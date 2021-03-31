@@ -1,1 +1,69 @@
 
+Menu
+Responsibilities:                                       Collaborators:
+•	Receive input from menu choice                        • Create New Game
+                                                        • Load Game
+                                                        
+Create new game
+Responsibilities:                                       Collaborators:
+• Receive input from players                            • Player
+                                                        • Color                          
+
+Load game
+Responsibilities:                                       Collaborators:
+• Receive input from loading choice                     • Database
+• Get info from DB (Active games)
+
+
+Player
+Responsibilities:                                       Collaborators:
+• Player                                                • Color
+
+
+Game engine
+Responsibilities:                                       Collaborators:
+• Logic to play                                         • Board
+
+
+Nest
+Responsibilities:                                       Collaborators:
+• Holds number of pieces in nest                        • Color
+                                                        • Player
+                                                        
+                                                        
+ Board
+ Responsibilities:                                       Collaborators:
+ • Move pieces                                           • Piece            
+                                                         • Player
+                                                         • Square (position)
+                                                         • Nest
+                                                         • Dice (maybe)
+                                                         
+                                                         
+                                                         
+Dices
+Responsibilities:                                       Collaborators: 
+• Roll dices                                            • Player
+
+
+
+Color
+Responsibilities:                                       Collaborators: 
+Chose color:                                            • Player
+  - Red
+  - Green
+  - Blue
+  - Yellow
+  
+
+
+Rule
+Responsibilities:                                       Collaborators: 
+
+
+
+Square
+Responsibilities:                                       Collaborators: 
+• Position                                              • Board
+
+
