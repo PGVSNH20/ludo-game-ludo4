@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace LudoBoard.DataModels
 {
-    public class Nest
+    public class Board
     {
+        public int Id { get; set; }
+
+        public Piece Piece { get; set; }
     }
 }
