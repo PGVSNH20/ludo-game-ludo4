@@ -48,6 +48,10 @@ LudoGameEngine ()
   * Program.cs
 
 
-Efter att vi skapat klasser med tillhörande properties så inledde vi med lite enkel logik i klassen Dice.
+Efter att vi skapat klasser med tillhörande properties så inledde vi med lite enkel logik i klassen Dice som vi sedan flyttade till Board.
+Vi skapade Game klassen som håller koll på spel, dock så kan funktionaliteten kollidera med Board så det är något vi ska se efter.
+I Square lade vi till så att man kan identifiera varje Square objekt med ett Id och lade till en bool om någon befinner sig i den samt en variabel som håller koll på hur många spelare är i den.
+Vi redigerade LudoDbAccess för att ha metoder för att kunna spara och ladda information från databasen.
+Sedan lade vi till en ny klass inom LudoGameEngine som bygger ett UserInterface för användaren, vilket vi inte hade tänkt från början.
 
 
