@@ -9,9 +9,7 @@ namespace LudoBoard.DataModels
     public class Piece
     {
         public int Id { get; set; }
-
         public int Position { get; set; }
-
-        public Player Player { get; set; }       
+        public Player Player { get; set; }
     }
 }

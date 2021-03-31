@@ -8,5 +8,7 @@ namespace LudoBoard.DataModels
 {
     public class Nest
     {
-    }
+		public int Id { get; set; }
+		public Piece Pieces { get; set; }
+	}
 }
