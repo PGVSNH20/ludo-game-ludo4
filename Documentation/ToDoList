@@ -3,8 +3,8 @@
 - Längst ned i dokumentet lägger vi in saker som är gjorda
 
 [To Do-List]
-1. Påbörja projektet (Skapa en solution och tillsammans, skapa lite struktion i applikationen om vad och var saker och ting skall ligga)
-2. 
+1. Påbörja projektet (Skapa en solution och tillsammans, skapa lite struktion i applikationen om vad och var saker och ting skall ligga) DONE
+2. I klassen Dice och metoden AskIfMoveFromNestOrMoveOnBord ifall switch/case fungerar som den ska.
 3. 
 4.
 5.
