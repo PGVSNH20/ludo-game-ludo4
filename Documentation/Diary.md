@@ -22,10 +22,9 @@ LudoBoard ()
   * Player.cs ()
   * Square.cs (Fastnade lite på vad vi menar med square och hur vi ska använda den. Förslag hamnade på att varje spelare har en lista på "sin" spelplan och vi läser ut den via       regex med index)
   
-  * Program.cs ?
+  * Program.cs 
 
-LudoGameEngine ()
-  * 
+LudoGameEngine () 
   * Program.cs
 
 
