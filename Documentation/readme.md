@@ -32,3 +32,5 @@ Vi har kommit igång med att skriva CRC-kort med vilka klasser vi kan behöva ha
 // Dessa saker är gjorda, Datum - Text
 [To Do-Listan DONE]
 30/3 - CRC kort - (Skapa en grundläggande överblick på projektet)
+
+Vi har fortsatt med "User Stories" och börjat med "User Case".
