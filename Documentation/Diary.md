@@ -16,7 +16,7 @@ LudoBoard ()
   * LudoDbContext.cs ()
 *  DataModels (Katalog som har datamodeller för DataAccess)
   * Color.cs (Håller de fyra färgerna (Enum))
-  * Dice.cs ()
+  * Dice.cs (Har bara en metod för att slå tärning.)
   * Nest.cs (Kanske inte behövs om man sätter en position på varje Piece)
   * Piece.cs (Håller positioner)
     * Id
