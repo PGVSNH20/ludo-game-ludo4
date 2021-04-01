@@ -55,3 +55,12 @@ Vi redigerade LudoDbAccess för att ha metoder för att kunna spara och ladda in
 Sedan lade vi till en ny klass inom LudoGameEngine som bygger ett UserInterface för användaren, vilket vi inte hade tänkt från början.
 
 
+1/4 <- Tredje Dagen.
+
+Förmiddagen
+Diskuterade över att skapa en loop som göra att man kan komma tillbaka till menyn för att sedan kunna skapa nytt spel / ladda spel
+Påbörjat en meny som frågar över hur många spelare som ska spela. Efter man skrivit in antal så skapas X-antal spelare i en metod.
+Efter spelaren skapats så får man skriva in Namn (Färg och id sätts automatiskt).
+
+Eftermiddagen
+
