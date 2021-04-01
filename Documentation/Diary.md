@@ -63,4 +63,4 @@ Påbörjat en meny som frågar över hur många spelare som ska spela. Efter man
 Efter spelaren skapats så får man skriva in Namn (Färg och id sätts automatiskt).
 
 Eftermiddagen
-
+Vi har precis installerat in EF i vårt program. Vi flyttade CreateGame() över till Game klassen ifrån UserInterface. 
