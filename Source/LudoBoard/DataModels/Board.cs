@@ -11,7 +11,7 @@ namespace LudoBoard.DataModels
         public int Id { get; set; }
         public Piece Piece { get; set; }
 
-        public void Move()
+        public static void Move()
         {
 
         }
