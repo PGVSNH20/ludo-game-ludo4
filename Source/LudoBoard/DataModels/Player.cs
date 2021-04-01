@@ -10,7 +10,7 @@ namespace LudoBoard.DataModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-		public Color PlayerColor { get; set; }
-		public bool IsWinner { get; set; }
+		public string PlayerColor { get; set; }
+        public bool IsWinner { get; set; } = false;
 	}
 }

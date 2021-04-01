@@ -8,9 +8,9 @@ namespace LudoBoard.DataModels
 {
     public enum Color
     {
-        RED,
-        BLUE,
-        YELLOW,
-        GREEN
+        RED = 1,
+        BLUE = 2,
+        YELLOW = 3,
+        GREEN = 4
     }
 }

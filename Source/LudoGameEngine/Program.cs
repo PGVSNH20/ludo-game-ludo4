@@ -7,12 +7,15 @@ namespace LudoGameEngine
     {
         static void Main(string[] args)
         {
-            //var runMenu = new Menu();
-            
-            var rolledDice = new Dice();
-            rolledDice.RollDice();
+            var runMenu = new UserInterface();
 
-            Console.WriteLine($"{rolledDice.RollDice()}");
+            runMenu.MainMenu();
+
+
+            //var rolledDice = new Dice();
+            //rolledDice.RollDice();
+
+            //Console.WriteLine($"{rolledDice.RollDice()}");
         }
     }
 }
