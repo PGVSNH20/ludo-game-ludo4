@@ -1,5 +1,6 @@
 ﻿using LudoBoard.DataModels;
 using System;
+using System.Collections.Generic;
 
 namespace LudoGameEngine
 {
@@ -7,18 +8,7 @@ namespace LudoGameEngine
     {
         static void Main(string[] args)
         {
-            var runMenu = new UserInterface();
-
-            runMenu.MainMenu();
-
-
-            //var rolledDice = new Dice();
-            //rolledDice.RollDice();
-
-            //Console.WriteLine($"{rolledDice.RollDice()}");
-
-
-            List<string> gb = new List<string>(60) {"    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
+            List<string> gb = new List<string>(60)         {"    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
                                                             "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
                                                             "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
                                                             "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
@@ -37,6 +27,24 @@ namespace LudoGameEngine
                               $"                        [{gb[50]}][{gb[51]}][{gb[52]}]\n" +
                               $"                        [{gb[53]}][{gb[54]}][{gb[55]}]\n" +
                               $"[{gb[56]}]                  [{gb[57]}][{gb[58]}][{gb[59]}]                  [{gb[60]}]\n");
+
+
+
+
+
+
+            var runMenu = new UserInterface();
+
+            runMenu.MainMenu();
+
+
+            //var rolledDice = new Dice();
+            //rolledDice.RollDice();
+
+            //Console.WriteLine($"{rolledDice.RollDice()}");
+
+
+           
 
         }
     }

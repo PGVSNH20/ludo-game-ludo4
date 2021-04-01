@@ -63,9 +63,43 @@ namespace LudoBoard.DataModels
                 player[i].Name = Console.ReadLine().ToString();
 
                 Console.WriteLine($"Player {i + 1} Name: {player[i].Name} Color: {player[i].PlayerColor}");
+
+                CreatePieces(player);
+
             }
 
+
+
+
+
+
         }
+
+        public static void CreatePieces(List<Player> Player)
+        {
+
+            List<Piece> piece = new List<Piece>();
+
+            for (int i = 0; i < Player.Count; i++)
+            {
+                piece.Add(new Piece());
+                piece[i].PlayerId = Player[i].Id; 
+
+                piece.Add(new Piece());
+                piece[i].PlayerId = Player[i].Id;
+
+
+                piece.Add(new Piece());
+                piece[i].PlayerId = Player[i].Id;
+
+                piece.Add(new Piece());
+                piece[i].PlayerId = Player[i].Id;
+
+                Console.WriteLine(piece[i].PlayerId);
+            }
+        }
+
+
         public static void LoadGame()
         {
             //Laddar ett spel som man kan välja i en lista
