@@ -73,8 +73,8 @@ Förmiddagen:
 Fixat lite små grejor
 - CreateGame() <- Fixat så att det står antal spelare istället för att skriva ut exakt hur många spelare som har blivit inlagda i listan.
 Så istället för:
-"Added Player"
-"Added Player"
+- "Added Player"
+- "Added Player"
 
 Står det nu:
 Added: "2" players in the list. 
