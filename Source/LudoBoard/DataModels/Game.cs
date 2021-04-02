@@ -17,6 +17,7 @@ namespace LudoBoard.DataModels
 		public DateTime LastTimePlayedDate { get; set; } //Används vid laddning och sparning av spel
 		public DateTime CompletedDate { get; set; }
 		public bool IsCompleted { get; set; }
+        public string WinnerPlayerName { get; set; }
 
 
         public static void CreateGame()
