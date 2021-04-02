@@ -58,14 +58,33 @@ namespace LudoBoard.DataModels
 
                 //Sätter spelarens färg
                 player[i].PlayerColor = colors[i];
-                Console.Write($"\nPlayer {i + 1} Name: ");
 
                 //Sätter spelarens namn
-                player[i].Name = Console.ReadLine().ToString();
 
-                Console.WriteLine($"Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
+                bool isRunning = true;
+                while (isRunning)
+                {
+                    Console.Write($"\nPlayer {i + 1} Name: ");
+                    player[i].Name = Console.ReadLine().ToString();
 
-                CreatePieces(player);
+                    bool containsInt = player[i].Name.Any(char.IsDigit);
+
+
+                    if (containsInt == true)
+                    {
+                        Console.Write("No numbers as a name, try again.");
+                    }
+                    else
+                    {
+
+                        Console.WriteLine($"Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
+
+                        CreatePieces(player);
+                        isRunning = false;
+                    }
+
+                }
+
 
             }
 
@@ -78,27 +97,27 @@ namespace LudoBoard.DataModels
 
         public static void CreatePieces(List<Player> Player)
         {
-
+            //TODO- Fixa denna
             List<Piece> piece = new List<Piece>();
-
+            
             for (int i = 0; i < Player.Count; i++)
             {
                 piece.Add(new Piece());
-                //piece[i].Player = Player[i].Id;
+                piece[i].Id = Player[i].Id;
 
                 piece.Add(new Piece());
-                //piece[i].Player = Player[i].Id;
+                piece[i].Id = Player[i].Id;
 
 
-                //piece.Add(new Piece());
-                //piece[i].Id = Player[i].Id;
+                piece.Add(new Piece());
+                piece[i].Id = Player[i].Id;
 
-                //piece.Add(new Piece());
-                ////piece[i].Id = Player[i].Id;
+                piece.Add(new Piece());
+                piece[i].Id = Player[i].Id;
 
+                Console.WriteLine(piece[i].Id);
             }
-
-            Console.WriteLine($"Added {piece.Count} pieces to your nest.");
+          
         }
 
 
