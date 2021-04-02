@@ -3,15 +3,15 @@
 - Längst ned i dokumentet lägger vi in saker som är gjorda
 
 [To Do-List]
-1. Gör klart - Metoden "CreateGame",
-    Följande Klasses ska sättas: Board(Id/Created/LastPlayed/GameCompleted/(Winner?)), Player(Id/Name/Color), Piece(Id/Position/Player_Id)
-
-2. Skapa - En funktion som sparar all data till databasen efter man valt "Create Game"
+1. Se över - En funktion som sparar all data till databasen efter man valt "Create Game"
+2. Skapa - En funktion som kan ladda all data till applikationen efter man valt "Load Game"
 3.
-4. Skapa - En funktion som kan ladda all data till applikationen efter man valt "Load Game"
+4. 
 5. Se över - I klassen Board och metoden AskIfMoveFromNestOrMoveOnBord ifall switch/case fungerar som den ska.
 
 [To Do-List DONE]
 30/3 - CRC kort - (Skapa en grundläggande överblick på projektet)
 31/3 - User Stories - (Skapa stories med hjälp utav CRC-dokumentet)
 31/3 - Påbörja projektet (Skapa en solution och tillsammans, skapa lite struktion i applikationen om vad och var saker och ting skall ligga)
+2/4  - Metoden "CreateGame",
+       Följande Klasses ska sättas: Board(Id/Created/LastPlayed/GameCompleted/(Winner?)), Player(Id/Name/Color), Piece(Id/Position/Player_Id)
