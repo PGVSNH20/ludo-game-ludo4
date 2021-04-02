@@ -64,3 +64,21 @@ Efter spelaren skapats så får man skriva in Namn (Färg och id sätts automati
 
 Eftermiddagen
 Vi har precis installerat in EF i vårt program. Vi flyttade CreateGame() över till Game klassen ifrån UserInterface. 
+
+
+
+2/4
+Förmiddagen:
+
+Fixat lite små grejor
+- CreateGame() <- Fixat så att det står antal spelare istället för att skriva ut exakt hur många spelare som har blivit inlagda i listan.
+Så istället för:
+"Added Player"
+"Added Player"
+
+Står det nu:
+Added: "2" players in the list. 
+
+- Flyttat "brädan" till Game klassen, CurrentBoard()
+- La till 2 tomma metoder med kommentarer i Board.cs
+- Felhanterade CreateGame() där användaren inte kan skriva in ett nummer som namn. 
