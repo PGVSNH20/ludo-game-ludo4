@@ -34,10 +34,11 @@ namespace LudoBoard.DataModels
                 if (userInput > 1 && userInput < 5)
                 {
                     for (int i = 0; i < userInput; i++)
-                    {
-                        Console.WriteLine("Added a player to List");
+                    {                      
                         player.Add(new Player());
                     }
+                    Console.WriteLine($"Added: \"{userInput}\" players to list");
+
                     isRunning = false;
                 }
                 else
@@ -57,12 +58,12 @@ namespace LudoBoard.DataModels
 
                 //Sätter spelarens färg
                 player[i].PlayerColor = colors[i];
-                Console.WriteLine($"Player {i + 1} Name: ");
+                Console.Write($"\nPlayer {i + 1} Name: ");
 
                 //Sätter spelarens namn
                 player[i].Name = Console.ReadLine().ToString();
 
-                Console.WriteLine($"Player {i + 1} Name: {player[i].Name} Color: {player[i].PlayerColor}");
+                Console.WriteLine($"Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
 
                 CreatePieces(player);
 
