@@ -30,7 +30,7 @@ namespace LudoBoard.DataAccess
 
             for (int x = 0; x < pieces.Count; x++)
             {
-                Console.WriteLine($"Adding piece Id: {pieces[x].Id}, Position: {pieces[x].Position}");
+                Console.WriteLine($"Adding Piece with Position: {pieces[x].Position}");
                 
                 // Add piece to DB set
                 context.Piece.Add(pieces[x]);
@@ -42,6 +42,7 @@ namespace LudoBoard.DataAccess
             // Save change in database
             context.SaveChanges();
             Console.WriteLine("Order saved to database");
+            Console.ReadKey();
         }
         public int GetHigestBoardId()
         {
