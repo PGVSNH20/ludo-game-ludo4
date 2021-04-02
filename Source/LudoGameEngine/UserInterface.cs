@@ -1,13 +1,9 @@
 ﻿using LudoBoard.DataModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LudoGameEngine
 {
-	public class UserInterface
+    public class UserInterface
 	{
         private static int userInput = 0;
         private static bool isRunning = true;

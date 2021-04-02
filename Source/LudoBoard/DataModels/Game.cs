@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LudoBoard.DataModels
 {
 
-	public class Game
+    public class Game
 	{
         private static int userInput = 0;
         private static bool isRunning = true;
