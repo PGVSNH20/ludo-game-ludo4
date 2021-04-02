@@ -42,6 +42,23 @@ namespace LudoBoard.DataAccess
             context.SaveChanges();
             Console.WriteLine("Order saved to database");
         }
+        public int GetHigestBoardId()
+        {
+            var context = new LudoDbContext();
+            int boardId;
+            try
+            {
+                boardId = Convert.ToInt32(context.Game.OrderByDescending(t => t.Id).First());
+            }
+            catch (Exception)
+            {
+                boardId = 0;
+            }
+
+            Console.WriteLine($"Returning highest Id: {boardId}");
+            Console.ReadLine();
+            return boardId;
+        }
 
         public int GetHigestPlayerId()
         {
@@ -57,6 +74,7 @@ namespace LudoBoard.DataAccess
             }
 
             Console.WriteLine($"Returning highest Id: {playerId}");
+            Console.ReadLine();
             return playerId;
         }
 

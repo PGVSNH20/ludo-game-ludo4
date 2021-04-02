@@ -11,19 +11,24 @@ namespace LudoBoard.DataModels
         private static int userInput = 0;
         private static bool isRunning = true;
 
-
         public int Id { get; set; }
-		public Piece Piece { get; set; }
 		public DateTime LastTimePlayedDate { get; set; } //Används vid laddning och sparning av spel
 		public DateTime CompletedDate { get; set; }
-		public bool IsCompleted { get; set; }
-        public string WinnerPlayerName { get; set; }
-
+        public bool IsCompleted { get; set; } = false;
+        public string WinnerPlayerName { get; set; } = "N/A";
 
         public static void CreateGame()
         {
-            // Generate new game
+            // Creating a new board
+            Game board = new Game();
+
+            // Retrieving the highest Id from db.
+            int higestBoardId = new LudoDbAccess().GetHigestBoardId();
+            board.Id = higestBoardId + 1;
+
+            // Creating amount of players
             Console.WriteLine("How many players? (2-4)");
+            
             List<Player> player = new List<Player>();
 
             // Checking the amount of players
@@ -38,7 +43,8 @@ namespace LudoBoard.DataModels
                         player.Add(new Player());
                     }
                     Console.WriteLine($"Added: \"{userInput}\" players to list");
-
+                    Console.ReadLine();
+                    
                     isRunning = false;
                 }
                 else
@@ -47,23 +53,22 @@ namespace LudoBoard.DataModels
                 }
             }
 
+            CreatePlayer(board, player);
+        }
+
+        private static void CreatePlayer(Game board, List<Player> player)
+        {
+            // Retrieving the highest Id from db.
             int higestPlayerId = new LudoDbAccess().GetHigestPlayerId();
+
             List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
             for (int i = 0; i < player.Count; i++)
             {
+                // SET Player id, color
                 player[i].Id = higestPlayerId + i + 1;
-
-                // Försök att fixa ENUM
-                foreach (var color in Enum.GetValues(typeof(Color)))
-                {
-
-                }
-
-                //Sätter spelarens färg
                 player[i].PlayerColor = colors[i];
 
-                //Sätter spelarens namn
-
+                // SET Player Name
                 bool isRunning = true;
                 while (isRunning)
                 {
@@ -72,57 +77,56 @@ namespace LudoBoard.DataModels
 
                     bool containsInt = player[i].Name.Any(char.IsDigit);
 
-
                     if (containsInt == true)
                     {
                         Console.Write("No numbers as a name, try again.");
                     }
                     else
                     {
-
-                        Console.WriteLine($"Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
-
-                        CreatePieces(player);
+                        Console.WriteLine($"Added Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
                         isRunning = false;
                     }
-
                 }
-
-
             }
 
-
-
-
-
-
+            CreatePieces(board, player);
         }
 
-        public static void CreatePieces(List<Player> Player)
+        private static void CreatePieces(Game board, List<Player> player)
         {
-            //TODO- Fixa denna
+            if (player is null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            // SET Piece Id, Position
             List<Piece> piece = new List<Piece>();
-            
-            for (int i = 0; i < Player.Count; i++)
+            List<int> nestPositions = new List<int> { 0, 4, 56, 60 };
+            for (int i = 0; i < player.Count; i++)
             {
                 piece.Add(new Piece());
-                piece[i].Id = Player[i].Id;
+                piece[i].Id = player[i].Id;
+                piece[i].Position = nestPositions[i];
 
                 piece.Add(new Piece());
-                piece[i].Id = Player[i].Id;
-
-
-                piece.Add(new Piece());
-                piece[i].Id = Player[i].Id;
+                piece[i+1].Id = player[i].Id;
+                piece[i].Position = nestPositions[i];
 
                 piece.Add(new Piece());
-                piece[i].Id = Player[i].Id;
+                piece[i+2].Id = player[i].Id;
+                piece[i].Position = nestPositions[i];
 
-                Console.WriteLine(piece[i].Id);
+                piece.Add(new Piece());
+                piece[i+3].Id = player[i].Id;
+                piece[i].Position = nestPositions[i];
+
+                Console.WriteLine($"Added x4 pieces with ID: {piece[i].Id} and their position are Board-Index: {nestPositions[i]}");
+                Console.ReadLine();
             }
-          
-        }
 
+            LudoDbAccess ludoDbAccess = new LudoDbAccess();
+            ludoDbAccess.SaveGame(board, player, piece);
+        }
 
         public static void LoadGame()
         {
