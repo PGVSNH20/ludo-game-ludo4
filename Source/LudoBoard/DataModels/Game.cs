@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LudoBoard.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,9 +48,12 @@ namespace LudoBoard.DataModels
                 }
             }
 
+            int higestPlayerId = new LudoDbAccess().GetHigestPlayerId();
             List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
             for (int i = 0; i < player.Count; i++)
             {
+                player[i].Id = higestPlayerId + i + 1;
+
                 // Försök att fixa ENUM
                 foreach (var color in Enum.GetValues(typeof(Color)))
                 {
