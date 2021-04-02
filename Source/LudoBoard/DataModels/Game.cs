@@ -12,8 +12,8 @@ namespace LudoBoard.DataModels
         private static bool isRunning = true;
 
         public int Id { get; set; }
-		public DateTime LastTimePlayedDate { get; set; } //Används vid laddning och sparning av spel
-		public DateTime CompletedDate { get; set; }
+        public DateTime? LastTimePlayedDate { get; set; } //Används vid laddning och sparning av spel
+		public DateTime? CompletedDate { get; set; }
         public bool IsCompleted { get; set; } = false;
         public string WinnerPlayerName { get; set; } = "N/A";
 
@@ -99,26 +99,24 @@ namespace LudoBoard.DataModels
                 throw new ArgumentNullException(nameof(player));
             }
 
+            // Board Nest Positions @Current map.
+            List<int> nestPositions = new List<int> { 0, 4, 56, 60 };
+
             // SET Piece Id, Position
             List<Piece> piece = new List<Piece>();
-            List<int> nestPositions = new List<int> { 0, 4, 56, 60 };
+            var counter = 0;
             for (int i = 0; i < player.Count; i++)
             {
                 piece.Add(new Piece());
-                piece[i].Id = player[i].Id;
-                piece[i].Position = nestPositions[i];
-
                 piece.Add(new Piece());
-                piece[i+1].Id = player[i].Id;
-                piece[i].Position = nestPositions[i];
-
                 piece.Add(new Piece());
-                piece[i+2].Id = player[i].Id;
-                piece[i].Position = nestPositions[i];
-
                 piece.Add(new Piece());
-                piece[i+3].Id = player[i].Id;
-                piece[i].Position = nestPositions[i];
+
+                for (int x = 0; x < 4;x++)
+                {
+                    piece[counter + x].Position = nestPositions[i];
+                }
+                counter += 4;
 
                 Console.WriteLine($"Added x4 pieces with ID: {piece[i].Id} and their position are Board-Index: {nestPositions[i]}");
                 Console.ReadLine();

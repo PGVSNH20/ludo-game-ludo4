@@ -15,7 +15,7 @@ namespace LudoBoard.DataAccess
         {
             var context = new LudoDbContext();
 
-            // DONE: Add order to DB set
+            game.LastTimePlayedDate = DateTime.Now;
 
             Console.WriteLine($"Added Game Id {game.Id}, Created Date: {game.LastTimePlayedDate}, Game Completed: {game.IsCompleted}");
             context.Game.Add(game);
@@ -23,22 +23,23 @@ namespace LudoBoard.DataAccess
             for (int i = 0; i < players.Count; i++)
             {
                 Console.WriteLine($"Adding Player Id {players[i].Id}, Name: {players[i].Name}, Color: {players[i].PlayerColor}");
-                // DONE: Add order to DB set
+                
+                // Add player to DB
                 context.Player.Add(players[i]);
             }
 
             for (int x = 0; x < pieces.Count; x++)
             {
-                Console.WriteLine($"Adding Piece Id {pieces[x].Id}, Position: {pieces[x].Position}, This piece: {pieces[x].Position}");
-                // DONE: Add order to DB set
+                Console.WriteLine($"Adding piece Id: {pieces[x].Id}, Position: {pieces[x].Position}");
+                
+                // Add piece to DB set
                 context.Piece.Add(pieces[x]);
-
             }
 
             Console.WriteLine("Press a key to save to database");
             Console.ReadKey();
 
-            // DONE: Save change in database
+            // Save change in database
             context.SaveChanges();
             Console.WriteLine("Order saved to database");
         }
