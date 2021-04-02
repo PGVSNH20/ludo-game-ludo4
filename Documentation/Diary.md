@@ -82,3 +82,11 @@ Added: "2" players in the list.
 - Flyttat "brädan" till Game klassen, CurrentBoard()
 - La till 2 tomma metoder med kommentarer i Board.cs
 - Felhanterade CreateGame() där användaren inte kan skriva in ett nummer som namn. 
+
+Eftermiddagen:
+
+Efter mycket om och men så tror jag att man nu kan köra "Create new game" -> Vilket skapar ett spelId,
+lägger till spelare och sedan lägger till deras pjäser.
+
+Efter man skapat det så körs metoden SaveGame() vilket lägger till SpelBräde, Spelare och Pjäser i db.
+
