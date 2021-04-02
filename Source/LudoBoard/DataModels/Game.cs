@@ -81,23 +81,24 @@ namespace LudoBoard.DataModels
 
             List<Piece> piece = new List<Piece>();
 
-            //for (int i = 0; i < Player.Count; i++)
-            //{
-            //    piece.Add(new Piece());
-            //    piece[i].PlayerId = Player[i].Id; 
+            for (int i = 0; i < Player.Count; i++)
+            {
+                piece.Add(new Piece());
+                //piece[i].Player = Player[i].Id;
 
-            //    piece.Add(new Piece());
-            //    piece[i].PlayerId = Player[i].Id;
+                piece.Add(new Piece());
+                //piece[i].Player = Player[i].Id;
 
 
-            //    piece.Add(new Piece());
-            //    piece[i].PlayerId = Player[i].Id;
+                //piece.Add(new Piece());
+                //piece[i].Id = Player[i].Id;
 
-            //    piece.Add(new Piece());
-            //    piece[i].PlayerId = Player[i].Id;
+                //piece.Add(new Piece());
+                ////piece[i].Id = Player[i].Id;
 
-            //    Console.WriteLine(piece[i].PlayerId);
-            //}
+            }
+
+            Console.WriteLine($"Added {piece.Count} pieces to your nest.");
         }
 
 

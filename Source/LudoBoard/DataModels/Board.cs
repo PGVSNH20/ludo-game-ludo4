@@ -46,7 +46,26 @@ namespace LudoBoard.DataModels
                         break;
 
                 }
+
+                
+
             }
+
         }
+
+        //TODO-Programmet ska göra en randomnize på spelarna som är registrerade, för att avgöra vem som går först. 
+        public void WhoGoesFirst()
+        {
+
+        }
+
+
+        //TODO-Programmet ska avgöra vems tur det är att kasta tärningen. 
+        public void WhoesTurnToRollTheDice()
+        {
+
+        }
+
+
     }
 }

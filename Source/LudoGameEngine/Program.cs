@@ -9,12 +9,6 @@ namespace LudoGameEngine
         static void Main(string[] args)
         {
             
-
-
-
-
-
-
             var runMenu = new UserInterface();
 
             runMenu.MainMenu();
