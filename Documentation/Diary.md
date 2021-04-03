@@ -98,4 +98,9 @@ Vi gick igenom programmet för att se vad som behövde göras.
 - Påbörjade metoden PlayGame som ska köra spelet.
 
 Eftermiddagen:
+- Skapat en metod för vilken som slumpar fram vem som startar spelet.
+- Påbörjat en metod som frågar vilken piece som skall flyttas.
+- Skapat en metod som tar ut en lista från databasen på vilka pjäser den spelaren äger (1 - 4).
+- Slängde in några fler TODO's i task list.
 
+Vi ska se över lite metoder om det går att hämta data från databasen istället för att skicka med en massa listor och dyl.

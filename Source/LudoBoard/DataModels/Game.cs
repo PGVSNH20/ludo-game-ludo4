@@ -55,17 +55,26 @@ namespace LudoBoard.DataModels
             }
 
             CreatePlayer(board, player);
-            PlayGame();
+            PlayGame(player);
         }
 
         private static void CreatePlayer(Game board, List<Player> player)
         {
+            // Slumpar fram vem som startar.
+            Random randomStartPlayer = new Random();            
+            int playerId = randomStartPlayer.Next(1, player.Count);
+
             // Retrieving the highest Id from db.
             int higestPlayerId = new LudoDbAccess().GetHigestPlayerId();
 
             List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
             for (int i = 0; i < player.Count; i++)
             {
+                if (playerId == i + 1)
+                {
+                    player[i].PlayerTurn = true;
+                    Console.WriteLine($"{player[i].Name} starts.");
+                }
                 // SET Player id, color
                 player[i].Id = higestPlayerId + i + 1;
                 player[i].PlayerColor = colors[i];
@@ -133,46 +142,41 @@ namespace LudoBoard.DataModels
             //Laddar ett spel som man kan välja i en lista
         }
 
-        public void CurrentBoard()
-        {
-            List<string> gb = new List<string>(60)         {"    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                                                            "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                                                            "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                                                            "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                                                            "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                                                            "    ","    ","    ","    ","    ","    ","    ","    ","    ", "    ", "    "};
-
-
-            Console.WriteLine($"[{gb[0]}]                  [{gb[1]}][{gb[2]}][{gb[3]}]                  [{gb[4]}]\n" +
-                              $"                        [{gb[5]}][{gb[6]}][{gb[7]}]\n" +
-                              $"                        [{gb[8]}][{gb[9]}][{gb[10]}]\n" +
-                              $"                        [{gb[11]}][{gb[12]}][{gb[13]}]\n" +
-                              $"[{gb[14]}][{gb[15]}][{gb[16]}][{gb[17]}][{gb[18]}][{gb[19]}][{gb[20]}][{gb[21]}][{gb[22]}][{gb[23]}][{gb[24]}]\n" +
-                              $"[{gb[25]}][{gb[26]}][{gb[27]}][{gb[28]}][{gb[29]}][{gb[30]}][{gb[31]}][{gb[32]}][{gb[33]}][{gb[34]}][{gb[35]}]\n" +
-                              $"[{gb[36]}][{gb[37]}][{gb[38]}][{gb[39]}][{gb[40]}][{gb[41]}][{gb[42]}][{gb[43]}][{gb[44]}][{gb[45]}][{gb[46]}]\n" +
-                              $"                        [{gb[47]}][{gb[48]}][{gb[49]}]\n" +
-                              $"                        [{gb[50]}][{gb[51]}][{gb[52]}]\n" +
-                              $"                        [{gb[53]}][{gb[54]}][{gb[55]}]\n" +
-                              $"[{gb[56]}]                  [{gb[57]}][{gb[58]}][{gb[59]}]                  [{gb[60]}]\n");
-        }
-
         public void ContinueGame()
         {
             Game.LoadGame(); //Ladda senast sparade spelet
         }
-        private static void PlayGame()
+        private static void PlayGame(List<Player> players)
         {
             Board board = new Board();
             Dice rollDice = new Dice();
+            List<Piece> onePlayersPieces = new List<Piece>();
 
-            // TODO - WhoGoesFirst() Lägg logik i denna metod i board;
-            board.WhoGoesFirst(); 
-
+            foreach (var player in players)
+            {
+                if (player.PlayerTurn == true)
+                {
+                    LudoDbAccess ludoDbAccess = new LudoDbAccess();
+                    
+                    Console.WriteLine($"It's player {player.Name} turn to roll the dice.");
+                    onePlayersPieces = ludoDbAccess.GetCurrentPlayersPieces(player.Id);
+                }
+            }
+            Console.WriteLine("1. rolldice");
+            Console.ReadKey();
             // Slå tärning            
-            rollDice.RollDice();
+            int i = rollDice.RollDice();
+            Console.WriteLine($"You rolled {i}");
 
-
-            board.AskIfMoveFromNestOrMoveOnBoard();
+            // TODO - Lägg till check om det finns pieces i nest.
+            if (i == 6)
+            {
+                board.AskIfMoveFromNestOrMoveOnBoard();
+            }
+            else
+            {                
+                board.MovePiece(onePlayersPieces, i);
+            }
 
             // PlayerTurn Ska lägga in property i player (done) så att vi ser vems tur det är om spelet avbryts.
             // 

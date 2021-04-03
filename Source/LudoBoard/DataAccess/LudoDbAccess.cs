@@ -69,6 +69,16 @@ namespace LudoBoard.DataAccess
             Console.WriteLine("Game saved to database");
             Console.ReadKey();
         }
+
+        public List<Piece> GetCurrentPlayersPieces(int playerId)
+        {
+            var context = new LudoDbContext();
+            List<Piece> currentPlayersPieces = new List<Piece>();
+
+            currentPlayersPieces.Add((Piece)context.Piece.Where(x => x.PlayerId == playerId));
+
+            return currentPlayersPieces;
+        }
         public int GetHigestBoardId()
         {
             var context = new LudoDbContext();

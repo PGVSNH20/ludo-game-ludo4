@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LudoBoard.DataModels
 {
     public class Board
     {
-        public static void MovePiece()
+        public void MovePiece(List<Piece> piece, int diceValue)
         {
-            
+            int pieceId = 0;
+            Console.WriteLine("Which piece do you want to move? (Id)");
+            int.TryParse(Console.ReadLine(), out pieceId);
+
+            piece[pieceId - 1].Position = diceValue;
+            // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
         }
 
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
@@ -47,13 +53,6 @@ namespace LudoBoard.DataModels
                 }
             }
         }
-
-        //TODO-Programmet ska göra en randomnize på spelarna som är registrerade, för att avgöra vem som går först. WhoGoesFirst();
-        public void WhoGoesFirst()
-        {
-
-        }
-
 
         //TODO-Programmet ska avgöra vems tur det är att kasta tärningen. WhoesTurnToRollTheDice(); 
         public void WhoesTurnToRollTheDice()
