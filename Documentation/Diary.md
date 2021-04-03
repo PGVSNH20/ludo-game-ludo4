@@ -90,3 +90,12 @@ lägger till spelare och sedan lägger till deras pjäser.
 
 Efter man skapat det så körs metoden SaveGame() vilket lägger till SpelBräde, Spelare och Pjäser i db.
 
+3/4
+Förmiddagen:
+Vi gick igenom programmet för att se vad som behövde göras.
+- Ändrade strukturen i databasen då vi stötte på problem med FK.
+- När vi fick FK att fungera så skrev den korrekt i databasen och kopplade spelar id till positioner samt att varje spelare tillhör ett visst game id.
+- Påbörjade metoden PlayGame som ska köra spelet.
+
+Eftermiddagen:
+
