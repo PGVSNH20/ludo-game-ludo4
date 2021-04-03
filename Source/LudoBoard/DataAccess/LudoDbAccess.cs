@@ -23,15 +23,40 @@ namespace LudoBoard.DataAccess
             for (int i = 0; i < players.Count; i++)
             {
                 Console.WriteLine($"Adding Player Id {players[i].Id}, Name: {players[i].Name}, Color: {players[i].PlayerColor}");
-                
-                // Add player to DB
+
+                int gameId;
+                //try
+                //{
+                //    gameId = Convert.ToInt32(game.Id);
+                //    players[i].GameId = gameId;
+                //}
+                //catch (Exception e)
+                //{
+                //    throw new Exception(e.ToString());
+                //}
+                ////Add player to DB
                 context.Player.Add(players[i]);
             }
 
             for (int x = 0; x < pieces.Count; x++)
             {
                 Console.WriteLine($"Adding Piece with Position: {pieces[x].Position}");
-                
+                if (pieces[x].Position == 0)
+                {
+                    pieces[x].PlayerId = players[0].Id;
+                }
+                else if (pieces[x].Position == 4)
+                {
+                    pieces[x].PlayerId = players[1].Id;
+                }
+                else if (pieces[x].Position == 56)
+                {
+                    pieces[x].PlayerId = players[2].Id;
+                }
+                else if (pieces[x].Position == 60)
+                {
+                    pieces[x].PlayerId = players[3].Id;
+                }
                 // Add piece to DB set
                 context.Piece.Add(pieces[x]);
             }

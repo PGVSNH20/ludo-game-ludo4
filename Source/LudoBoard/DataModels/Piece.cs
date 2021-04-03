@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int Position { get; set; }
-        public Player Player { get; set; }    
+        public int? PlayerId { get; set; } 
+        public Player Player { get; set; }
     }
 }
