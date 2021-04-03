@@ -10,12 +10,14 @@ namespace LudoBoard.DataModels
     {        
         public int RollDice()
         {
+            Board board = new Board();
             Random diceValue = new Random();
             int DiceValue = diceValue.Next(1, 7);
 
+            // Kan behövas en loop för att slå igen när man slagit 6
             if (DiceValue == 6)
             {
-                Board.AskIfMoveFromNestOrMoveOnBoard();
+                board.AskIfMoveFromNestOrMoveOnBoard();
             }
 
             return DiceValue;

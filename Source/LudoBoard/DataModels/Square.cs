@@ -8,7 +8,7 @@ namespace LudoBoard.DataModels
 {
     // This class should be controlling all the movement
     // so that CurrentBoard() can print out each piece location.
-    class Square
+    public class Square
     {
         public void CurrentBoard()
         {
@@ -52,5 +52,4 @@ namespace LudoBoard.DataModels
                               $"[{gb[56]}]                  [{gb[57]}][{gb[58]}][{gb[59]}]                  [{gb[60]}]\n");
         }
     }
-
 }

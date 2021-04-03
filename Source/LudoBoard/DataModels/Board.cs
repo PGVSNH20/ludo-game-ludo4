@@ -36,7 +36,7 @@ namespace LudoBoard.DataModels
                         break;
 
                     case 3:
-                        Square.CurrentBoard();
+                        square.CurrentBoard();
                         break;
 
                     default:
@@ -45,21 +45,17 @@ namespace LudoBoard.DataModels
                         break;
 
                 }
-
-                
-
             }
-
         }
 
-        //TODO-Programmet ska göra en randomnize på spelarna som är registrerade, för att avgöra vem som går först. 
+        //TODO-Programmet ska göra en randomnize på spelarna som är registrerade, för att avgöra vem som går först. WhoGoesFirst();
         public void WhoGoesFirst()
         {
 
         }
 
 
-        //TODO-Programmet ska avgöra vems tur det är att kasta tärningen. 
+        //TODO-Programmet ska avgöra vems tur det är att kasta tärningen. WhoesTurnToRollTheDice(); 
         public void WhoesTurnToRollTheDice()
         {
 

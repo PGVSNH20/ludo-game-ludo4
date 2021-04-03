@@ -162,20 +162,20 @@ namespace LudoBoard.DataModels
         }
         private static void PlayGame()
         {
-            // TODO - WhoGoesFirst();
             Board board = new Board();
-            board.WhoGoesFirst(); // Skapa denna metod i board
-            // Slå tärning
             Dice rollDice = new Dice();
+
+            // TODO - WhoGoesFirst() Lägg logik i denna metod i board;
+            board.WhoGoesFirst(); 
+
+            // Slå tärning            
             rollDice.RollDice();
-            // Gå med piece "MovePiece"
-            board.
-            // Start ordning
+
+
+            board.AskIfMoveFromNestOrMoveOnBoard();
+
             // PlayerTurn Ska lägga in property i player (done) så att vi ser vems tur det är om spelet avbryts.
             // 
         }
-
-
     }
-
 }
