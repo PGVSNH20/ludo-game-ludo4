@@ -25,16 +25,16 @@ namespace LudoBoard.DataAccess
                 Console.WriteLine($"Adding Player Id {players[i].Id}, Name: {players[i].Name}, Color: {players[i].PlayerColor}");
 
                 int gameId;
-                //try
-                //{
-                //    gameId = Convert.ToInt32(game.Id);
-                //    players[i].GameId = gameId;
-                //}
-                //catch (Exception e)
-                //{
-                //    throw new Exception(e.ToString());
-                //}
-                ////Add player to DB
+                try
+                {
+                    gameId = Convert.ToInt32(game.Id);
+                    players[i].GameId = gameId;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.ToString());
+                }
+                //Add player to DB
                 context.Player.Add(players[i]);
             }
 
@@ -66,7 +66,7 @@ namespace LudoBoard.DataAccess
 
             // Save change in database
             context.SaveChanges();
-            Console.WriteLine("Order saved to database");
+            Console.WriteLine("Game saved to database");
             Console.ReadKey();
         }
         public int GetHigestBoardId()

@@ -55,6 +55,7 @@ namespace LudoBoard.DataModels
             }
 
             CreatePlayer(board, player);
+            PlayGame();
         }
 
         private static void CreatePlayer(Game board, List<Player> player)
@@ -159,6 +160,17 @@ namespace LudoBoard.DataModels
         {
             Game.LoadGame(); //Ladda senast sparade spelet
         }
+        private static void PlayGame()
+        {
+            // TODO - WhoGoesFirst();
+
+            // Slå tärning
+            // Gå med piece "MovePiece"
+            // Start ordning
+            // PlayerTurn Ska lägga in property i player (done) så att vi ser vems tur det är om spelet avbryts.
+            // 
+        }
+
 
     }
 
