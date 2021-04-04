@@ -104,3 +104,8 @@ Eftermiddagen:
 - Slängde in några fler TODO's i task list.
 
 Vi ska se över lite metoder om det går att hämta data från databasen istället för att skicka med en massa listor och dyl.
+
+
+4/4
+Förmiddagen:
+Vi har suttit försökt att testa att få ut det högsta värdet ifrån "boardId" i Xunit. Gick inte att köra testet pga av en Console.ReadLine() som blockerade vårt testa att köras.  
