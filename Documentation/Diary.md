@@ -114,3 +114,9 @@ Vi såg också att hanterat metoden felaktigt så att den spottade ut nåt vi in
 Efter lite mek så insåg vi att databasen var smartare än sig själv då vi faktiskt kan hämta ut hela spelet ur den.
 Testet funkar nu.
 
+Eftermiddagen:
+Vi har fortsatt pysslat med tester. 
+- Vi testade om RollDice om den gav ett värde mellan 1-6, det funkade.
+- Vi testade highestId på player för att vi skulle sätta id på spelarna vi skapade.
+- Lagt till en tabell i databasen för att se vilka pjäser som är aktiva.
+- Vi påbörjade metoden CurrentBoard, den metoden ska ta in alla positoner från pjäser och sätta ut det på spelplanen.  
