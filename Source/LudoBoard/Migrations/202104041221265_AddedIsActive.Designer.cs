@@ -7,13 +7,13 @@ namespace LudoBoard.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class SomthingWentWrong : IMigrationMetadata
+    public sealed partial class AddedIsActive : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SomthingWentWrong));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedIsActive));
         
         string IMigrationMetadata.Id
         {
-            get { return "202104040952555_SomthingWentWrong"; }
+            get { return "202104041221265_AddedIsActive"; }
         }
         
         string IMigrationMetadata.Source

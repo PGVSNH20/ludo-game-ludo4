@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LudoBoard.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,18 @@ namespace LudoBoard.DataModels
     // so that CurrentBoard() can print out each piece location.
     public class Square
     {
-        public void CurrentBoard()
+        public List<string> CurrentBoard()
         {
+            LudoDbAccess ludoDbAccess = new LudoDbAccess(); 
+            List<string> updated = new List<string>();
+            List<Piece> pieces = new List<Piece>();
+            pieces = ludoDbAccess.GetAllPieces();
+
+            foreach (var p in pieces)
+            {
+                Console.WriteLine($"{p.Id} has the position {p.Position}");
+            }
+
             List<string> gb = new List<string>(60)
             {
                 "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
@@ -50,6 +61,8 @@ namespace LudoBoard.DataModels
                               $"                        [{gb[50]}][{gb[51]}][{gb[52]}]\n" +
                               $"                        [{gb[53]}][{gb[54]}][{gb[55]}]\n" +
                               $"[{gb[56]}]                  [{gb[57]}][{gb[58]}][{gb[59]}]                  [{gb[60]}]\n");
+
+            return updated;
         }
     }
 }

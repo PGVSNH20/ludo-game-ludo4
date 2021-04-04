@@ -1,4 +1,5 @@
 ﻿using LudoBoard.DataAccess;
+using LudoBoard.DataModels;
 
 namespace LudoGameEngine
 {
@@ -10,8 +11,10 @@ namespace LudoGameEngine
 
             //runMenu.MainMenu();
 
-            LudoDbAccess ludoDbAccess = new LudoDbAccess();
-            ludoDbAccess.GetHigestBoardId();
+           Square square = new Square();
+            square.CurrentBoard();
+
+
         }
     }
 }
