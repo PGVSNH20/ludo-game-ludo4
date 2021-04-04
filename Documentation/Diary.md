@@ -108,4 +108,9 @@ Vi ska se över lite metoder om det går att hämta data från databasen iställ
 
 4/4
 Förmiddagen:
-Vi har suttit försökt att testa att få ut det högsta värdet ifrån "boardId" i Xunit. Gick inte att köra testet pga av en Console.ReadLine() som blockerade vårt testa att köras.  
+Vi har suttit försökt att testa att få ut det högsta värdet ifrån "boardId" i Xunit. 
+Gick inte att köra testet pga av en Console.ReadLine() som blockerade vårt testa att köras.
+Vi såg också att hanterat metoden felaktigt så att den spottade ut nåt vi inte ville ha. 
+Efter lite mek så insåg vi att databasen var smartare än sig själv då vi faktiskt kan hämta ut hela spelet ur den.
+Testet funkar nu.
+
