@@ -27,6 +27,9 @@ namespace LudoBoard.DataModels
             Console.WriteLine("How many players? (2-4)");
             
             List<Player> player = new List<Player>();
+            LudoDbAccess ludoDbAccess = new LudoDbAccess();
+            int highestId = ludoDbAccess.GetHigestPlayerId();
+
 
             // Checking the amount of players
             while (isRunning)
@@ -36,8 +39,10 @@ namespace LudoBoard.DataModels
                 if (userInput > 1 && userInput < 5)
                 {
                     for (int i = 0; i < userInput; i++)
-                    {                      
-                        player.Add(new Player());
+                    {
+            
+                        player.Add(new Player() { Id = highestId + i + 1});
+                        
                     }
                     Console.WriteLine($"Added: \"{userInput}\" players to list");
                     Console.ReadLine();
@@ -60,9 +65,6 @@ namespace LudoBoard.DataModels
             Random randomStartPlayer = new Random();            
             int playerId = randomStartPlayer.Next(1, player.Count);
 
-            // Retrieving the highest Id from db.
-            int higestPlayerId = new LudoDbAccess().GetHigestPlayerId();
-
             List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
             for (int i = 0; i < player.Count; i++)
             {
@@ -72,7 +74,7 @@ namespace LudoBoard.DataModels
                     Console.WriteLine($"{player[i].Name} starts.");
                 }
                 // SET Player id, color
-                player[i].Id = higestPlayerId + i + 1;
+         
                 player[i].PlayerColor = colors[i];
 
                 // SET Player Name
@@ -114,7 +116,7 @@ namespace LudoBoard.DataModels
             var counter = 0;
             for (int i = 0; i < player.Count; i++)
             {
-                piece.Add(new Piece());
+                piece.Add(new Piece());                              
                 piece.Add(new Piece());
                 piece.Add(new Piece());
                 piece.Add(new Piece());
@@ -122,6 +124,7 @@ namespace LudoBoard.DataModels
                 for (int x = 0; x < 4;x++)
                 {
                     piece[counter + x].Position = nestPositions[i];
+                    piece[counter + x].IsActive = true;
                 }
                 counter += 4;
 

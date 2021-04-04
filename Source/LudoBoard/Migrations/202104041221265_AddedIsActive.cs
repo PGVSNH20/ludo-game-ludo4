@@ -3,16 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SomthingWentWrong : DbMigration
+    public partial class AddedIsActive : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Players", "PlayerTurn", c => c.Boolean(nullable: false));
+            AddColumn("dbo.Pieces", "IsActive", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Players", "PlayerTurn");
+            DropColumn("dbo.Pieces", "IsActive");
         }
     }
 }

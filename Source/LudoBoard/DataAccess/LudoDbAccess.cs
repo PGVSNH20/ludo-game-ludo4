@@ -44,18 +44,22 @@ namespace LudoBoard.DataAccess
                 if (pieces[x].Position == 0)
                 {
                     pieces[x].PlayerId = players[0].Id;
+                   
                 }
                 else if (pieces[x].Position == 4)
                 {
                     pieces[x].PlayerId = players[1].Id;
+      
                 }
                 else if (pieces[x].Position == 56)
                 {
                     pieces[x].PlayerId = players[2].Id;
+  
                 }
                 else if (pieces[x].Position == 60)
                 {
                     pieces[x].PlayerId = players[3].Id;
+  
                 }
                 // Add piece to DB set
                 context.Piece.Add(pieces[x]);
@@ -101,19 +105,19 @@ namespace LudoBoard.DataAccess
         public int GetHigestPlayerId()
         {
             var context = new LudoDbContext();
-            int playerId;
+            Player playerId = null;
+            int id = 0;
             try
             {
-                playerId = Convert.ToInt32(context.Player.OrderByDescending(t => t.Id).First());
+                playerId = context.Player.OrderByDescending(t => t.Id).First();
             }
             catch (Exception)
             {
-                playerId = 0;
+                return id;
             }
 
-            Console.WriteLine($"Returning highest Id: {playerId}");
-            Console.ReadLine();
-            return playerId;
+            Console.WriteLine($"Returning highest Id: {playerId.Id}"); 
+            return playerId.Id;
         }
 
 
@@ -131,5 +135,21 @@ namespace LudoBoard.DataAccess
 		{
 
 		}
+        
+        public List<Piece> GetAllPieces()
+        {
+            List<Piece> pieces = new List<Piece>();
+            var context = new LudoDbContext();
+            try
+            {
+                pieces.Add((Piece)context.Piece.Where(t => t.IsActive == true));  
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+     
+            return pieces;
+        }
     }
 }
