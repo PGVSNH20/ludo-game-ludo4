@@ -23,10 +23,6 @@ namespace LudoBoard.DataModels
             // Creating a new board
             Game board = new Game();
 
-            // Retrieving the highest Id from db.
-            int higestBoardId = new LudoDbAccess().GetHigestBoardId();
-            board.Id = higestBoardId + 1;
-
             // Creating amount of players
             Console.WriteLine("How many players? (2-4)");
             
@@ -139,11 +135,12 @@ namespace LudoBoard.DataModels
 
         public static void LoadGame()
         {
-            //Laddar ett spel som man kan välja i en lista
+            // Laddar ett spel som man kan välja i en lista
         }
 
         public void ContinueGame()
         {
+            // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
             Game.LoadGame(); //Ladda senast sparade spelet
         }
         private static void PlayGame(List<Player> players)

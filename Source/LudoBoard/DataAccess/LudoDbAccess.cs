@@ -81,20 +81,21 @@ namespace LudoBoard.DataAccess
         }
         public int GetHigestBoardId()
         {
+
             var context = new LudoDbContext();
-            int boardId;
+            Game boardId = null;
             try
             {
-                boardId = Convert.ToInt32(context.Game.OrderByDescending(t => t.Id).First());
+                boardId = context.Game.OrderByDescending(t => t.Id).First();
+                Console.WriteLine(boardId.Id);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                boardId = 0;
+                Console.WriteLine(e);
             }
 
             Console.WriteLine($"Returning highest Id: {boardId}");
-            Console.ReadLine();
-            return boardId;
+            return boardId.Id;
         }
 
         public int GetHigestPlayerId()

@@ -38,7 +38,7 @@ namespace LudoBoard.DataModels
                         break;
 
                     case 2:
-                        MovePiece();
+                        //MovePiece();
                         break;
 
                     case 3:
