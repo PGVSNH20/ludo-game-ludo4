@@ -90,7 +90,7 @@ namespace LudoBoard.DataAccess
             }
         }
 
-        public int GetHigestBoardId()
+        public int GetHighestBoardId()
         {
 
             var context = new LudoDbContext();

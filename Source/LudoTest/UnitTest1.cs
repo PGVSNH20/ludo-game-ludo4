@@ -17,7 +17,7 @@ namespace LudoTest
             int expected = 2;
 
             // Act - Vad ska testet göra, en metod som får ut ett resultat?
-            int result = ludoDbAccess.GetHigestBoardId();
+            int result = ludoDbAccess.GetHighestBoardId();
 
             // Assert - Vad vill vi att resultatet ska bli?
             Assert.Equal(expected, result);
