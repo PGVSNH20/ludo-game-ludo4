@@ -53,7 +53,7 @@ namespace LudoTest
         {
             // Arange - lägg upp testet genom att ta in variabler osv.
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
-            string expected = "Messi";
+            //string expected = "Messi";
 
             // Act - Vad ska testet göra, en metod som får ut ett resultat?
             int result = ludoDbAccess.GetHighestPlayerId();

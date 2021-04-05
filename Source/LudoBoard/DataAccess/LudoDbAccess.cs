@@ -7,8 +7,6 @@ namespace LudoBoard.DataAccess
 {
     public class LudoDbAccess
     {
-        private object db;
-
         // Spara det nuvarande spelet
         // TODO - Sikta på att spara varje gång något händer i spelet.  
         public void SaveGame(Game game, List<Player> players, List<Piece> pieces)
