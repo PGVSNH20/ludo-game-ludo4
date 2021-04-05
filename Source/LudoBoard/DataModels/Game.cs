@@ -55,6 +55,7 @@ namespace LudoBoard.DataModels
                 }
             }
 
+<<<<<<< Updated upstream
             CreatePlayer(board, player);
             PlayGame(player);
         }
@@ -69,6 +70,16 @@ namespace LudoBoard.DataModels
             for (int i = 0; i < player.Count; i++)
             {
                 if (playerId == i + 1)
+=======
+            int highestPlayerId = new LudoDbAccess().GetHighestPlayerId();
+            List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
+            for (int i = 0; i < player.Count; i++)
+            {
+                player[i].Id = highestPlayerId + i + 1;
+
+                // Försök att fixa ENUM
+                foreach (var color in Enum.GetValues(typeof(Color)))
+>>>>>>> Stashed changes
                 {
                     player[i].PlayerTurn = true;
                     Console.WriteLine($"{player[i].Name} starts.");
