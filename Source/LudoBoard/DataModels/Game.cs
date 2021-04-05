@@ -168,15 +168,15 @@ namespace LudoBoard.DataModels
             Console.WriteLine($"You rolled {i}");
 
             // TODO - Lägg till check om det finns pieces i nest.
-            if (i == 6)
-            {
-                board.AskIfMoveFromNestOrMoveOnBoard();
-            }
-            else
-            {                
-                board.MovePiece(onePlayersPieces, i);
-            }
-
+            //if (i == 6)
+            //{
+            //    board.AskIfMoveFromNestOrMoveOnBoard();
+            //}
+            //else
+            //{                
+            //    board.MovePiece(onePlayersPieces, i);
+            //}
+            board.MovePiece(onePlayersPieces, i);
             // PlayerTurn Ska lägga in property i player (done) så att vi ser vems tur det är om spelet avbryts.
             // 
         }

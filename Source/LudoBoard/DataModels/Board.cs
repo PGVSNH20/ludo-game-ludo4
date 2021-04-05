@@ -11,7 +11,29 @@ namespace LudoBoard.DataModels
             Console.WriteLine("Which piece do you want to move? (Id)");
             int.TryParse(Console.ReadLine(), out pieceId);
 
-            piece[pieceId - 1].Position = diceValue;
+			if (piece[0].PlayerId = 0)
+			{
+
+			}
+            if (piece[0].PlayerId = 1)
+            {
+
+            }
+            if (piece[0].PlayerId = 2)
+            {
+
+            }
+            if (piece[0].PlayerId = 3)
+            {
+
+            }
+
+            var index = Square.player1.IndexOf(piece[pieceId].Position);
+            index = index + diceValue;
+            piece[pieceId].Position = Square.player1[index];
+            Console.WriteLine($"Index is: {index} and the new position is {piece[pieceId].Position}!");
+            //piece[pieceId - 1].Position = diceValue;
+            
             // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
         }
 

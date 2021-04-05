@@ -20,7 +20,7 @@ namespace LudoGameEngine
                                     "[1] Create new game\n" +
                                     "[2] Load game");
 
-                MenuChoise();              
+                MenuChoice();              
             }
         }
         public static void LoadGame()
@@ -47,11 +47,13 @@ namespace LudoGameEngine
                     Console.WriteLine($"\n---------------------------------------------------------------------------\n");
                 }
 
-                MenuChoise();
+                MenuChoice();
+
+                //TODO: Ge ett felmeddelande om man inte har ett sparat spel och gå tillbaka till menyn
 
             }
         }
-        public static void MenuChoise()
+        public static void MenuChoice()
         {
             int.TryParse(Console.ReadLine(), out userInput);
 
