@@ -18,6 +18,25 @@ namespace LudoBoard.DataModels
         public string WinnerPlayerName { get; set; } = "N/A";
         public ICollection<Player> Players { get; set; }
 
+        public static List<int> player1GameBoard = new List<int>()
+            {
+                0,14,15,16,17,18,11,8,5,1,2,3,7,10,13,20,21,22,23,24,35,46,45,44,43,42,49,52,55,59,58,57,53,50,47,40,39,38,37,36,25,26,27,28,29,30
+            };
+
+        public static List<int> player2GameBoard = new List<int>()
+            {
+                4,3,7,10,13,20,21,22,23,24,35,46,45,44,43,42,49,52,55,59,58,57,53,50,47,40,39,38,37,36,25,14,15,16,17,18,11,8,5,1,2,6,9,12,19,30
+            };
+
+        public static List<int> player3GameBoard = new List<int>()
+            {
+                60,46,45,44,43,42,49,52,55,59,58,57,53,50,47,40,39,38,37,36,25,14,15,16,17,18,11,8,5,1,2,3,7,10,13,20,21,22,23,24,35,34,33,32,31,30
+            };
+
+        public static List<int> player4GameBoard = new List<int>()
+            {
+                56,57,53,50,47,40,39,38,37,36,25,14,15,16,17,18,11,8,5,1,2,3,7,10,13,20,21,22,23,24,35,46,45,44,43,42,49,52,55,59,58,54,51,48,41,30
+            };
         public static void CreateGame()
         {
             // Creating a new board
@@ -40,9 +59,9 @@ namespace LudoBoard.DataModels
                 {
                     for (int i = 0; i < userInput; i++)
                     {
-            
-                        player.Add(new Player() { Id = highestId + i + 1});
-                        
+                        player.Add(new Player() { Id = highestId + i + 1 });
+                        /*PlayerBoard = PlayerBoard(player[ i + 1 ]GameBoard}*/
+
                     }
                     Console.WriteLine($"Added: \"{userInput}\" players to list");
                     Console.ReadLine();
@@ -66,38 +85,78 @@ namespace LudoBoard.DataModels
             int playerId = randomStartPlayer.Next(1, player.Count);
 
             List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
-            for (int i = 0; i < player.Count; i++)
+            using (var context = new LudoDbContext())
             {
-                if (playerId == i + 1)
+                for (int i = 0; i < player.Count; i++)
                 {
-                    player[i].PlayerTurn = true;
-                    Console.WriteLine($"{player[i].Name} starts.");
-                }
-                // SET Player id, color
-         
-                player[i].PlayerColor = colors[i];
-
-                // SET Player Name
-                bool isRunning = true;
-                while (isRunning)
-                {
-                    Console.Write($"\nPlayer {i + 1} Name: ");
-                    player[i].Name = Console.ReadLine().ToString();
-
-                    bool containsInt = player[i].Name.Any(char.IsDigit);
-
-                    if (containsInt == true)
+                    if (i == 0)
                     {
-                        Console.Write("No numbers as a name, try again.");
+                        foreach (var value in player1GameBoard)
+                        {
+                            player[i].PlayerBoard.Add(value);
+                        }
+                        context.SaveChanges();
                     }
-                    else if (player[i].Name == String.Empty)
+
+                    else if (i == 1)
                     {
-                        Console.WriteLine("Please enter a name..");
+                        foreach (var value in player2GameBoard)
+                        {
+                            player[i].PlayerBoard.Add(value);
+                        }
+                        context.SaveChanges();
+                    }
+                    else if (i == 2)
+                    {
+                        foreach (var value in player3GameBoard)
+                        {
+                            player[i].PlayerBoard.Add(value);
+                        }
+                        context.SaveChanges();
+                    }
+                    else if (i == 3)
+                    {
+                        foreach (var value in player4GameBoard)
+                        {
+                            player[i].PlayerBoard.Add(value);
+                        }
+                        context.SaveChanges();
                     }
                     else
                     {
-                        Console.WriteLine($"Added Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
-                        isRunning = false;
+                        throw new Exception();
+                    }
+                    if (playerId == i + 1)
+                    {
+                        player[i].PlayerTurn = true;
+                        Console.WriteLine($"{player[i].Name} starts.");
+                    }
+                    // SET Player id, color
+
+                    player[i].PlayerColor = colors[i];
+
+                    // SET Player Name
+                    bool isRunning = true;
+                    while (isRunning)
+                    {
+                        Console.Write($"\nPlayer {i + 1} Name: ");
+                        player[i].Name = Console.ReadLine().ToString();
+
+                        bool containsInt = player[i].Name.Any(char.IsDigit);
+
+                        if (containsInt == true)
+                        {
+                            Console.Write("No numbers as a name, try again.");
+                        }
+                        else if (player[i].Name == String.Empty)
+                        {
+                            Console.WriteLine("Please enter a name..");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Added Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
+                            isRunning = false;
+                        }
                     }
                 }
             }
@@ -150,11 +209,13 @@ namespace LudoBoard.DataModels
             Board board = new Board();
             Dice rollDice = new Dice();
             List<Piece> onePlayersPieces = new List<Piece>();
+            List<object> playerGameBoard = new List<object>();
 
             foreach (var player in players)
             {
                 if (player.PlayerTurn == true)
                 {
+                    playerGameBoard.Add(player.PlayerBoard);
                     LudoDbAccess ludoDbAccess = new LudoDbAccess();
                     
                     Console.WriteLine($"It's player {player.Name} turn to roll the dice.");
@@ -176,7 +237,7 @@ namespace LudoBoard.DataModels
             //{                
             //    board.MovePiece(onePlayersPieces, i);
             //}
-            board.MovePiece(onePlayersPieces, i);
+            board.MovePiece(onePlayersPieces, i, playerGameBoard);
             // PlayerTurn Ska lägga in property i player (done) så att vi ser vems tur det är om spelet avbryts.
             // 
         }

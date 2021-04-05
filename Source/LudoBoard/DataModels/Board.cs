@@ -5,34 +5,17 @@ namespace LudoBoard.DataModels
 {
     public class Board
     {
-        public void MovePiece(List<Piece> piece, int diceValue)
+        public void MovePiece(List<Piece> piece, int diceValue, List<object> playerGameBoard)
         {
             int pieceId = 0;
             Console.WriteLine("Which piece do you want to move? (Id)");
             int.TryParse(Console.ReadLine(), out pieceId);
 
-			if (piece[0].PlayerId = 0)
-			{
-
-			}
-            if (piece[0].PlayerId = 1)
-            {
-
-            }
-            if (piece[0].PlayerId = 2)
-            {
-
-            }
-            if (piece[0].PlayerId = 3)
-            {
-
-            }
-
-            var index = Square.player1.IndexOf(piece[pieceId].Position);
+            var index = playerGameBoard.IndexOf(piece[pieceId].Position);
             index = index + diceValue;
-            piece[pieceId].Position = Square.player1[index];
+            piece[pieceId].Position = Game.player1GameBoard[index];
+
             Console.WriteLine($"Index is: {index} and the new position is {piece[pieceId].Position}!");
-            //piece[pieceId - 1].Position = diceValue;
             
             // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
         }
