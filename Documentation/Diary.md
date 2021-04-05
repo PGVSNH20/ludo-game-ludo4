@@ -120,3 +120,7 @@ Vi har fortsatt pysslat med tester.
 - Vi testade highestId på player för att vi skulle sätta id på spelarna vi skapade.
 - Lagt till en tabell i databasen för att se vilka pjäser som är aktiva.
 - Vi påbörjade metoden CurrentBoard, den metoden ska ta in alla positoner från pjäser och sätta ut det på spelplanen.  
+
+5/4
+Förmiddagen:
+ -Skapat en metod som tar in spel som inte är avslutad (IsCompleted = false) till en lista, Därifrån ska vi skapa ett val om vilket spel man skulle vilja ladda
