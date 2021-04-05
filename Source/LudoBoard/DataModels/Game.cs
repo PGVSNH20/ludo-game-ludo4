@@ -90,6 +90,10 @@ namespace LudoBoard.DataModels
                     {
                         Console.Write("No numbers as a name, try again.");
                     }
+                    else if (player[i].Name == String.Empty)
+                    {
+                        Console.WriteLine("Please enter a name..");
+                    }
                     else
                     {
                         Console.WriteLine($"Added Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
