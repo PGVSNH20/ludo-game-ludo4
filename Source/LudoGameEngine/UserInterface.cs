@@ -20,25 +20,7 @@ namespace LudoGameEngine
                                     "[1] Create new game\n" +
                                     "[2] Load game");
 
-                int.TryParse(Console.ReadLine(), out userInput);
-
-                switch (userInput)
-                {
-                    case 1:
-                        Game.CreateGame();
-                        isRunning = false;
-                        break;
-
-                    case 2:
-                        LoadGame();
-                        isRunning = false;
-                        break;
-
-                    default:
-                        Console.WriteLine("You need to press 1 or 2");
-                        break;
-
-                }
+                MenuChoise();              
             }
         }
         public static void LoadGame()
@@ -65,27 +47,30 @@ namespace LudoGameEngine
                     Console.WriteLine($"\n---------------------------------------------------------------------------\n");
                 }
 
+                MenuChoise();
 
-                int.TryParse(Console.ReadLine(), out userInput);
+            }
+        }
+        public static void MenuChoise()
+        {
+            int.TryParse(Console.ReadLine(), out userInput);
 
-                switch (userInput)
-                {
+            switch (userInput)
+            {
 
-                    case 1:
-                        Game.CreateGame();
-                        isRunning = false;
-                        break;
+                case 1:
+                    Game.CreateGame();
+                    isRunning = false;
+                    break;
 
-                    case 2:
-                        LoadGame();
-                        isRunning = false;
-                        break;
+                case 2:
+                    LoadGame();
+                    isRunning = false;
+                    break;
 
-                    default:
-                        Console.WriteLine("You need to press 1 or 2");
-                        break;
-
-                }
+                default:
+                    Console.WriteLine("You need to press 1 or 2");
+                    break;
             }
         }
     }
