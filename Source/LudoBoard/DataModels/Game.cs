@@ -28,7 +28,7 @@ namespace LudoBoard.DataModels
             
             List<Player> player = new List<Player>();
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
-            int highestId = ludoDbAccess.GetHigestPlayerId();
+            int highestId = ludoDbAccess.GetHighestPlayerId();
 
 
             // Checking the amount of players
