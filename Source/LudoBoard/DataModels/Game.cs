@@ -136,15 +136,10 @@ namespace LudoBoard.DataModels
             ludoDbAccess.SaveGame(board, player, piece);
         }
 
-        public static void LoadGame()
-        {
-            // Laddar ett spel som man kan välja i en lista
-        }
-
         public void ContinueGame()
         {
             // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
-            Game.LoadGame(); //Ladda senast sparade spelet
+            //Ladda senast sparade spelet
         }
         private static void PlayGame(List<Player> players)
         {

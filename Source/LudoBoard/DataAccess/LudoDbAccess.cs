@@ -44,22 +44,22 @@ namespace LudoBoard.DataAccess
                 if (pieces[x].Position == 0)
                 {
                     pieces[x].PlayerId = players[0].Id;
-                   
+
                 }
                 else if (pieces[x].Position == 4)
                 {
                     pieces[x].PlayerId = players[1].Id;
-      
+
                 }
                 else if (pieces[x].Position == 56)
                 {
                     pieces[x].PlayerId = players[2].Id;
-  
+
                 }
                 else if (pieces[x].Position == 60)
                 {
                     pieces[x].PlayerId = players[3].Id;
-  
+
                 }
                 // Add piece to DB set
                 context.Piece.Add(pieces[x]);
@@ -72,6 +72,14 @@ namespace LudoBoard.DataAccess
             context.SaveChanges();
             Console.WriteLine("Game saved to database");
             Console.ReadKey();
+        }
+
+        public List<Player> GetAllPlayers()
+        {
+            using (var context = new LudoDbContext())
+            {
+                return context.Player.ToList();
+            }
         }
 
         public List<Piece> GetCurrentPlayersPieces(int playerId)
@@ -116,39 +124,43 @@ namespace LudoBoard.DataAccess
                 return id;
             }
 
-            Console.WriteLine($"Returning highest Id: {playerId.Id}"); 
+            Console.WriteLine($"Returning highest Id: {playerId.Id}");
             return playerId.Id;
         }
 
 
         public void CompleteGameAndApplyStatsToList() //Kan kanske tas bort
-		{
+        {
             //Spelet är slut och lägger till stats i en lista på spelade spel
-		}
+        }
 
         public void SaveStats()
-		{
+        {
 
-		}
+        }
 
-        public void LoadStats()
-		{
+        public List<Game> GetAllUnfinishedGames()
+        {
 
-		}
-        
+            using (var context = new LudoDbContext())
+            {
+                return context.Game.Where(t => t.IsCompleted == false).ToList();
+            }
+        }
+
         public List<Piece> GetAllPieces()
         {
             List<Piece> pieces = new List<Piece>();
             var context = new LudoDbContext();
             try
             {
-                pieces.Add((Piece)context.Piece.Where(t => t.IsActive == true));  
+                pieces.Add((Piece)context.Piece.Where(t => t.IsActive == true));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-     
+
             return pieces;
         }
     }

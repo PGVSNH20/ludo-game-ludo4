@@ -1,5 +1,7 @@
-﻿using LudoBoard.DataModels;
+﻿using LudoBoard.DataAccess;
+using LudoBoard.DataModels;
 using System;
+using System.Collections.Generic;
 
 namespace LudoGameEngine
 {
@@ -28,7 +30,7 @@ namespace LudoGameEngine
                         break;
 
                     case 2:
-                        Game.LoadGame();
+                        LoadGame();
                         isRunning = false;
                         break;
 
@@ -39,5 +41,52 @@ namespace LudoGameEngine
                 }
             }
         }
-	}
+        public static void LoadGame()
+        {
+            // Laddar en lista med spel från LudoDbAccess som man sedan ska kunna välja från Load Game Menyn
+            List<Game> games = new LudoDbAccess().GetAllUnfinishedGames();
+            List<Player> players = new LudoDbAccess().GetAllPlayers();
+            
+            while (isRunning)
+            {
+                Console.Clear();
+                Console.WriteLine("What game do you want to load?\n");
+
+                for (int i = 0; i < games.Count; i++)
+                {
+                    Console.WriteLine($"[{i}]\nGame Id: {games[i].Id} Last Played: {games[i].LastTimePlayedDate}");
+                    Console.Write($"Players:");
+                    foreach(Player p in players)
+                    {
+                        if (p.GameId == games[i].Id)
+                            Console.Write($" {p.Name}");
+                    }
+
+                    Console.WriteLine($"\n---------------------------------------------------------------------------\n");
+                }
+
+
+                int.TryParse(Console.ReadLine(), out userInput);
+
+                switch (userInput)
+                {
+
+                    case 1:
+                        Game.CreateGame();
+                        isRunning = false;
+                        break;
+
+                    case 2:
+                        LoadGame();
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("You need to press 1 or 2");
+                        break;
+
+                }
+            }
+        }
+    }
 }

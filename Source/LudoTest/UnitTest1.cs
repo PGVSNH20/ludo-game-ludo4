@@ -1,5 +1,6 @@
 using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
+using LudoGameEngine;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -21,6 +22,17 @@ namespace LudoTest
             // Assert - Vad vill vi att resultatet ska bli?
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void When_LoadGamesFromMenu_Expecting_ListOfUnfinishedGamesToPlay()
+        {
+            // Arange - lägg upp testet genom att ta in variabler osv.
+
+            // Act - Vad ska testet göra, en metod som får ut ett resultat?
+
+            // Assert - Vad vill vi att resultatet ska bli?
+        }
+
         [Fact]
         public void When_RollDice_ExpectNumberBetween_1_And_6()
         {
@@ -30,6 +42,7 @@ namespace LudoTest
             
             // Act - Vad ska testet göra, en metod som får ut ett resultat?
             result = dice.RollDice();
+
             // Assert - Vad vill vi att resultatet ska bli?
             Assert.True(result >= 0 && result <= 6);
 

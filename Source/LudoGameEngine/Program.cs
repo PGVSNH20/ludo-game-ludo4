@@ -7,12 +7,12 @@ namespace LudoGameEngine
     {
         static void Main(string[] args)
         {
-            //var runMenu = new UserInterface();
+            var runMenu = new UserInterface();
 
-            //runMenu.MainMenu();
+            runMenu.MainMenu();
 
-           Square square = new Square();
-            square.CurrentBoard();
+            //Square square = new Square();
+            // square.CurrentBoard();
 
 
         }

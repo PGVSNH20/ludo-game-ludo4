@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LudoBoard\LudoBoard.csproj" />
+    <ProjectReference Include="..\LudoGameEngine\LudoGameEngine.csproj" />
   </ItemGroup>
 
 </Project>
