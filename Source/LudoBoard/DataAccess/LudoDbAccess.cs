@@ -84,13 +84,12 @@ namespace LudoBoard.DataAccess
 
         public List<Piece> GetCurrentPlayersPieces(int playerId)
         {
-            var context = new LudoDbContext();
-            List<Piece> currentPlayersPieces = new List<Piece>();
-
-            currentPlayersPieces.Add((Piece)context.Piece.Where(x => x.PlayerId == playerId));
-
-            return currentPlayersPieces;
+            using (var context = new LudoDbContext())
+            {
+                return context.Piece.Where(x => x.PlayerId == playerId).ToList();
+            }
         }
+
         public int GetHigestBoardId()
         {
 
