@@ -109,7 +109,7 @@ namespace LudoBoard.DataAccess
             return boardId.Id;
         }
 
-        public int GetHighestPlayerId()
+        public int GetHigestPlayerId()
         {
             var context = new LudoDbContext();
             Player playerId = null;
