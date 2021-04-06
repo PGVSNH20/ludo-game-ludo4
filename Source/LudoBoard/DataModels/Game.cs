@@ -224,9 +224,9 @@ namespace LudoBoard.DataModels
 
             List<Piece> currentPlayerPieces = Update.GetPlayerPieces(currentPlayer);
 
-
             Console.WriteLine("1. rolldice");
             Console.ReadKey();
+
             // Slå tärning            
             int i = rollDice.RollDice();
             Console.WriteLine($"You rolled {i}");
