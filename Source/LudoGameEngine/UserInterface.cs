@@ -13,16 +13,37 @@ namespace LudoGameEngine
 
         public void MainMenu()
         {
-
             while (isRunning)
             {
-				
-                    Console.WriteLine("Hello and welcome to Ludo game! What do you want to do?\n" +
+				Console.Clear();
+                Console.WriteLine("Hello and welcome to Ludo game! What do you want to do?\n" +
                                     "[1] Continue\n" +
-                                    "[2] Create new game" +
+                                    "[2] Create new game\n" +
                                     "[3] Load game");
+
+                int.TryParse(Console.ReadLine(), out userInput);
+
+                switch (userInput)
+                {
+
+                    case 1:
+                        GameLoop.InitializeGame(1);
+                        break;
+                    case 2:
+                        GameLoop.InitializeGame(2);
+                        break;
+                    case 3:
+                        MenuLoadGame();
+                        break;
+
+                    default:
+                        Console.WriteLine("You need to press 1 or 2");
+                        break;
+                }
             }
         }
+
+
         public static void MenuLoadGame() //Visa information om sparade spel och ladda det. Skall kunna hoppa tillbaka till menyn. Om det inte finns någon data ge ett felmeddelande och skicka tillbaka till huvudmenyn.
         {
             // Laddar en lista med spel från LudoDbAccess som man sedan ska kunna välja från Load Game Menyn

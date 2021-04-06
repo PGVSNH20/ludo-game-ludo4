@@ -18,7 +18,6 @@ namespace LudoBoard.DataModels
         public string WinnerPlayerName { get; set; } = "N/A";
         public ICollection<Player> Players { get; set; }
 
-
         public static List<int> player1GameBoard = new List<int>()
             {
                 0,14,15,16,17,18,11,8,5,1,2,3,7,10,13,20,21,22,23,24,35,46,45,44,43,42,49,52,55,59,58,57,53,50,47,40,39,38,37,36,25,26,27,28,29,30
@@ -37,6 +36,9 @@ namespace LudoBoard.DataModels
             };
 
 
+        /// <summary>
+        /// INITIALIZE GAME
+        /// </summary>
         public void CreateGame()
         {
             // Creating a new board
@@ -214,6 +216,84 @@ namespace LudoBoard.DataModels
         {
             // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
             //Ladda senast sparade spelet
+            //LoadGame();
+        }
+
+        public Game LoadGame(int gameID) //Laddar parametrar och skickar det sedan till spelet som sedan körs
+		{
+            //TODO - Ta hem ett specifikt gameID från databasen och sedan returna det
+            return null;
+		}
+
+
+        /// <summary>
+        /// GAME LOGIC
+        /// </summary>
+        public void MovePiece(List<Piece> piece, int diceValue, List<int> playerGameBoard)
+        {
+            int pieceId = 0;
+            Console.WriteLine("Which piece do you want to move? (Id)");
+            int.TryParse(Console.ReadLine(), out pieceId);
+
+            var index = playerGameBoard.IndexOf(piece[pieceId].Position);
+            Console.WriteLine($"\nCurrent index of the piece: {index} | Current position: {piece[pieceId].Position}!");
+
+            index = index + diceValue;
+            piece[pieceId].Position = playerGameBoard[index];
+            Console.WriteLine($"Updated index of the piece: {index} and the new position is {piece[pieceId].Position}!\n");
+
+            // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
+            // Spara Piece.position
+            // Uppdatera Player.PlayerTurn
+        }
+
+        //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
+        public void AskIfMoveFromNestOrMoveOnBoard(List<Piece> piece, int diceValue, List<int> playerGameBoard)
+        {
+            Square square = new Square();
+            bool isRunning = true;
+            int userInput = 0;
+
+            while (isRunning)
+            {
+                Console.WriteLine("Do you want move a piece from the nest or move a piece on board?\n" +
+                                    "[1] Move piece from the nest\n" +
+                                    "[2] Move piece on the board\n" +
+                                    "[3] View current board");
+
+                int.TryParse(Console.ReadLine(), out userInput);
+                //TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
+                isRunning = false;
+                switch (userInput)
+                {
+                    case 1:
+                        //Här ska vi flytta en pjäs från nest:et.
+                        isRunning = false;
+                        break;
+
+                    case 2:
+                        MovePiece(piece, diceValue, playerGameBoard);
+                        isRunning = false;
+                        break;
+
+                    case 3:
+                        square.CurrentBoard();
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("You need to press 1, 2 or 3");
+                        isRunning = true;
+                        break;
+
+                }
+            }
+        }
+
+        //TODO-Programmet ska avgöra vems tur det är att kasta tärningen. WhoesTurnToRollTheDice(); 
+        public void WhoesTurnToRollTheDice()
+        {
+
         }
     }
 }

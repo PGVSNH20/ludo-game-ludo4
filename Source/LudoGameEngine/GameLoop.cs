@@ -9,21 +9,23 @@ namespace LudoGameEngine
 {
 	public class GameLoop
 	{
+        public static bool isPlaying = false;
+
         public static void InitializeGame(int choice)
 		{
             UserInterface ui = new UserInterface();
-            ui.MainMenu();
             Game game = new Game();
+
 			switch (choice)
 			{
                 case 1:
-					game.CreateGame();
+                    game.ContinueGame(); //Kolla vilken vi ska använda automatiskt
                     break;
                 case 2:
-                    game.ContinueGame(); //Kolla vilken vi ska använda automatiskt
-                    game.LoadGame();
+                    game.CreateGame();
                     break;
 				default:
+					Console.WriteLine("Wrong input!");
 					break;
 			}
 		}
