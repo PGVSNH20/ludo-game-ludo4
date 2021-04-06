@@ -1,11 +1,12 @@
 ﻿using LudoBoard.DataAccess;
+using LudoBoard.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LudoBoard.DataModels
+namespace LudoGameEngine.UI
 {
     // This class should be controlling all the movement
     // so that CurrentBoard() can print out each piece location.

@@ -1,6 +1,8 @@
 using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
 using LudoGameEngine;
+using LudoGameEngine.GameLogic;
+using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -23,15 +25,15 @@ namespace LudoTest
             Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void When_LoadGamesFromMenu_Expecting_ListOfUnfinishedGamesToPlay()
-        {
-            // Arange - lägg upp testet genom att ta in variabler osv.
+        //[Fact]
+        //public void When_LoadGamesFromMenu_Expecting_ListOfUnfinishedGamesToPlay()
+        //{
+        //    // Arange - lägg upp testet genom att ta in variabler osv.
 
-            // Act - Vad ska testet göra, en metod som får ut ett resultat?
+        //    // Act - Vad ska testet göra, en metod som får ut ett resultat?
 
-            // Assert - Vad vill vi att resultatet ska bli?
-        }
+        //    // Assert - Vad vill vi att resultatet ska bli?
+        //}
 
         [Fact]
         public void When_RollDice_ExpectNumberBetween_1_And_6()
@@ -105,18 +107,17 @@ namespace LudoTest
         // EXEMPEL
         // Så här kan man göra om man vill testa en funktion med flera olika inparametrar.
         // Detta gör vi för att motverka redundans
-        [Theory]
-        [InlineData(5, 2, 3)]
-        [InlineData(0, 5, -5)]
-        public void Test2(int expected, int x, int y)
-        {
-            // Arange - lägg upp testet genom att ta in variabler osv.
+        //[Theory]
+        //[InlineData(5, 2, 3)]
+        //[InlineData(0, 5, -5)]
+        //public void Test2(int expected, int x, int y)
+        //{
+        //    // Arange - lägg upp testet genom att ta in variabler osv.
 
-            // Act - Vad ska testet göra, en metod som får ut ett resultat?
+        //    // Act - Vad ska testet göra, en metod som får ut ett resultat?
 
-            // Assert - Vad vill vi att resultatet ska bli?
+        //    // Assert - Vad vill vi att resultatet ska bli?
 
-        }
-
+        //}
     }
 }

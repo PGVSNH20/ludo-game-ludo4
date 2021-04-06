@@ -1,4 +1,6 @@
 ﻿using LudoBoard.DataModels;
+using LudoGameEngine.GameLogic;
+using LudoGameEngine.Initialize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,9 @@ namespace LudoGameEngine
 	{
         public static bool isPlaying = false;
 
-        public static void InitializeGame(int choice)
+        public void InitializeGame(int choice)
 		{
-            UserInterface ui = new UserInterface();
-            Game game = new Game();
+            CreateGame game = new CreateGame();
 
 			switch (choice)
 			{
@@ -22,7 +23,7 @@ namespace LudoGameEngine
                     game.ContinueGame(); //Kolla vilken vi ska använda automatiskt
                     break;
                 case 2:
-                    game.CreateGame();
+                    game.CreateNewGame();
                     break;
 				default:
 					Console.WriteLine("Wrong input!");
@@ -30,19 +31,19 @@ namespace LudoGameEngine
 			}
 		}
 
-        public static void RunGame(List<Player> players) //Kanske måste uppdelas eller göras om till initialize
-        {
-            Board board = new Board();
+        public void RunGame(List<Player> players) //Kanske måste uppdelas eller göras om till initialize
+        {           
             Dice rollDice = new Dice();
+            Move move = new Move();
 
             bool isPlaying = true; //ska flyttas
 			while (isPlaying) //loopar omgångar
 			{
 				for (int t = 0; t <= players.Count; t++) //loopar spelarnas turn
 				{
-                    Player currentPlayer = Update.GetPlayerTurn(players);
+                    Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
 
-                    List<Piece> currentPlayerPieces = Update.GetPlayerPieces(currentPlayer);
+                    List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
                     Console.WriteLine("1. rolldice");
                     Console.ReadKey();
@@ -57,11 +58,11 @@ namespace LudoGameEngine
                     {
                         if (i == 6 && nestChecker.Contains(Convert.ToInt32(p.Position)))
                         {
-                            board.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, i, currentPlayer.PlayerBoard);
+                            move.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, i, currentPlayer.PlayerBoard);
                         }
                     }
 
-                    board.MovePiece(currentPlayerPieces, i, currentPlayer.PlayerBoard);
+                    move.MovePiece(currentPlayerPieces, i, currentPlayer.PlayerBoard);
                 }
             }
         }

@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LudoBoard.DataModels
+namespace LudoGameEngine.Initialize
 {
-    public class Nest
+    public class SaveGame
     {
-		public int Id { get; set; }
-		public Piece Pieces { get; set; }
-	}
+    }
 }

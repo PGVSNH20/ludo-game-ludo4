@@ -1,9 +1,14 @@
-﻿using System;
+﻿using LudoBoard.DataModels;
+using LudoGameEngine.UI;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LudoBoard.DataModels
+namespace LudoGameEngine.GameLogic
 {
-    public class Board
+    public class Move
     {
         public void MovePiece(List<Piece> piece, int diceValue, List<int> playerGameBoard)
         {
@@ -22,7 +27,6 @@ namespace LudoBoard.DataModels
             // Spara Piece.position
             // Uppdatera Player.PlayerTurn
         }
-
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
         public void AskIfMoveFromNestOrMoveOnBoard(List<Piece> piece, int diceValue, List<int> playerGameBoard)
         {
@@ -65,12 +69,5 @@ namespace LudoBoard.DataModels
                 }
             }
         }
-
-        //TODO-Programmet ska avgöra vems tur det är att kasta tärningen. WhoesTurnToRollTheDice(); 
-        public void WhoesTurnToRollTheDice()
-        {
-
-        }
-
     }
 }

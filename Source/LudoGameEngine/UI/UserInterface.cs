@@ -3,7 +3,7 @@ using LudoBoard.DataModels;
 using System;
 using System.Collections.Generic;
 
-namespace LudoGameEngine
+namespace LudoGameEngine.UI
 {
     public class UserInterface
 	{
@@ -13,6 +13,7 @@ namespace LudoGameEngine
 
         public void MainMenu()
         {
+            GameLoop gameLoop = new GameLoop();
             while (isRunning)
             {
 				Console.Clear();
@@ -27,10 +28,10 @@ namespace LudoGameEngine
                 {
 
                     case 1:
-                        GameLoop.InitializeGame(1);
+                        gameLoop.InitializeGame(1);
                         break;
                     case 2:
-                        GameLoop.InitializeGame(2);
+                        gameLoop.InitializeGame(2);
                         break;
                     case 3:
                         MenuLoadGame();

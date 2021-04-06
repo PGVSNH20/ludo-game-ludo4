@@ -1,13 +1,14 @@
 ﻿using LudoBoard.DataAccess;
+using LudoBoard.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LudoBoard.DataModels
+namespace LudoGameEngine.GameLogic
 {
-    public static class Update
+    public static class UpdateGameBoard
     {
         public static Player GetPlayerTurn(List<Player> players)
         {
