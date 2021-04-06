@@ -16,14 +16,14 @@ namespace LudoGameEngine
 
             while (isRunning)
             {
-                Console.WriteLine("Hello and welcome to Ludo game! What do you want to do?\n" +
-                                    "[1] Create new game\n" +
-                                    "[2] Load game");
-
-                MenuChoice();              
+				
+                    Console.WriteLine("Hello and welcome to Ludo game! What do you want to do?\n" +
+                                    "[1] Continue\n" +
+                                    "[2] Create new game" +
+                                    "[3] Load game");
             }
         }
-        public static void LoadGame()
+        public static void MenuLoadGame() //Visa information om sparade spel och ladda det. Skall kunna hoppa tillbaka till menyn. Om det inte finns någon data ge ett felmeddelande och skicka tillbaka till huvudmenyn.
         {
             // Laddar en lista med spel från LudoDbAccess som man sedan ska kunna välja från Load Game Menyn
             List<Game> games = new LudoDbAccess().GetAllUnfinishedGames();
@@ -47,32 +47,7 @@ namespace LudoGameEngine
                     Console.WriteLine($"\n---------------------------------------------------------------------------\n");
                 }
 
-                MenuChoice();
-
                 //TODO: Ge ett felmeddelande om man inte har ett sparat spel och gå tillbaka till menyn
-
-            }
-        }
-        public static void MenuChoice()
-        {
-            int.TryParse(Console.ReadLine(), out userInput);
-
-            switch (userInput)
-            {
-
-                case 1:
-                    Game.CreateGame();
-                    isRunning = false;
-                    break;
-
-                case 2:
-                    LoadGame();
-                    isRunning = false;
-                    break;
-
-                default:
-                    Console.WriteLine("You need to press 1 or 2");
-                    break;
             }
         }
     }

@@ -31,6 +31,7 @@ namespace LudoGameEngine
             //           player turn
             //           diceroll (kolla om det finns pjäser på brädet, om det ej finns pjäser och värdet är för lågt skippa till nästa spelare)
             //           player move (hoppa ut ur nästet, flytta pjäs)
+            //           --uppdatera brädets grafik--- (console clear)
             //           nästa spelare
             //           spara till databas
             //           }

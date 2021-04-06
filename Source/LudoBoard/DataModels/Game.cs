@@ -37,7 +37,7 @@ namespace LudoBoard.DataModels
             };
 
 
-        public static void CreateGame()
+        public void CreateGame()
         {
             // Creating a new board
             Game board = new Game();
@@ -75,7 +75,7 @@ namespace LudoBoard.DataModels
             }
 
             CreatePlayer(board, player);
-            PlayGame(player);
+            //PlayGame(player);
         }
 
         private static void CreatePlayer(Game board, List<Player> player)
@@ -215,34 +215,5 @@ namespace LudoBoard.DataModels
             // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
             //Ladda senast sparade spelet
         }
-        private static void PlayGame(List<Player> players)
-        {
-            Board board = new Board();
-            Dice rollDice = new Dice();
-
-            Player currentPlayer = Update.GetPlayerTurn(players);
-
-            List<Piece> currentPlayerPieces = Update.GetPlayerPieces(currentPlayer);
-
-            Console.WriteLine("1. rolldice");
-            Console.ReadKey();
-
-            // Slå tärning            
-            int i = rollDice.RollDice();
-            Console.WriteLine($"You rolled {i}");
-
-            // TODO - Lägg till check om det finns pieces i nest.
-            List<int> nestChecker = new List<int>() { 0, 4, 56, 60};
-            foreach (var p in currentPlayerPieces)
-            {
-                if (i == 6 && nestChecker.Contains(Convert.ToInt32(p.Position)))
-                {
-                    board.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, i, currentPlayer.PlayerBoard);
-                }
-            }
-
-            board.MovePiece(currentPlayerPieces, i, currentPlayer.PlayerBoard);
-        }
-
     }
 }
