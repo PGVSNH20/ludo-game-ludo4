@@ -5,19 +5,30 @@ namespace LudoBoard.DataModels
 {
     public class Board
     {
-        public void MovePiece(List<Piece> piece, int diceValue, List<object> playerGameBoard)
+        public void MovePiece(List<Piece> piece, int diceValue, List<int> playerGameBoard)
         {
+            //Ta bort denna cw senare
+            Console.WriteLine($"You rolled {diceValue}");
+
             int pieceId = 0;
             Console.WriteLine("Which piece do you want to move? (Id)");
             int.TryParse(Console.ReadLine(), out pieceId);
 
             var index = playerGameBoard.IndexOf(piece[pieceId].Position);
-            index = index + diceValue;
-            piece[pieceId].Position = Game.player1GameBoard[index];
+            Console.WriteLine($"\nCurrent index of the piece: {index} | Current position: {piece[pieceId].Position}!");
 
-            Console.WriteLine($"Index is: {index} and the new position is {piece[pieceId].Position}!");
-            
+            index = index + diceValue;
+            piece[pieceId].Position = playerGameBoard[index];
+            Console.WriteLine($"Updated index of the piece: {index} and the new position is {piece[pieceId].Position}!\n");
+
             // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
+
+            Board board = new Board();
+            Dice dice = new Dice();
+            Console.WriteLine("\n1. Roll dice again\n");
+            Console.ReadKey();
+
+            board.MovePiece(piece, dice.RollDice(), playerGameBoard);
         }
 
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.

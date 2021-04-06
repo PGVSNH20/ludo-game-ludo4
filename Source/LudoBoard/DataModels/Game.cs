@@ -220,13 +220,13 @@ namespace LudoBoard.DataModels
             Board board = new Board();
             Dice rollDice = new Dice();
             List<Piece> onePlayersPieces = new List<Piece>();
-            List<object> playerGameBoard = new List<object>();
+            List<int> playerGameBoard = new List<int>();
 
             foreach (var player in players)
             {
                 if (player.PlayerTurn == true)
                 {
-                    playerGameBoard.Add(player.PlayerBoard);
+                    playerGameBoard = player.PlayerBoard;
                     LudoDbAccess ludoDbAccess = new LudoDbAccess();
                     
                     Console.WriteLine($"It's player {player.Name} turn to roll the dice.");
@@ -237,7 +237,7 @@ namespace LudoBoard.DataModels
             Console.ReadKey();
             // Slå tärning            
             int i = rollDice.RollDice();
-            Console.WriteLine($"You rolled {i}");
+            //Console.WriteLine($"You rolled {i}");
 
             // TODO - Lägg till check om det finns pieces i nest.
             //if (i == 6)
