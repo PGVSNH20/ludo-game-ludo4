@@ -13,11 +13,6 @@ namespace LudoBoard.DataModels
             Board board = new Board();
             Random diceValue = new Random();
             int DiceValue = diceValue.Next(1, 7);
-                        
-            //if (DiceValue == 6)
-            //{
-            //    board.AskIfMoveFromNestOrMoveOnBoard();
-            //}
 
             return DiceValue;
         }

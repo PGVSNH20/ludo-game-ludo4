@@ -160,5 +160,18 @@ namespace LudoBoard.DataAccess
 
             return pieces;
         }
+
+        public void UpdatePlayerTurn(List<Player> players)
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i].PlayerTurn == true)
+                {
+                    players[i].PlayerTurn = false;
+                    players[i + 1].PlayerTurn = true;
+                    break;
+                }
+            }
+        }
     }
 }

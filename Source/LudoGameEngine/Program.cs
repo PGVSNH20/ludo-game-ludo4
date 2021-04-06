@@ -10,11 +10,6 @@ namespace LudoGameEngine
             var runMenu = new UserInterface();
 
             runMenu.MainMenu();
-
-            //Square square = new Square();
-            // square.CurrentBoard();
-
-
         }
     }
 }

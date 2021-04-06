@@ -219,38 +219,30 @@ namespace LudoBoard.DataModels
         {
             Board board = new Board();
             Dice rollDice = new Dice();
-            List<Piece> onePlayersPieces = new List<Piece>();
-            List<int> playerGameBoard = new List<int>();
 
-            foreach (var player in players)
-            {
-                if (player.PlayerTurn == true)
-                {
-                    playerGameBoard = player.PlayerBoard;
-                    LudoDbAccess ludoDbAccess = new LudoDbAccess();
-                    
-                    Console.WriteLine($"It's player {player.Name} turn to roll the dice.");
-                    onePlayersPieces = ludoDbAccess.GetCurrentPlayersPieces(player.Id);
-                }
-            }
+            Player currentPlayer = Update.GetPlayerTurn(players);
+
+            List<Piece> currentPlayerPieces = Update.GetPlayerPieces(currentPlayer);
+
+
             Console.WriteLine("1. rolldice");
             Console.ReadKey();
             // Slå tärning            
             int i = rollDice.RollDice();
-            //Console.WriteLine($"You rolled {i}");
+            Console.WriteLine($"You rolled {i}");
 
             // TODO - Lägg till check om det finns pieces i nest.
-            //if (i == 6)
-            //{
-            //    board.AskIfMoveFromNestOrMoveOnBoard();
-            //}
-            //else
-            //{                
-            //    board.MovePiece(onePlayersPieces, i);
-            //}
-            board.MovePiece(onePlayersPieces, i, playerGameBoard);
-            // PlayerTurn Ska lägga in property i player (done) så att vi ser vems tur det är om spelet avbryts.
-            // 
+            List<int> nestChecker = new List<int>() { 0, 4, 56, 60};
+            foreach (var p in currentPlayerPieces)
+            {
+                if (i == 6 && nestChecker.Contains(Convert.ToInt32(p.Position)))
+                {
+                    board.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, i, currentPlayer.PlayerBoard);
+                }
+            }
+
+            board.MovePiece(currentPlayerPieces, i, currentPlayer.PlayerBoard);
         }
+
     }
 }

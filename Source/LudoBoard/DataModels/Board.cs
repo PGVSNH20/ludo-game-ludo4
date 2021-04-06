@@ -7,9 +7,6 @@ namespace LudoBoard.DataModels
     {
         public void MovePiece(List<Piece> piece, int diceValue, List<int> playerGameBoard)
         {
-            //Ta bort denna cw senare
-            Console.WriteLine($"You rolled {diceValue}");
-
             int pieceId = 0;
             Console.WriteLine("Which piece do you want to move? (Id)");
             int.TryParse(Console.ReadLine(), out pieceId);
@@ -22,21 +19,17 @@ namespace LudoBoard.DataModels
             Console.WriteLine($"Updated index of the piece: {index} and the new position is {piece[pieceId].Position}!\n");
 
             // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
-
-            Board board = new Board();
-            Dice dice = new Dice();
-            Console.WriteLine("\n1. Roll dice again\n");
-            Console.ReadKey();
-
-            board.MovePiece(piece, dice.RollDice(), playerGameBoard);
+            // Spara Piece.position
+            // Uppdatera Player.PlayerTurn
         }
 
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
-        public void AskIfMoveFromNestOrMoveOnBoard()
+        public void AskIfMoveFromNestOrMoveOnBoard(List<Piece> piece, int diceValue, List<int> playerGameBoard)
         {
             Square square = new Square();
-            bool isRunning = false;
+            bool isRunning = true;
             int userInput = 0;
+
             while (isRunning)
             {
                 Console.WriteLine("Do you want move a piece from the nest or move a piece on board?\n" +
@@ -51,14 +44,17 @@ namespace LudoBoard.DataModels
                 {
                     case 1:
                         //Här ska vi flytta en pjäs från nest:et.
+                        isRunning = false;
                         break;
 
                     case 2:
-                        //MovePiece();
+                        MovePiece(piece, diceValue, playerGameBoard);
+                        isRunning = false;
                         break;
 
                     case 3:
                         square.CurrentBoard();
+                        isRunning = false;
                         break;
 
                     default:
