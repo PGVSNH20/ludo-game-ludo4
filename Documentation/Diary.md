@@ -124,3 +124,7 @@ Vi har fortsatt pysslat med tester.
 5/4
 Förmiddagen:
  -Skapat en metod som tar in spel som inte är avslutad (IsCompleted = false) till en lista, Därifrån ska vi skapa ett val om vilket spel man skulle vilja ladda
+
+6/4 
+Vi höll på med funktionen att ifall man slog en 6 på träningen skall kunna få möjligheten att flytta ut en pjäs utifrån nest.
+Vi har diskuterat om att flytta lite kod till olika metoder för att lättare kunna kalla på dom.
