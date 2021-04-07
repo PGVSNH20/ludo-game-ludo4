@@ -137,4 +137,5 @@ Eftermiddagen
 
 7/4
 Förmiddagen
-- Vi har i  "UpdateGameBoard.cs" fixat en metod ("UpdatePlayerTurn") som ser till att vi byter tur på spelarna som spelar.  
+- Vi har i  "UpdateGameBoard.cs" fixat en metod ("UpdatePlayerTurn") som ser till att vi byter tur på spelarna som spelar.
+- Vi har dessutom försökt fixa en metod ("SavePositionToDb") i klassen "UpdateGameBoard.cs", som ska spara det vi skrev ovanför till databasen.   
