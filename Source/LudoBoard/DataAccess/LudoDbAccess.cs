@@ -38,7 +38,6 @@ namespace LudoBoard.DataAccess
 
             for (int x = 0; x < pieces.Count; x++)
             {
-                Console.WriteLine($"Adding Piece with Position: {pieces[x].Position}");
                 if (pieces[x].Position == 0)
                 {
                     pieces[x].PlayerId = players[0].Id;
@@ -59,17 +58,14 @@ namespace LudoBoard.DataAccess
                     pieces[x].PlayerId = players[3].Id;
 
                 }
+
                 // Add piece to DB set
                 context.Piece.Add(pieces[x]);
             }
 
-            Console.WriteLine("Press a key to save to database");
-            Console.ReadKey();
-
             // Save change in database
             context.SaveChanges();
             Console.WriteLine("Game saved to database");
-            Console.ReadKey();
         }
 
         public List<Player> GetAllPlayers()
@@ -102,8 +98,6 @@ namespace LudoBoard.DataAccess
             {
                 Console.WriteLine(e);
             }
-
-            Console.WriteLine($"Returning highest Id: {boardId}");
             return boardId.Id;
         }
 
@@ -120,8 +114,6 @@ namespace LudoBoard.DataAccess
             {
                 return id;
             }
-
-            Console.WriteLine($"Returning highest Id: {playerId.Id}");
             return playerId.Id;
         }
 

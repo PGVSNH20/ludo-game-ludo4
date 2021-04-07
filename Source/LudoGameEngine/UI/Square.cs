@@ -18,6 +18,9 @@ namespace LudoGameEngine.UI
             LudoDbAccess ludoDbAccess = new LudoDbAccess(); 
             List<string> updated = new List<string>();
             List<Piece> pieces = new List<Piece>();
+            List<string> gb = new GameBoard().CompleteGameBoard;
+
+            //TODO - Brädet skall skriva ut pjäser med hjälp av metoden nedan. Den tar in alla pieces, dvs deras position. 
             pieces = ludoDbAccess.GetAllPieces();
 
             foreach (var p in pieces)
@@ -25,15 +28,6 @@ namespace LudoGameEngine.UI
                 Console.WriteLine($"{p.Id} has the position {p.Position}");
             }
 
-            List<string> gb = new List<string>(60)
-            {
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ", "    ", "    "
-            };
 
             Console.WriteLine($"[{gb[0]}]                  [{gb[1]}][{gb[2]}][{gb[3]}]                  [{gb[4]}]\n" +
                               $"                        [{gb[5]}][{gb[6]}][{gb[7]}]\n" +
