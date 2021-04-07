@@ -1,5 +1,6 @@
 ﻿using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
+using LudoGameEngine.GameLogic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +14,17 @@ namespace LudoGameEngine.UI
     public class Square
     {
 
-        public List<string> CurrentBoard()
+        public List<string> CurrentBoard(List<Player> allPlayersInGame)
         {
-            LudoDbAccess ludoDbAccess = new LudoDbAccess(); 
             List<string> updated = new List<string>();
-            List<Piece> pieces = new List<Piece>();
-            List<string> gb = new GameBoard().CompleteGameBoard;
+            LudoDbAccess ludoDbAccess = new LudoDbAccess();
+            List<Piece> pieces = ludoDbAccess.GetAllPieces(allPlayersInGame);
+
+            var gb = UpdateGameBoard.PiecesOnGameBoardUpdate(pieces, allPlayersInGame);
+
+
 
             //TODO - Brädet skall skriva ut pjäser med hjälp av metoden nedan. Den tar in alla pieces, dvs deras position. 
-            pieces = ludoDbAccess.GetAllPieces();
-
-            foreach (var p in pieces)
-            {
-                Console.WriteLine($"{p.Id} has the position {p.Position}");
-            }
-
 
             Console.WriteLine($"[{gb[0]}]                  [{gb[1]}][{gb[2]}][{gb[3]}]                  [{gb[4]}]\n" +
                               $"                        [{gb[5]}][{gb[6]}][{gb[7]}]\n" +

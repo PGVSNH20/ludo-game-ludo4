@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LudoGameEngine.GameLogic
 {
-    public static class UpdateGameBoard
+    public class UpdateGameBoard
     {
         public static Player GetPlayerTurn(List<Player> players)
         {
@@ -43,19 +43,21 @@ namespace LudoGameEngine.GameLogic
 
                     currentPlayers[i].PlayerTurn = false;
 
-                    if (i == playercounter -1)
+                    if (i == playercounter - 1)
                     {
                         Console.WriteLine($"i == playercounter");
 
                         currentPlayers[0].PlayerTurn = true;
                         ludoDbAccess.SavePositionsToDb(pieces, currentPlayers);
+                        break;
                     }
                     else
                     {
-                        currentPlayers[i+1].PlayerTurn = true;
+                        currentPlayers[i + 1].PlayerTurn = true;
 
-                        Console.WriteLine($"{currentPlayers[i+1].Name} Sätter player turn till true");
+                        Console.WriteLine($"{currentPlayers[i + 1].Name} Sätter player turn till true");
                         ludoDbAccess.SavePositionsToDb(pieces, currentPlayers);
+                        break;
                     }
                 }
             }
@@ -68,5 +70,153 @@ namespace LudoGameEngine.GameLogic
 
             return playersPieces;
         }
+
+        // TODO - PRIORITERING, FÅ DENNA ATT FUNGERA. Den skall uppdatera spelbrädet
+        public static List<string> PiecesOnGameBoardUpdate(List<Piece> allActivePieces, List<Player> allActivePlayers)
+        {
+
+            List<string> gb = new GameBoard().CompleteGameBoard;
+
+            // i = 60
+            for (int i = 0; i < gb.Count; i++)
+            {
+                int positionCounter = 0;
+
+
+                foreach (var piece in allActivePieces)
+                {
+                    //if (piece.PlayerId == allActivePlayers[x].Id)
+                    //{
+
+                    if (piece.Position == i)
+                    {
+                        positionCounter++;
+                    }
+
+
+                }
+
+
+                for (int x = 0; x < allActivePlayers.Count; x++)
+                {
+                    foreach (var piece in allActivePieces)
+                    {
+                        if (piece.Position == i)
+                        {
+                            if (piece.PlayerId == allActivePlayers[x].Id)
+                            {
+                                if (x == 0)
+                                {
+                                    for (int u = 0; u < positionCounter; u++)
+                                    {
+                                        gb[i] += "1";
+                                    }
+                                    for (int l = positionCounter; l < 4; l++)
+                                    {
+                                        gb[i] += " ";
+                                    }
+                                    break;
+                                }
+                                if (x == 1)
+                                {
+                                    for (int u = 0; u < positionCounter; u++)
+                                    {
+                                        gb[i] += "2";
+                                    }
+                                    for (int l = positionCounter; l < 4; l++)
+                                    {
+                                        gb[i] += " ";
+                                    }
+                                    break;
+                                }
+                                if (x == 2)
+                                {
+                                    for (int u = 0; u < positionCounter; u++)
+                                    {
+                                        gb[i] += "3";
+                                    }
+                                    for (int l = positionCounter; l < 4; l++)
+                                    {
+                                        gb[i] += " ";
+                                    }
+                                    break;
+                                }
+                                if (x == 3)
+                                {
+                                    for (int u = 0; u < positionCounter; u++)
+                                    {
+                                        gb[i] += "4";
+                                    }
+                                    for (int l = positionCounter; l < 4; l++)
+                                    {
+                                        gb[i] += " ";
+                                    }
+                                    break;
+                                }
+                                
+                                break;
+                            }
+                            //else
+                            //{
+                            //    int ii = 4 - positionCounter;
+                            //    List<string> mellanrum = new List<string>(){
+                            //        " ", "  ","   ","    " };
+
+                            //    gb[i] += mellanrum[ii];
+                            //}
+                        }
+ 
+                    }
+                }
+            }
+
+
+
+
+
+
+
+            //if (piece.PlayerId == allActivePlayers[x].Id)
+            //{
+            //    if (x == 0)
+            //    {
+            //        Console.WriteLine("PositionCounter" + positionCounter);
+
+            //        string p = "1";
+            //        for (int y = 0; y < positionCounter; y++)
+            //        {
+            //            p += "1";
+            //        }
+
+            //        gb[i] = gb[i].Replace(" ", "1");
+            //        break;
+            //    }
+            //    if (x == 1)
+            //    {
+            //        gb[i] = gb[i].Replace(" ", "2");
+            //        break;
+            //    }
+            //    if (x == 2)
+            //    {
+            //        gb[i] = gb[i].Replace(" ", "3");
+            //        break;
+            //    }
+            //    if (x == 3)
+            //    {
+            //        gb[i] = gb[i].Replace(" ", "4");
+            //        break;
+            //    }
+
+            //    break;
+            //}
+
+            //Console.WriteLine($"MapIndex: {i}");
+
+
+            //}
+
+            return gb;
+        }
     }
 }
+

@@ -22,10 +22,6 @@ namespace LudoGameEngine.GameLogic
             index = index + diceValue;
             piece[pieceId].Position = playerGameBoard[index];
             Console.WriteLine($"Updated index of the piece: {index} and the new position is {piece[pieceId].Position}!\n");
-
-            // Spara Piece.position
-            // Uppdatera Player.PlayerTurn
-            // TODO - Skapa en metod i LudoDbAccess för att uppdatera databasen.
         }
 
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
@@ -43,6 +39,7 @@ namespace LudoGameEngine.GameLogic
                                     "[3] View current board");
 
                 int.TryParse(Console.ReadLine(), out userInput);
+                
                 //TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
                 isRunning = false;
                 switch (userInput)
@@ -58,7 +55,7 @@ namespace LudoGameEngine.GameLogic
                         break;
 
                     case 3:
-                        square.CurrentBoard();
+                        //square.CurrentBoard();
                         isRunning = false;
                         break;
 

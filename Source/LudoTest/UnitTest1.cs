@@ -64,42 +64,42 @@ namespace LudoTest
             //Assert.Equal(expected, result);
         }
 
-        [Fact]
-        public void When_CurrentBoard_Expect_PiecesToTheirPosition_ShouldReturn_UpdatedBoard()
-        {
-            // Arange - lägg upp testet genom att ta in variabler osv.
-            Square square = new Square();
+        //[Fact]
+        //public void When_CurrentBoard_Expect_PiecesToTheirPosition_ShouldReturn_UpdatedBoard()
+        //{
+        //    // Arange - lägg upp testet genom att ta in variabler osv.
+        //    Square square = new Square();
 
-            List<string> expected = new List<string>(60)
-            {
-                "1234","    ","    ","    ","1234","    ","    ","    ","    ","   ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-                "    ","    ","    ","    ","    ","    ","1234","    ","    ", "    ", "1234"
-            };
-            List<string> result = new List<string>();
+        //    List<string> expected = new List<string>(60)
+        //    {
+        //        "1234","    ","    ","    ","1234","    ","    ","    ","    ","   ",
+        //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
+        //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
+        //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
+        //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
+        //        "    ","    ","    ","    ","    ","    ","1234","    ","    ", "    ", "1234"
+        //    };
+        //    List<string> result = new List<string>();
 
-            Console.WriteLine($"[{expected[0]}]                  [{expected[1]}][{expected[2]}][{expected[3]}]                  [{expected[4]}]\n" +
-                             $"                        [{expected[5]}][{expected[6]}][{expected[7]}]\n" +
-                             $"                        [{expected[8]}][{expected[9]}][{expected[10]}]\n" +
-                             $"                        [{expected[11]}][{expected[12]}][{expected[13]}]\n" +
-                             $"[{expected[14]}][{expected[15]}][{expected[16]}][{expected[17]}][{expected[18]}][{expected[19]}][{expected[20]}][{expected[21]}][{expected[22]}][{expected[23]}][{expected[24]}]\n" +
-                             $"[{expected[25]}][{expected[26]}][{expected[27]}][{expected[28]}][{expected[29]}][{expected[30]}][{expected[31]}][{expected[32]}][{expected[33]}][{expected[34]}][{expected[35]}]\n" +
-                             $"[{expected[36]}][{expected[37]}][{expected[38]}][{expected[39]}][{expected[40]}][{expected[41]}][{expected[42]}][{expected[43]}][{expected[44]}][{expected[45]}][{expected[46]}]\n" +
-                             $"                        [{expected[47]}][{expected[48]}][{expected[49]}]\n" +
-                             $"                        [{expected[50]}][{expected[51]}][{expected[52]}]\n" +
-                             $"                        [{expected[53]}][{expected[54]}][{expected[55]}]\n" +
-                             $"[{expected[56]}]                  [{expected[57]}][{expected[58]}][{expected[59]}]                  [{expected[60]}]\n");
+        //    Console.WriteLine($"[{expected[0]}]                  [{expected[1]}][{expected[2]}][{expected[3]}]                  [{expected[4]}]\n" +
+        //                     $"                        [{expected[5]}][{expected[6]}][{expected[7]}]\n" +
+        //                     $"                        [{expected[8]}][{expected[9]}][{expected[10]}]\n" +
+        //                     $"                        [{expected[11]}][{expected[12]}][{expected[13]}]\n" +
+        //                     $"[{expected[14]}][{expected[15]}][{expected[16]}][{expected[17]}][{expected[18]}][{expected[19]}][{expected[20]}][{expected[21]}][{expected[22]}][{expected[23]}][{expected[24]}]\n" +
+        //                     $"[{expected[25]}][{expected[26]}][{expected[27]}][{expected[28]}][{expected[29]}][{expected[30]}][{expected[31]}][{expected[32]}][{expected[33]}][{expected[34]}][{expected[35]}]\n" +
+        //                     $"[{expected[36]}][{expected[37]}][{expected[38]}][{expected[39]}][{expected[40]}][{expected[41]}][{expected[42]}][{expected[43]}][{expected[44]}][{expected[45]}][{expected[46]}]\n" +
+        //                     $"                        [{expected[47]}][{expected[48]}][{expected[49]}]\n" +
+        //                     $"                        [{expected[50]}][{expected[51]}][{expected[52]}]\n" +
+        //                     $"                        [{expected[53]}][{expected[54]}][{expected[55]}]\n" +
+        //                     $"[{expected[56]}]                  [{expected[57]}][{expected[58]}][{expected[59]}]                  [{expected[60]}]\n");
 
-            // Act - Vad ska testet göra, en metod som får ut ett resultat?
-            result = square.CurrentBoard();
+        //    // Act - Vad ska testet göra, en metod som får ut ett resultat?
+        //    result = square.CurrentBoard();
 
-            // Assert - Vad vill vi att resultatet ska bli?
-            Assert.Equal(expected, result);
+        //    // Assert - Vad vill vi att resultatet ska bli?
+        //    Assert.Equal(expected, result);
 
-        }
+        //}
 
 
 

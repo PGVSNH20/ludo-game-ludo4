@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LudoBoard.DataAccess;
+using LudoBoard.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +10,23 @@ namespace LudoGameEngine.Initialize
 {
    public class LoadGame
     {
-        public int LoadAnyGame(int gameID) //Laddar parametrar och skickar det sedan till spelet som sedan körs
+        public void LoadAnyGame(int gameID) //Laddar parametrar och skickar det sedan till spelet som sedan körs
         {
-            //TODO - Ta hem ett specifikt gameID från databasen och sedan returna det
-            return 0;
+            LudoDbAccess ludoDbAccess = new LudoDbAccess();
+
+            // GET all players from game id
+            var players = ludoDbAccess.GetPlayersWhenLoadingGame(gameID);
+
+            // SET players Game Board
+            GameBoard gameBoard = new GameBoard();
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].PlayerBoard = gameBoard.PlayersGameBoards[i];
+            }
+
+            // Run Game
+            GameLoop gameLoop = new GameLoop();
+            gameLoop.RunGame(players);
         }
 
         public void ContinueGame()

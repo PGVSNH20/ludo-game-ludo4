@@ -7,8 +7,6 @@ namespace LudoBoard.DataAccess
 {
     public class LudoDbAccess
     {
-        // Spara det nuvarande spelet
-        // TODO - Sikta på att spara varje gång en runda har gått.  
         public void SaveGame(Game game, List<Player> players, List<Piece> pieces)
         {
             var context = new LudoDbContext();
@@ -67,41 +65,35 @@ namespace LudoBoard.DataAccess
             context.SaveChanges();
             Console.WriteLine("Game saved to database");
         }
-        // TODO - Denna ger error, varför går det inte lägga till pieces till en lista? 
+
         public void SavePositionsToDb(List<Piece> pieces, List<Player> players)
         {
             using (var context = new LudoDbContext())
             {
-                List<Piece> playerPieces = null;
+                List<Piece> playerPieces = new List<Piece>();
                 for (int i = 0; i < pieces.Count; i++)
                 {
-                    if (playerPieces != null)
-                    {
-                        Console.WriteLine(playerPieces.Count);
-                    }
 
                     int id = Convert.ToInt32(pieces[i].Id);
                     var piece = context.Piece.Where(x => x.Id == id).Single();
-
-                    Console.WriteLine($"List Piece contains Piece id:{piece.Id}");
-
-                    Console.WriteLine($"Piece position is {pieces[i].Position}");
+                    
                     piece.Position = pieces[i].Position;
 
-                    Console.WriteLine($"Piece updated position is {pieces[i].Position}");
                     playerPieces.Add(piece);
                 }
 
-                List<Player> allPlayers = null;
+                List<Player> allPlayers = new List<Player>();
                 for (int z = 0; z < players.Count; z++)
                 {
-                    int id = Convert.ToInt32(players[z].Id);
-                    allPlayers = context.Player.Where(x => x.Id == id).ToList();
 
-                    allPlayers[z].PlayerTurn = players[z].PlayerTurn;
+                    int id = Convert.ToInt32(players[z].Id);
+                    var player = context.Player.Where(x => x.Id == id).Single();
+
+                    player.PlayerTurn = players[z].PlayerTurn;
+
+                    allPlayers.Add(player);
                 }
 
-                Console.WriteLine("Spelares ordning och Pjäsers positioner är nu uppdaterade i databasen.");
                 context.SaveChanges();
             }
         }
@@ -111,6 +103,14 @@ namespace LudoBoard.DataAccess
             using (var context = new LudoDbContext())
             {
                 return context.Player.ToList();
+            }
+        }
+
+        public List<Player> GetPlayersWhenLoadingGame(int gameId)
+        {
+            using (var context = new LudoDbContext())
+            {
+                return context.Player.Where(x => x.GameId == gameId).ToList();
             }
         }
 
@@ -156,14 +156,13 @@ namespace LudoBoard.DataAccess
         }
 
 
-        public void CompleteGameAndApplyStatsToList() //Kan kanske tas bort
-        {
-            //Spelet är slut och lägger till stats i en lista på spelade spel
-        }
-
-        public void SaveStats()
+        public List<Game> GetAllFinishedGames()
         {
 
+            using (var context = new LudoDbContext())
+            {
+                return context.Game.Where(t => t.IsCompleted == true).ToList();
+            }
         }
 
         public List<Game> GetAllUnfinishedGames()
@@ -175,21 +174,29 @@ namespace LudoBoard.DataAccess
             }
         }
 
-        public List<Piece> GetAllPieces()
+        // IsActive = Kollar om pjäsen är aktiv på brädet eller om den har gått i mål.
+        public List<Piece> GetAllPieces(List<Player> playersCurrentlyPlaying)
         {
-            List<Piece> pieces = new List<Piece>();
-            var context = new LudoDbContext();
-            try
+            List<Piece> playersPieces = new List<Piece>();
+
+            using (var context = new LudoDbContext())
             {
-                pieces.Add((Piece)context.Piece.Where(t => t.IsActive == true));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                for (int i = 0; i < playersCurrentlyPlaying.Count; i++)
+                {
+                    int id = Convert.ToInt32(playersCurrentlyPlaying[i].Id);
+
+                    var playersActivePieces = context.Piece.Where(t => t.IsActive == true && t.PlayerId == id).ToList();
+
+                    foreach (var pp in playersActivePieces)
+                    {
+                        playersPieces.Add(pp);
+                    }
+                }
             }
 
-            return pieces;
+            return playersPieces;
         }
+
 
         public void UpdatePlayerTurn(List<Player> players)
         {
