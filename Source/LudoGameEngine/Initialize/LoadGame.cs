@@ -13,5 +13,12 @@ namespace LudoGameEngine.Initialize
             //TODO - Ta hem ett specifikt gameID från databasen och sedan returna det
             return 0;
         }
+
+        public void ContinueGame()
+        {
+            // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
+            //Ladda senast sparade spelet
+            //LoadGame();
+        }
     }
 }

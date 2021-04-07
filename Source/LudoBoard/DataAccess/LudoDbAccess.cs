@@ -8,7 +8,7 @@ namespace LudoBoard.DataAccess
     public class LudoDbAccess
     {
         // Spara det nuvarande spelet
-        // TODO - Sikta på att spara varje gång något händer i spelet.  
+        // TODO - Sikta på att spara varje gång en runda har gått.  
         public void SaveGame(Game game, List<Player> players, List<Piece> pieces)
         {
             var context = new LudoDbContext();

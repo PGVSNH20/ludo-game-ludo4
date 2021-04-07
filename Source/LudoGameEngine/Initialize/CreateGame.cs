@@ -139,17 +139,7 @@ namespace LudoGameEngine.Initialize
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
             ludoDbAccess.SaveGame(board, player, piece);
 
-        }
-
-        public void ContinueGame()
-        {
-            // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
-            //Ladda senast sparade spelet
-            //LoadGame();
-        }
-
-        
-
+        }       
 
         /// <summary>
         /// GAME LOGIC

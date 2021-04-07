@@ -23,9 +23,9 @@ namespace LudoGameEngine.GameLogic
             piece[pieceId].Position = playerGameBoard[index];
             Console.WriteLine($"Updated index of the piece: {index} and the new position is {piece[pieceId].Position}!\n");
 
-            // TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
             // Spara Piece.position
             // Uppdatera Player.PlayerTurn
+            // TODO - Skapa en metod i LudoDbAccess för att uppdatera databasen.
         }
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
         public void AskIfMoveFromNestOrMoveOnBoard(List<Piece> piece, int diceValue, List<int> playerGameBoard)

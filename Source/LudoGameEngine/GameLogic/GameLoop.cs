@@ -16,11 +16,12 @@ namespace LudoGameEngine
         public void InitializeGame(int choice)
 		{
             CreateGame game = new CreateGame();
+            LoadGame loadGame = new LoadGame();
 
 			switch (choice)
 			{
                 case 1:
-                    game.ContinueGame(); //Kolla vilken vi ska använda automatiskt
+                    loadGame.ContinueGame(); //Kolla vilken vi ska använda automatiskt
                     break;
                 case 2:
                     game.CreateNewGame();
@@ -35,7 +36,8 @@ namespace LudoGameEngine
         {           
             Dice rollDice = new Dice();
             Move move = new Move();
-
+            int userInput = 0;
+            int diceValue = 0;
             bool isPlaying = true; //ska flyttas
 			while (isPlaying) //loopar omgångar
 			{
@@ -46,23 +48,35 @@ namespace LudoGameEngine
                     List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
                     Console.WriteLine("1. rolldice");
-                    Console.ReadKey();
-
-                    // Slå tärning            
-                    int i = rollDice.RollDice();
-                    Console.WriteLine($"You rolled {i}");
-
-                    // TODO - Lägg till check om det finns pieces i nest.
-                    List<int> nestChecker = new List<int>() { 0, 4, 56, 60 };
-                    foreach (var p in currentPlayerPieces)
+                    do
                     {
-                        if (i == 6 && nestChecker.Contains(Convert.ToInt32(p.Position)))
+                        int.TryParse(Console.ReadLine(), out userInput);
+
+                        if (userInput == 1)
                         {
-                            move.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, i, currentPlayer.PlayerBoard);
+                            // Roll Dice
+                            diceValue = rollDice.RollDice();
+                            Console.WriteLine($"You rolled {diceValue}");
+                        }
+                        else
+                            Console.WriteLine("Please enter a valid number.");
+                    } while (userInput != 1);
+
+                    // Check if dicevalue is 6 & if there is a piece in the nest. 
+                    List<int> nestChecker = new List<int>() { 0, 4, 56, 60 };
+
+                    if (diceValue == 6)
+                    {
+                        foreach (var p in currentPlayerPieces)
+                        {
+                            if (nestChecker.Contains(Convert.ToInt32(p.Position)))
+                            {
+                                move.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard);
+                            }
                         }
                     }
 
-                    move.MovePiece(currentPlayerPieces, i, currentPlayer.PlayerBoard);
+                    move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard);
                 }
             }
         }
