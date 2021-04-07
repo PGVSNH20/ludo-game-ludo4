@@ -1,6 +1,18 @@
-TODO-LISTAN LIGGER INNE I VS, //TODO -> Task List. Denna blir inte längre uppdaterad
+TODO-LISTAN LIGGER INNE I VS, //TODO -> Task List. Detta är nurvarande Todo's
 
+1.	TODO - Sikta på att spara varje gång en runda har gått. 
+2.	TODO - Lägg till check om det finns pieces i nest.
+3.	TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
+4.	TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
+5.	TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
+6.	TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.	
+7.	TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
+8.	TODO-Programmet ska avgöra vems tur det är att kasta tärningen. WhoesTurnToRollTheDice();
+9.	TODO - Ta hem ett specifikt gameID från databasen och sedan returna det
+10.	TODO - Brädet skall skriva ut pjäser med hjälp av metoden nedan. Den tar in alla pieces, dvs deras position. 
+11.	TODO: Ge ett felmeddelande om man inte har ett sparat spel och gå tillbaka till menyn
 
+-------------------------------------------------------------------------------------------------------------------------------------------
 - Prioritetsordning med saker som skall göras
 - Längst ned i dokumentet lägger vi in saker som är gjorda
 
