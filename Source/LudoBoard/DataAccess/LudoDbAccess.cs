@@ -15,12 +15,12 @@ namespace LudoBoard.DataAccess
 
             game.LastTimePlayedDate = DateTime.Now;
 
-            Console.WriteLine($"Added Game Id {game.Id}, Created Date: {game.LastTimePlayedDate}, Game Completed: {game.IsCompleted}");
+            Console.WriteLine($"Created Date: {game.LastTimePlayedDate}, Game Completed: {game.IsCompleted}\n");
             context.Game.Add(game);
 
             for (int i = 0; i < players.Count; i++)
             {
-                Console.WriteLine($"Adding Player Id {players[i].Id}, Name: {players[i].Name}, Color: {players[i].PlayerColor}");
+                Console.WriteLine($"Adding Player Id {players[i].Id}, Name: {players[i].Name}, Color: {players[i].PlayerColor}\n");
 
                 int gameId;
                 try

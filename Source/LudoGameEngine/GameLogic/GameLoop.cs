@@ -38,13 +38,15 @@ namespace LudoGameEngine
             Move move = new Move();
             int userInput = 0;
             int diceValue = 0;
-            bool isPlaying = true; //ska flyttas
-			while (isPlaying) //loopar omgångar
-			{
-				for (int t = 0; t <= players.Count; t++) //loopar spelarnas turn
-				{
-                    Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
+            bool isPlaying = true; // ska flyttas              (till? /Magnusson)
 
+			while (isPlaying) // loopar omgångar
+			{
+				//for (int t = 0; t <= players.Count; t++) // loopar spelarnas turn
+				//{
+                    // Kollar vilkens spelares tur det är
+                    Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
+                    
                     List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
                     Console.WriteLine("1. rolldice");
@@ -77,7 +79,13 @@ namespace LudoGameEngine
                     }
 
                     move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard);
-                }
+
+                    // TODO-Programmet ska avgöra vems tur det är att kasta tärningen.; 
+                    // WhoesTurnToRollTheDice()
+
+                    UpdateGameBoard.UpdatePlayerTurn(players);
+               
+                //}
             }
         }
     }
