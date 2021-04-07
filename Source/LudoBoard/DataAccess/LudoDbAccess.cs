@@ -67,6 +67,44 @@ namespace LudoBoard.DataAccess
             context.SaveChanges();
             Console.WriteLine("Game saved to database");
         }
+        // TODO - Denna ger error, varför går det inte lägga till pieces till en lista? 
+        public void SavePositionsToDb(List<Piece> pieces, List<Player> players)
+        {
+            using (var context = new LudoDbContext())
+            {
+                List<Piece> playerPieces = null;
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    if (playerPieces != null)
+                    {
+                        Console.WriteLine(playerPieces.Count);
+                    }
+
+                    int id = Convert.ToInt32(pieces[i].Id);
+                    var piece = context.Piece.Where(x => x.Id == id).Single();
+
+                    Console.WriteLine($"List Piece contains Piece id:{piece.Id}");
+
+                    Console.WriteLine($"Piece position is {pieces[i].Position}");
+                    piece.Position = pieces[i].Position;
+
+                    Console.WriteLine($"Piece updated position is {pieces[i].Position}");
+                    playerPieces.Add(piece);
+                }
+
+                List<Player> allPlayers = null;
+                for (int z = 0; z < players.Count; z++)
+                {
+                    int id = Convert.ToInt32(players[z].Id);
+                    allPlayers = context.Player.Where(x => x.Id == id).ToList();
+
+                    allPlayers[z].PlayerTurn = players[z].PlayerTurn;
+                }
+
+                Console.WriteLine("Spelares ordning och Pjäsers positioner är nu uppdaterade i databasen.");
+                context.SaveChanges();
+            }
+        }
 
         public List<Player> GetAllPlayers()
         {

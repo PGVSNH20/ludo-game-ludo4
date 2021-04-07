@@ -83,7 +83,7 @@ namespace LudoGameEngine
                     // TODO-Programmet ska avgöra vems tur det är att kasta tärningen.; 
                     // WhoesTurnToRollTheDice()
 
-                    UpdateGameBoard.UpdatePlayerTurn(players);
+                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
                
                 //}
             }
