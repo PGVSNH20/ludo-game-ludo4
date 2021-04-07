@@ -134,3 +134,7 @@ Eftermiddagen
 - Vi skapade mapparna GameLogic (med klasserna: Dice, GameLoop, Move och UpdateGameBoard), Initialize (Med klasserna
     CreateGame, LoadGame och SaveGame) och UI (med klasserna: Square och UserInterface)
 - Vi flyttade sedan logiken dit där den hör hemma.
+
+7/4
+Förmiddagen
+- Vi har i  "UpdateGameBoard.cs" fixat en metod ("UpdatePlayerTurn") som ser till att vi byter tur på spelarna som spelar.  
