@@ -18,9 +18,11 @@ namespace LudoGameEngine.GameLogic
             int pieceId = 0;
             do
             {//TODO: Ändra id nr baserat på vilka pieces man kan flytta och ta bort dom som är i mål
+                pieceId = 0;
                 Console.WriteLine($"Which piece do you want to move? (1,2,3,4)");
                 int.TryParse(Console.ReadLine(), out pieceId);
             } while (pieceId != 1 && pieceId != 2 && pieceId != 3 && pieceId != 4);
+            //TODO: Se över pieceId! 
             pieceId -= 1;
             //TODO: ArgumentOutOfRange kolla om idt existerar och att det inte går över eller under
             var index = playerGameBoard.IndexOf(piece[pieceId].Position);
@@ -78,8 +80,9 @@ namespace LudoGameEngine.GameLogic
 					}
 					else
 					{
-						for (int i = 1; i < currentPlayer.PlayerBoard[i]; i++)
+						for (int i = 1; i < currentPlayer.PlayerBoard[45]; i++)
 						{
+                            Console.WriteLine($"Index left to goal {currentPlayer.PlayerBoard[i]}");
 							if (pieces.Position == currentPlayer.PlayerBoard[i])
 							{
                                 isPieceOnBoard = true;

@@ -66,6 +66,7 @@ namespace LudoGameEngine
                         Square.CurrentBoard(players);
                         // Roll Dice
                         diceValue = rollDice.RollDice();
+                        Console.WriteLine($"It's {currentPlayer.Name} time to roll! ");
                         Console.WriteLine($"You rolled {diceValue}!");
 
                     }
@@ -88,14 +89,30 @@ namespace LudoGameEngine
                     {
                         if (nestChecker.Contains(Convert.ToInt32(p.Position)))
                         {
+                        
                             move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+                   
+                
                         }
                     }
                 }
+                else
+                { 
+                    foreach (var piece in currentPlayerPieces)
+                    {
+                        if (piece.Position > currentPlayer.PlayerBoard[0] && piece.Position < currentPlayer.PlayerBoard[45])
+                        {
+                            
+                            currentPlayerPieces = move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+         
+             
 
-                currentPlayerPieces = move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+                        }
+                    }
+                }
+               
+                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
                 
-                UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
             }
         }
     }
