@@ -66,14 +66,12 @@ namespace LudoGameEngine
                         Square.CurrentBoard(players);
                         // Roll Dice
                         diceValue = rollDice.RollDice();
-                        Console.WriteLine($"It's {currentPlayer.Name} time to roll! ");
-                        Console.WriteLine($"You rolled {diceValue}!");
+                        Console.WriteLine($"It's {currentPlayer.Name}'s time to roll! ");
+                        Console.WriteLine($"{currentPlayer.Name} rolled {diceValue}!");
 
                     }
                     else
                     {
-                       
-                       
                         Console.Write("Please enter 1 to roll:");
                     }
                   
