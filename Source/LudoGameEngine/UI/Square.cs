@@ -22,10 +22,6 @@ namespace LudoGameEngine.UI
 
             var gb = UpdateGameBoard.PiecesOnGameBoardUpdate(allPlayersInGame);
 
-
-
-            //TODO - Brädet skall skriva ut pjäser med hjälp av metoden nedan. Den tar in alla pieces, dvs deras position. 
-
             Console.WriteLine($"\n[{gb[0]}]                  [{gb[1]}][{gb[2]}][{gb[3]}]                  [{gb[4]}]\n" +
                               $"                        [{gb[5]}][{gb[6]}][{gb[7]}]\n" +
                               $"                        [{gb[8]}][{gb[9]}][{gb[10]}]\n" +

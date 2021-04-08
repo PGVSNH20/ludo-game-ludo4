@@ -11,7 +11,6 @@ namespace LudoBoard.DataAccess
 
         public void SaveGame(Game game, List<Player> players, List<Piece> pieces)
         {
-            //var context = new LudoDbContext();
 
             game.LastTimePlayedDate = DateTime.Now;
 
@@ -78,7 +77,7 @@ namespace LudoBoard.DataAccess
 
                     int id = Convert.ToInt32(pieces[i].Id);
                     var piece = context.Piece.Where(x => x.Id == id).Single();
-                    
+
                     piece.Position = pieces[i].Position;
 
                     playerPieces.Add(piece);
@@ -102,32 +101,25 @@ namespace LudoBoard.DataAccess
 
         public List<Player> GetAllPlayers()
         {
-            //using (var context = new LudoDbContext())
-            {
-                return context.Player.ToList();
-            }
+
+            return context.Player.ToList();
         }
 
         public List<Player> GetPlayersWhenLoadingGame(int gameId)
         {
-            //using (var context = new LudoDbContext())
-            {
-                return context.Player.Where(x => x.GameId == gameId).ToList();
-            }
+
+            return context.Player.Where(x => x.GameId == gameId).ToList();
         }
 
         public List<Piece> GetCurrentPlayersPieces(int playerId)
         {
-            //using (var context = new LudoDbContext())
-            {
-                return context.Piece.Where(x => x.PlayerId == playerId).ToList();
-            }
+
+            return context.Piece.Where(x => x.PlayerId == playerId).ToList();
         }
 
         public int GetHighestBoardId()
         {
 
-            //var context = new LudoDbContext();
             Game boardId = null;
             try
             {
@@ -143,7 +135,7 @@ namespace LudoBoard.DataAccess
 
         public int GetHighestPlayerId()
         {
-            //var context = new LudoDbContext();
+
             Player playerId = null;
             int id = 0;
             try
@@ -157,23 +149,16 @@ namespace LudoBoard.DataAccess
             return playerId.Id;
         }
 
-
         public List<Game> GetAllFinishedGames()
         {
 
-            //using (var context = new LudoDbContext())
-            {
-                return context.Game.Where(t => t.IsCompleted == true).ToList();
-            }
+            return context.Game.Where(t => t.IsCompleted == true).ToList();
         }
 
         public List<Game> GetAllUnfinishedGames()
         {
 
-            //using (var context = new LudoDbContext())
-            {
-                return context.Game.Where(t => t.IsCompleted == false).ToList();
-            }
+            return context.Game.Where(t => t.IsCompleted == false).ToList();
         }
 
         // IsActive = Kollar om pjäsen är aktiv på brädet eller om den har gått i mål.
@@ -181,24 +166,20 @@ namespace LudoBoard.DataAccess
         {
             List<Piece> playersPieces = new List<Piece>();
 
-            //using (var context = new LudoDbContext())
+            for (int i = 0; i < playersCurrentlyPlaying.Count; i++)
             {
-                for (int i = 0; i < playersCurrentlyPlaying.Count; i++)
+                int id = Convert.ToInt32(playersCurrentlyPlaying[i].Id);
+
+                var playersActivePieces = context.Piece.Where(t => t.IsActive == true && t.PlayerId == id).ToList();
+
+                foreach (var pp in playersActivePieces)
                 {
-                    int id = Convert.ToInt32(playersCurrentlyPlaying[i].Id);
-
-                    var playersActivePieces = context.Piece.Where(t => t.IsActive == true && t.PlayerId == id).ToList();
-
-                    foreach (var pp in playersActivePieces)
-                    {
-                        playersPieces.Add(pp);
-                    }
+                    playersPieces.Add(pp);
                 }
             }
 
             return playersPieces;
         }
-
 
         public void UpdatePlayerTurn(List<Player> players)
         {
