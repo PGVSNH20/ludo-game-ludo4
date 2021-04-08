@@ -58,7 +58,7 @@ namespace LudoGameEngine.UI
 
                 for (int i = 0; i < games.Count; i++)
                 {
-                    Console.WriteLine($"[{i+1}]\nGame Id: {games[i].Id} Last Played: {games[i].LastTimePlayedDate}");
+                    Console.WriteLine($"[{games[i].Id}]\nGame Id: {games[i].Id} Last Played: {games[i].LastTimePlayedDate}");
                     Console.Write($"Players:");
                     foreach(Player p in players)
                     {

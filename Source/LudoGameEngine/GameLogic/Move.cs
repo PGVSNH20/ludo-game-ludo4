@@ -17,21 +17,39 @@ namespace LudoGameEngine.GameLogic
             
             int pieceId = 0;
 
-            Console.WriteLine("Which piece do you want to move? (Id)");
+            Console.WriteLine($"Which piece do you want to move? (Id)");
             int.TryParse(Console.ReadLine(), out pieceId);
             pieceId -= 1;
 
             var index = playerGameBoard.IndexOf(piece[pieceId].Position);
-            Console.WriteLine($"\nCurrent index of the piece: {index} | Current position: {piece[pieceId].Position}!");
+            
 
             index = index + diceValue;
-            piece[pieceId].Position = playerGameBoard[index];
-            Console.WriteLine($"Updated index of the piece: {index} and the new position is {piece[pieceId].Position}!\n");
+            try
+            {
+                piece[pieceId].Position = playerGameBoard[index];
+            }
+            catch (Exception)
+            {
+                piece[pieceId].IsActive = false;
+
+                if (true)
+                {
+
+                }
+            }
+            
+            
 
             updatedPositions.Add(piece[pieceId]);
             // Göra en loop för att hitta listan som CheckPositions håller.
-            updatedPositions.Add(CheckPositions(updatedPositions[0], players));
-
+            
+            var checkSomething = CheckPositions(updatedPositions[0], players);
+            foreach (var c in checkSomething)
+            {
+                updatedPositions.Add(c);
+            }
+            
             return updatedPositions; 
         }
 
@@ -41,17 +59,23 @@ namespace LudoGameEngine.GameLogic
             //Square square = new Square();
             bool isRunning = true;
             int userInput = 0;
+            GameLoop runGame = new GameLoop();
+            Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
+            List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
             while (isRunning)
             {
-                Console.WriteLine("Do you want move a piece from the nest or move a piece on board?\n" +
+                Console.Clear();
+                Square.CurrentBoard(players);
+                Console.WriteLine("You rolled 6!!!! Do you want move a piece from the nest or move a piece on board?\n" +
                                     "[1] Move piece from the nest\n" +
                                     "[2] Move piece on the board\n");
 
                 int.TryParse(Console.ReadLine(), out userInput);
                 
                 //TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
-                isRunning = false;
+                //isRunning = false;
+             
                 switch (userInput)
                 {
                     case 1:
@@ -60,8 +84,15 @@ namespace LudoGameEngine.GameLogic
                         break;
 
                     case 2:
-                        MovePiece(piece, diceValue, playerGameBoard, players);
                         isRunning = false;
+                        Console.Clear();
+                        Square.CurrentBoard(players);
+                        currentPlayerPieces = MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+
+                        UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
+                        Console.Clear();
+                        runGame.RunGame(players);
+
                         break;
 
                     case 3:
@@ -98,14 +129,18 @@ namespace LudoGameEngine.GameLogic
                 {
                     if (piece.Position == movedPiece.Position)
                     {
-                        Console.WriteLine($"KNUFF!{piece.Position}");
+                        Console.WriteLine($"KNUFF!");
                         piece.Position = nest[i];
-                        Console.WriteLine($"KNUFF!{piece.Position} knuff ny position");
                         updatedPieces.Add(piece);
                     }
                 }
             }
             return updatedPieces;
+        }
+
+        public void FinishLine()
+        {
+            
         }
     }
 }

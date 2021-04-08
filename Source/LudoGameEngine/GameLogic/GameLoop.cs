@@ -47,27 +47,35 @@ namespace LudoGameEngine
 
             while (isPlaying) // loopar omgångar
             {
+                
                 // Kollar vilkens spelares tur det är
                 Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
 
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
                 Console.WriteLine("1. rolldice");
+                
+                
                 do
                 {
                     int.TryParse(Console.ReadLine(), out userInput);
-
+                    
                     if (userInput == 1)
                     {
                         Console.Clear();
                         Square.CurrentBoard(players);
                         // Roll Dice
                         diceValue = rollDice.RollDice();
-                        Console.WriteLine($"You rolled {diceValue}");
+                        Console.WriteLine($"You rolled {diceValue}!");
 
                     }
                     else
-                        Console.WriteLine("Please enter a valid number.");
+                    {
+                       
+                       
+                        Console.Write("Please enter 1 to roll:");
+                    }
+                  
                 } while (userInput != 1);
 
                 // Check if dicevalue is 6 & if there is a piece in the nest. 
@@ -75,6 +83,7 @@ namespace LudoGameEngine
 
                 if (diceValue == 6)
                 {
+
                     foreach (var p in currentPlayerPieces)
                     {
                         if (nestChecker.Contains(Convert.ToInt32(p.Position)))

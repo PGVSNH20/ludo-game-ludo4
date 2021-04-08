@@ -30,22 +30,22 @@ namespace LudoGameEngine.GameLogic
             Player updateThisplayer = null;
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
             int playercounter = currentPlayers.Count;
-            Console.WriteLine($"PlayerCounter = {playercounter}");
+            
 
             for (int i = 0; i < currentPlayers.Count; i++)
             {
-                Console.WriteLine($"i = {i}");
+                
 
                 if (currentPlayers[i].PlayerTurn == true)
                 {
                     updateThisplayer = currentPlayers[i];
-                    Console.WriteLine($"currentplayer[i-1] = {currentPlayers[i].Name}");
+                    
 
                     currentPlayers[i].PlayerTurn = false;
 
                     if (i == playercounter - 1)
                     {
-                        Console.WriteLine($"i == playercounter");
+                        
 
                         currentPlayers[0].PlayerTurn = true;
                         ludoDbAccess.SavePositionsToDb(pieces, currentPlayers);
@@ -55,7 +55,7 @@ namespace LudoGameEngine.GameLogic
                     {
                         currentPlayers[i + 1].PlayerTurn = true;
 
-                        Console.WriteLine($"{currentPlayers[i + 1].Name} Sätter player turn till true");
+                       
                         ludoDbAccess.SavePositionsToDb(pieces, currentPlayers);
                         break;
                     }
