@@ -11,22 +11,22 @@ namespace LudoGameEngine.UI
 {
     // This class should be controlling all the movement
     // so that CurrentBoard() can print out each piece location.
-    public class Square
+    public static class Square
     {
 
-        public List<string> CurrentBoard(List<Player> allPlayersInGame)
+        public static List<string> CurrentBoard(List<Player> allPlayersInGame)
         {
             List<string> updated = new List<string>();
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
             List<Piece> pieces = ludoDbAccess.GetAllPieces(allPlayersInGame);
 
-            var gb = UpdateGameBoard.PiecesOnGameBoardUpdate(pieces, allPlayersInGame);
+            var gb = UpdateGameBoard.PiecesOnGameBoardUpdate(allPlayersInGame);
 
 
 
             //TODO - Brädet skall skriva ut pjäser med hjälp av metoden nedan. Den tar in alla pieces, dvs deras position. 
 
-            Console.WriteLine($"[{gb[0]}]                  [{gb[1]}][{gb[2]}][{gb[3]}]                  [{gb[4]}]\n" +
+            Console.WriteLine($"\n[{gb[0]}]                  [{gb[1]}][{gb[2]}][{gb[3]}]                  [{gb[4]}]\n" +
                               $"                        [{gb[5]}][{gb[6]}][{gb[7]}]\n" +
                               $"                        [{gb[8]}][{gb[9]}][{gb[10]}]\n" +
                               $"                        [{gb[11]}][{gb[12]}][{gb[13]}]\n" +

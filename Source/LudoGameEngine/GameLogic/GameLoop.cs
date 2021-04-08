@@ -42,8 +42,8 @@ namespace LudoGameEngine
             int diceValue = 0;
             bool isPlaying = true;
 
-            Square square = new Square();
-            square.CurrentBoard(players);
+            //Square square = new Square();
+            Square.CurrentBoard(players);
 
             while (isPlaying) // loopar omgångar
             {
@@ -59,9 +59,12 @@ namespace LudoGameEngine
 
                     if (userInput == 1)
                     {
+                        Console.Clear();
+                        Square.CurrentBoard(players);
                         // Roll Dice
                         diceValue = rollDice.RollDice();
                         Console.WriteLine($"You rolled {diceValue}");
+
                     }
                     else
                         Console.WriteLine("Please enter a valid number.");
@@ -76,15 +79,14 @@ namespace LudoGameEngine
                     {
                         if (nestChecker.Contains(Convert.ToInt32(p.Position)))
                         {
-                            move.AskIfMoveFromNestOrMoveOnBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard);
+                            move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
                         }
                     }
                 }
 
-                move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard);
-
+                currentPlayerPieces = move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+                
                 UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
-
             }
         }
     }

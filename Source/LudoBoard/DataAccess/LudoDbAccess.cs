@@ -7,9 +7,11 @@ namespace LudoBoard.DataAccess
 {
     public class LudoDbAccess
     {
+        LudoDbContext context = new LudoDbContext();
+
         public void SaveGame(Game game, List<Player> players, List<Piece> pieces)
         {
-            var context = new LudoDbContext();
+            //var context = new LudoDbContext();
 
             game.LastTimePlayedDate = DateTime.Now;
 
@@ -68,7 +70,7 @@ namespace LudoBoard.DataAccess
 
         public void SavePositionsToDb(List<Piece> pieces, List<Player> players)
         {
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 List<Piece> playerPieces = new List<Piece>();
                 for (int i = 0; i < pieces.Count; i++)
@@ -100,7 +102,7 @@ namespace LudoBoard.DataAccess
 
         public List<Player> GetAllPlayers()
         {
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 return context.Player.ToList();
             }
@@ -108,7 +110,7 @@ namespace LudoBoard.DataAccess
 
         public List<Player> GetPlayersWhenLoadingGame(int gameId)
         {
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 return context.Player.Where(x => x.GameId == gameId).ToList();
             }
@@ -116,7 +118,7 @@ namespace LudoBoard.DataAccess
 
         public List<Piece> GetCurrentPlayersPieces(int playerId)
         {
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 return context.Piece.Where(x => x.PlayerId == playerId).ToList();
             }
@@ -125,7 +127,7 @@ namespace LudoBoard.DataAccess
         public int GetHighestBoardId()
         {
 
-            var context = new LudoDbContext();
+            //var context = new LudoDbContext();
             Game boardId = null;
             try
             {
@@ -141,7 +143,7 @@ namespace LudoBoard.DataAccess
 
         public int GetHighestPlayerId()
         {
-            var context = new LudoDbContext();
+            //var context = new LudoDbContext();
             Player playerId = null;
             int id = 0;
             try
@@ -159,7 +161,7 @@ namespace LudoBoard.DataAccess
         public List<Game> GetAllFinishedGames()
         {
 
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 return context.Game.Where(t => t.IsCompleted == true).ToList();
             }
@@ -168,7 +170,7 @@ namespace LudoBoard.DataAccess
         public List<Game> GetAllUnfinishedGames()
         {
 
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 return context.Game.Where(t => t.IsCompleted == false).ToList();
             }
@@ -179,7 +181,7 @@ namespace LudoBoard.DataAccess
         {
             List<Piece> playersPieces = new List<Piece>();
 
-            using (var context = new LudoDbContext())
+            //using (var context = new LudoDbContext())
             {
                 for (int i = 0; i < playersCurrentlyPlaying.Count; i++)
                 {

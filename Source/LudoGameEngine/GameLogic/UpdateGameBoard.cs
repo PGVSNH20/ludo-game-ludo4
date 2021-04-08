@@ -72,16 +72,16 @@ namespace LudoGameEngine.GameLogic
         }
 
         // TODO - PRIORITERING, FÅ DENNA ATT FUNGERA. Den skall uppdatera spelbrädet
-        public static List<string> PiecesOnGameBoardUpdate(List<Piece> allActivePieces, List<Player> allActivePlayers)
+        public static List<string> PiecesOnGameBoardUpdate(List<Player> allActivePlayers)
         {
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
             List<string> gb = new GameBoard().CompleteGameBoard;
 
             // Tar ut alla spelares pjäser till 4 olika listor 0 = spelare 1, 1 = spelare 2 osv.
-            List<List<Piece>> PlayersGameBoards = new List<List<Piece>>();
+            List<List<Piece>> eachPlayersPieces = new List<List<Piece>>();
             for (int i = 0; i < allActivePlayers.Count; i++)
             {
-                PlayersGameBoards.Add(ludoDbAccess.GetCurrentPlayersPieces(allActivePlayers[i].Id));
+                eachPlayersPieces.Add(ludoDbAccess.GetCurrentPlayersPieces(allActivePlayers[i].Id));
             }
 
             // Går igenom varje fyrkant på kartan
@@ -90,12 +90,12 @@ namespace LudoGameEngine.GameLogic
                 // Sätter en counter (Kan bara vara max 4 pieces på en ruta)
                 int counter = 4;
 
-                for (int x = 0; x < PlayersGameBoards.Count; x++) // Går igenom varje spelare
+                for (int x = 0; x < eachPlayersPieces.Count; x++) // Går igenom varje spelare
                 {
                     int pieceCounter = 0; // Värdet på denna counter är id 1, 2 ,3 ,4 på en spelares pjäser.
                                           // Detta för att vi ska kunna skriva ut "1", "2", "3" eller "4" på kartan.
 
-                    foreach (var piece in PlayersGameBoards[x]) // Går igenom varje spelares pjäser (4st)
+                    foreach (var piece in eachPlayersPieces[x]) // Går igenom varje spelares pjäser (4st)
                     {
                         pieceCounter += 1;
 
@@ -104,7 +104,7 @@ namespace LudoGameEngine.GameLogic
                             counter -= 1;
 
                             if (x == 0) // Player 1
-                            {
+                            {                                
                                 if (pieceCounter == 1) // piece Id
                                 {
                                     gb[i] = gb[i] + "1";
@@ -121,7 +121,9 @@ namespace LudoGameEngine.GameLogic
                                 {
                                     gb[i] = gb[i] + "4";
                                 }
+                                
                             }
+                            
                             else if (x == 1) // Player 2
                             {
                                 if (pieceCounter == 1) // piece Id
@@ -178,7 +180,7 @@ namespace LudoGameEngine.GameLogic
                                 {
                                     gb[i] = gb[i] + "4";
                                 }
-                            }
+                            }                            
                         }
                     }
                 }
