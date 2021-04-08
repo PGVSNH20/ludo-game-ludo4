@@ -16,13 +16,14 @@ namespace LudoGameEngine.GameLogic
             List<Piece> updatedPositions = new List<Piece>();
             
             int pieceId = 0;
-
-            Console.WriteLine($"Which piece do you want to move? (Id)");
-            int.TryParse(Console.ReadLine(), out pieceId);
+            do
+            {//TODO: Ändra id nr baserat på vilka pieces man kan flytta och ta bort dom som är i mål
+                Console.WriteLine($"Which piece do you want to move? (1,2,3,4)");
+                int.TryParse(Console.ReadLine(), out pieceId);
+            } while (pieceId != 1 && pieceId != 2 && pieceId != 3 && pieceId != 4);
             pieceId -= 1;
-
+            //TODO: ArgumentOutOfRange kolla om idt existerar och att det inte går över eller under
             var index = playerGameBoard.IndexOf(piece[pieceId].Position);
-            
 
             index = index + diceValue;
             try
@@ -38,8 +39,6 @@ namespace LudoGameEngine.GameLogic
 
                 }
             }
-            
-            
 
             updatedPositions.Add(piece[pieceId]);
             // Göra en loop för att hitta listan som CheckPositions håller.
@@ -67,11 +66,61 @@ namespace LudoGameEngine.GameLogic
             {
                 Console.Clear();
                 Square.CurrentBoard(players);
-                Console.WriteLine("You rolled 6!!!! Do you want move a piece from the nest or move a piece on board?\n" +
+
+                //
+                bool isPieceInNest = false;
+                bool isPieceOnBoard = false;
+				foreach (var pieces in currentPlayerPieces)
+				{
+					if (pieces.Position == currentPlayer.PlayerBoard[0])
+					{
+                        isPieceInNest = true;
+					}
+					else
+					{
+						for (int i = 1; i < currentPlayer.PlayerBoard[i]; i++)
+						{
+							if (pieces.Position == currentPlayer.PlayerBoard[i])
+							{
+                                isPieceOnBoard = true;
+							}
+						}
+					}
+                }
+
+				if (isPieceInNest && isPieceOnBoard)
+				{
+                    Console.WriteLine("You rolled 6!!!! Do you want move a piece from the nest or move a piece on board?\n" +
                                     "[1] Move piece from the nest\n" +
                                     "[2] Move piece on the board\n");
 
-                int.TryParse(Console.ReadLine(), out userInput);
+                    int.TryParse(Console.ReadLine(), out userInput);
+                }
+				else if (isPieceInNest && !isPieceOnBoard)
+				{
+                    Console.WriteLine("You rolled 6!!!!\n");
+
+                    //Här ska vi flytta en pjäs från nest:et.
+                    isRunning = false;
+                    Console.Clear();
+                    Square.CurrentBoard(players);
+                    currentPlayerPieces = MovePiece(currentPlayerPieces, 1, currentPlayer.PlayerBoard, players);
+
+                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
+                    Console.Clear();
+                    runGame.RunGame(players);
+				}
+				else
+				{
+                    isRunning = false;
+                    Console.Clear();
+                    Square.CurrentBoard(players);
+                    currentPlayerPieces = MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+
+                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
+                    Console.Clear();
+                    runGame.RunGame(players);
+                }
                 
                 //TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
                 //isRunning = false;
@@ -81,6 +130,13 @@ namespace LudoGameEngine.GameLogic
                     case 1:
                         //Här ska vi flytta en pjäs från nest:et.
                         isRunning = false;
+                        Console.Clear();
+                        Square.CurrentBoard(players);
+                        currentPlayerPieces = MovePiece(currentPlayerPieces, 1, currentPlayer.PlayerBoard, players);
+
+                        UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
+                        Console.Clear();
+                        runGame.RunGame(players);
                         break;
 
                     case 2:
