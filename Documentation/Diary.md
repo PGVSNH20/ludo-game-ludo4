@@ -139,3 +139,10 @@ Eftermiddagen
 Förmiddagen
 - Vi har i  "UpdateGameBoard.cs" fixat en metod ("UpdatePlayerTurn") som ser till att vi byter tur på spelarna som spelar.
 - Vi har dessutom försökt fixa en metod ("SavePositionToDb") i klassen "UpdateGameBoard.cs", som ska spara det vi skrev ovanför till databasen.   
+
+8/4
+förmiddagen:
+- Fixade så att metoden UpdateGameboard fungerar
+- Flyttat listan på nest positions till datamodellen GameBoard
+- Refaktorerade var context i LudoDbAccess
+- Skapat en funktion som knuffar spelare till nest
