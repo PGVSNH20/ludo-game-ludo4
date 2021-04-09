@@ -109,7 +109,7 @@ namespace LudoGameEngine
                                     if (currentPlayerPieces[i].Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
                                     {
                                         piecesOnBoard.Add(currentPlayerPieces[i]);
-                                        Console.WriteLine($"{i + 1}. Piece");
+                                        Console.WriteLine($"[{i + 1}] Piece {i + 1}");
                                     }
                                 }
                                 
