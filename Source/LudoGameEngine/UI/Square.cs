@@ -35,6 +35,8 @@ namespace LudoGameEngine.UI
             //                  $"                        [{gb[53]}][{gb[54]}][{gb[55]}]\n" +
             //                  $"[{gb[56]}]                  [{gb[57]}][{gb[58]}][{gb[59]}]                  [{gb[60]}]\n");
 
+            EscapeSequencer.Install(); //Install sequence parse
+            EscapeSequencer.Bold = true; //Brighter colors
 
             Console.WriteLine("\n[".Red() + gb[0] + "]".Red() + "                  [" + gb[1] + "][" + gb[2] + "][" + gb[3] + "]                  " + "[".Blue() + gb[4] + "]\n".Blue() +
                               "                        [" + gb[5] + "]" + "[".Blue() + gb[6] + "]".Blue() + "[" + gb[7] + "]\n" +
