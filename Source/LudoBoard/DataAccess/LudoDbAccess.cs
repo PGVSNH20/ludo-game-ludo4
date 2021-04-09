@@ -193,5 +193,20 @@ namespace LudoBoard.DataAccess
                 }
             }
         }
+
+        public void SetWinner(Player player)
+        {
+
+            var game = context.Game.Where(x => x.Id == player.GameId).Single();
+
+            game.WinnerPlayerName = player.Name;
+            game.IsCompleted = true;
+            game.CompletedDate = DateTime.Now;
+
+            // Save change in database
+            context.SaveChanges();
+
+            Console.WriteLine($"PLAYER {player.PlayerColor.ToUpper()} {player.Name.ToUpper()} HAS WON!");
+        }
     }
 }

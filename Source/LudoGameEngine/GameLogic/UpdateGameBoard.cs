@@ -1,6 +1,7 @@
 ﻿using Edokan.KaiZen.Colors;
 using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
+using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,9 +86,13 @@ namespace LudoGameEngine.GameLogic
                 {
                     int pieceCounter = 0; // Värdet på denna counter är id 1, 2 ,3 ,4 på en spelares pjäser.
                                           // Detta för att vi ska kunna skriva ut "1", "2", "3" eller "4" på kartan.
-
+                    int pieceIsInactiveCounter = 0;
                     foreach (var piece in eachPlayersPieces[x]) // Går igenom varje spelares pjäser (4st)
                     {
+                        if (piece.IsActive == false)
+                        {
+                            pieceIsInactiveCounter++;
+                        }
                         pieceCounter += 1;
 
                         if (piece.Position == i)
@@ -173,6 +178,15 @@ namespace LudoGameEngine.GameLogic
                                 }
                             }                            
                         }
+                    }
+
+                    if(pieceIsInactiveCounter == 4)
+                    {
+                        ludoDbAccess.SetWinner(allActivePlayers[x]);
+
+                        var runMenu = new UserInterface();
+
+                        runMenu.MainMenu();
                     }
                 }
 
