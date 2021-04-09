@@ -14,48 +14,51 @@ namespace LudoGameEngine.GameLogic
         public List<Piece> MovePiece(List<Piece> piece, int diceValue, List<int> playerGameBoard, List<Player> players)
         {
             List<Piece> updatedPositions = new List<Piece>();
-            
+
+            //TODO: Ändra id nr baserat på vilka pieces man kan flytta och ta bort dom som är i mål
             int pieceId = 0;
             do
-            {//TODO: Ändra id nr baserat på vilka pieces man kan flytta och ta bort dom som är i mål
+            {
                 pieceId = 0;
                 Console.WriteLine($"Which piece do you want to move? (1,2,3,4)");
                 int.TryParse(Console.ReadLine(), out pieceId);
-            } while (pieceId != 1 && pieceId != 2 && pieceId != 3 && pieceId != 4);
-            //TODO: Se över pieceId! 
-            pieceId -= 1;
+
+            } while (pieceId != 1 || pieceId != 2 || pieceId != 3 || pieceId != 4);
+
             //TODO: ArgumentOutOfRange kolla om idt existerar och att det inte går över eller under
+            pieceId -= 1;
             var index = playerGameBoard.IndexOf(piece[pieceId].Position);
 
             index = index + diceValue;
+
+            // TODO - Här måste vi göra en check så att position inte överstiger position 30 (sista steget)
             try
             {
                 piece[pieceId].Position = playerGameBoard[index];
-            }
-            catch (Exception)
-            {
-                piece[pieceId].IsActive = false;
-
-                if (true)
+                
+                if (piece[pieceId].Position == playerGameBoard[45])
                 {
-
+                    piece[pieceId].IsActive = false;
                 }
+            }
+            catch (Exception e)
+            {
+
             }
 
             updatedPositions.Add(piece[pieceId]);
-            // Göra en loop för att hitta listan som CheckPositions håller.
             
-            var checkSomething = CheckPositions(updatedPositions[0], players);
-            foreach (var c in checkSomething)
+            var checkIfPushingAnotherPlayer = CheckPositions(updatedPositions[0], players);
+            foreach (var p in checkIfPushingAnotherPlayer)
             {
-                updatedPositions.Add(c);
+                updatedPositions.Add(p);
             }
             
             return updatedPositions; 
         }
 
         //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
-        public void MoveFromNestOrBoard(List<Piece> piece, int diceValue, List<int> playerGameBoard, List<Player> players)
+        public List<Piece> MoveFromNestOrBoard(List<Piece> piece, int diceValue, List<int> playerGameBoard, List<Player> players)
         {
             //Square square = new Square();
             bool isRunning = true;
@@ -63,21 +66,24 @@ namespace LudoGameEngine.GameLogic
             GameLoop runGame = new GameLoop();
             Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
             List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
+            List<Piece> updatedPositions = new List<Piece>();
 
             while (isRunning)
             {
                 Console.Clear();
                 Square.CurrentBoard(players);
 
-                //
+                // Kollar om en pjäs finns i nest eller ute på spelbrädet
                 bool isPieceInNest = false;
                 bool isPieceOnBoard = false;
+
 				foreach (var pieces in currentPlayerPieces)
 				{
 					if (pieces.Position == currentPlayer.PlayerBoard[0])
 					{
                         isPieceInNest = true;
 					}
+
 					else
 					{
 						for (int i = 1; i < currentPlayer.PlayerBoard[45]; i++)
@@ -99,6 +105,7 @@ namespace LudoGameEngine.GameLogic
 
                     int.TryParse(Console.ReadLine(), out userInput);
                 }
+
 				else if (isPieceInNest && !isPieceOnBoard)
 				{
                     Console.WriteLine("You rolled 6!!!!\n");
@@ -107,27 +114,20 @@ namespace LudoGameEngine.GameLogic
                     isRunning = false;
                     Console.Clear();
                     Square.CurrentBoard(players);
-                    currentPlayerPieces = MovePiece(currentPlayerPieces, 1, currentPlayer.PlayerBoard, players);
+                    updatedPositions = MovePiece(currentPlayerPieces, 1, currentPlayer.PlayerBoard, players);
+                }
 
-                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
-                    Console.Clear();
-                    runGame.RunGame(players);
-				}
-				else
+                else
 				{
                     isRunning = false;
                     Console.Clear();
                     Square.CurrentBoard(players);
-                    currentPlayerPieces = MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
-
-                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
-                    Console.Clear();
-                    runGame.RunGame(players);
+                    updatedPositions = MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
                 }
-                
+
                 //TODO-Kolla till om det finns pjäser ute på brädan. Kunna ge ett felmeddelande om det inte en pjäs ute på brädan ifall man trycker på "Move piece on the board"
                 //isRunning = false;
-             
+
                 switch (userInput)
                 {
                     case 1:
@@ -135,38 +135,27 @@ namespace LudoGameEngine.GameLogic
                         isRunning = false;
                         Console.Clear();
                         Square.CurrentBoard(players);
-                        currentPlayerPieces = MovePiece(currentPlayerPieces, 1, currentPlayer.PlayerBoard, players);
-
-                        UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
-                        Console.Clear();
-                        runGame.RunGame(players);
+                        updatedPositions = MovePiece(currentPlayerPieces, 1, currentPlayer.PlayerBoard, players);
                         break;
 
                     case 2:
                         isRunning = false;
                         Console.Clear();
                         Square.CurrentBoard(players);
-                        currentPlayerPieces = MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
-
-                        UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
-                        Console.Clear();
-                        runGame.RunGame(players);
-
-                        break;
-
-                    case 3:
-                        //Square.CurrentBoard();
-                        isRunning = false;
+                        updatedPositions = MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
                         break;
 
                     default:
-                        Console.WriteLine("You need to press 1, 2 or 3");
+                        Console.WriteLine("You need to press 1 or 2");
                         isRunning = true;
                         break;
-
                 }
             }
+
+            Console.Clear();
+            return updatedPositions;
         }
+
         public List<Piece> CheckPositions(Piece movedPiece, List<Player> players)
         {            
             var ludoDbAccess = new LudoDbAccess();
@@ -195,11 +184,6 @@ namespace LudoGameEngine.GameLogic
                 }
             }
             return updatedPieces;
-        }
-
-        public void FinishLine()
-        {
-            
         }
     }
 }

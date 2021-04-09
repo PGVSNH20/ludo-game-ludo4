@@ -16,7 +16,7 @@ namespace LudoGameEngine.GameLogic
             {
                 if (player.PlayerTurn == true)
                 {
-                    Console.WriteLine($"It's player {player.Name} turn to roll the dice.");
+                    Console.WriteLine($"It's Player {player.PlayerColor}: {player.Name}'s time to roll! ");
 
                     return player;
                 }

@@ -1,13 +1,9 @@
-﻿using LudoBoard.DataAccess;
-using LudoBoard.DataModels;
+﻿using LudoBoard.DataModels;
 using LudoGameEngine.GameLogic;
 using LudoGameEngine.Initialize;
 using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LudoGameEngine
 {
@@ -36,22 +32,22 @@ namespace LudoGameEngine
 
         public void RunGame(List<Player> players) //Kanske måste uppdelas eller göras om till initialize
         {
-            Dice rollDice = new Dice();
-            Move move = new Move();
-            int userInput = 0;
-            int diceValue = 0;
             bool isPlaying = true;
-
-            //Square square = new Square();
-            Square.CurrentBoard(players);
-
             while (isPlaying) // loopar omgångar
             {
-                
+                // View Current Board
+                Square.CurrentBoard(players);
+
+                Dice rollDice = new Dice();
+                Move move = new Move();
+                int userInput = 0;
+                int diceValue = 0;
+
                 // Kollar vilkens spelares tur det är
                 Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
 
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
+                List<Piece> updatedPositions = new List<Piece>();
 
                 Console.WriteLine("1. rolldice");
                 
@@ -64,10 +60,10 @@ namespace LudoGameEngine
                     {
                         Console.Clear();
                         Square.CurrentBoard(players);
+
                         // Roll Dice
                         diceValue = rollDice.RollDice();
-                        Console.WriteLine($"It's {currentPlayer.Name}'s time to roll! ");
-                        Console.WriteLine($"{currentPlayer.Name} rolled {diceValue}!");
+                        Console.WriteLine($"Player {currentPlayer.PlayerColor}: {currentPlayer.Name} rolled {diceValue}!");
 
                     }
                     else
@@ -82,35 +78,30 @@ namespace LudoGameEngine
 
                 if (diceValue == 6)
                 {
-
-                    foreach (var p in currentPlayerPieces)
+                    foreach (var piece in currentPlayerPieces)
                     {
-                        if (nestChecker.Contains(Convert.ToInt32(p.Position)))
+                        if (nestChecker.Contains(Convert.ToInt32(piece.Position)))
                         {
-                        
-                            move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
-                   
-                
+
+                            updatedPositions = move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
                         }
                     }
                 }
                 else
-                { 
+                {
+                    // Fixad
+                    // piece.Position > & < currentPlayer.PlayerBoard[0] denna är fel, spelare 3 har piece.position == 60. Då blir den aldrig > än [0]
                     foreach (var piece in currentPlayerPieces)
                     {
-                        if (piece.Position > currentPlayer.PlayerBoard[0] && piece.Position < currentPlayer.PlayerBoard[45])
+                        if ( !currentPlayer.PlayerBoard[0].Equals(piece.Position) && piece.Position != 30)
                         {
-                            
-                            currentPlayerPieces = move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
-         
-             
 
+                            updatedPositions = move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
                         }
                     }
                 }
                
-                    UpdateGameBoard.UpdatePlayerTurn(currentPlayerPieces, players);
-                
+                    UpdateGameBoard.UpdatePlayerTurn(updatedPositions, players);
             }
         }
     }
