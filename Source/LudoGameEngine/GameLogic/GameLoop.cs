@@ -50,7 +50,7 @@ namespace LudoGameEngine
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
                 List<Piece> updatedPositions = new List<Piece>();
 
-                Console.WriteLine("1. rolldice");
+                Console.WriteLine("[1] Rolldice");
 
 
                 do

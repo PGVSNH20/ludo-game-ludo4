@@ -46,7 +46,7 @@ namespace LudoGameEngine.UI
                               "                        [" + gb[50] + "]" + "[".Green() + gb[51] + "]".Green() + "[" + gb[52] + "]\n" +
                               "                        [" + gb[53] + "]" + "[".Green() + gb[54] + "]".Green() + "[" + gb[55] + "]\n" +
                               "[".Green() + gb[56] + "]".Green() + "                  [" + gb[57] + "][" + gb[58] + "][" + gb[59] + "]                  " + "[".Yellow() + gb[60] + "]\n".Yellow() + "\n" +
-                              "Finished pieces: " + gb[61]);
+                              "Finished pieces: ".Grey() + gb[61] + "\n");
 
             return updated;
         }
