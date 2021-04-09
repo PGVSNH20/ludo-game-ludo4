@@ -47,12 +47,12 @@ namespace LudoBoard.DataAccess
                     pieces[x].PlayerId = players[1].Id;
 
                 }
-                else if (pieces[x].Position == 56)
+                else if (pieces[x].Position == 60)
                 {
                     pieces[x].PlayerId = players[2].Id;
 
                 }
-                else if (pieces[x].Position == 60)
+                else if (pieces[x].Position == 56)
                 {
                     pieces[x].PlayerId = players[3].Id;
 
