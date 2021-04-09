@@ -1,4 +1,5 @@
-﻿using LudoBoard.DataAccess;
+﻿using Edokan.KaiZen.Colors;
+using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
 using LudoGameEngine.UI;
 
@@ -9,6 +10,8 @@ namespace LudoGameEngine
         static void Main(string[] args)
         {
             var runMenu = new UserInterface();
+            EscapeSequencer.Install(); //Install sequence parse
+            EscapeSequencer.Bold = true; //Brighter colors
 
             runMenu.MainMenu();
         }
