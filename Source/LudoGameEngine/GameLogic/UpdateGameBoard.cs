@@ -31,11 +31,13 @@ namespace LudoGameEngine.GameLogic
         {
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
             int playercounter = currentPlayers.Count;
-            
+
+            ludoDbAccess.ChangeIsActive(pieces);
             for (int i = 0; i < currentPlayers.Count; i++)
             {
                 if (currentPlayers[i].PlayerTurn == true)
                 {
+
                     currentPlayers[i].PlayerTurn = false;
 
                     if (i == playercounter - 1)
@@ -89,9 +91,11 @@ namespace LudoGameEngine.GameLogic
                     int pieceIsInactiveCounter = 0;
                     foreach (var piece in eachPlayersPieces[x]) // Går igenom varje spelares pjäser (4st)
                     {
+                        //TODO - Ska kolla vinnare!!
                         if (piece.IsActive == false)
                         {
                             pieceIsInactiveCounter++;
+
                         }
                         pieceCounter += 1;
 

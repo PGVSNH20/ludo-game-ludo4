@@ -60,8 +60,8 @@ namespace LudoGameEngine
 
                     if (userInput == 1)
                     {
-                        Console.Clear();
-                        Square.CurrentBoard(players);
+                        //Console.Clear();
+                        //Square.CurrentBoard(players);
 
                         // Roll Dice
                         diceValue = rollDice.RollDice();
@@ -114,19 +114,26 @@ namespace LudoGameEngine
                                 }
                                 
                                 int.TryParse(Console.ReadLine(), out pieceId);
-                                pieceId -= 1;
+                                pieceId -= 1;                               
 
                                 foreach (var p in piecesOnBoard)
                                 {
-                                    if (p.Id == currentPlayerPieces[pieceId].Id)
+                                    if (pieceId >= 0 && pieceId <= piecesOnBoard.Count)
                                     {
-                                        isTrueorFalse = false;
+                                        if (p.Id == currentPlayerPieces[pieceId].Id)
+                                        {
+                                            isTrueorFalse = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"You pressed wrong number! Try agin");
                                     }
                                 }
 
                             } while (isTrueorFalse);
 
-                            
+                            Console.Clear();
 
                             updatedPositions = move.MovePiece(currentPlayerPieces[pieceId], diceValue, currentPlayer.PlayerBoard, players);
                             break;

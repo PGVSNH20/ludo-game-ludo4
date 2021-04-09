@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LudoGameEngine.GameLogic
@@ -26,7 +27,7 @@ namespace LudoGameEngine.GameLogic
                 piece.Position = playerGameBoard[index];
 
                 if (piece.Position == 30)
-                {
+                {                   
                     piece.IsActive = false;
                 }
             }
@@ -91,39 +92,56 @@ namespace LudoGameEngine.GameLogic
             {
                 Console.WriteLine("You rolled 6! Choose a piece from the nest or on the board!");
 
-
+                var counter = piecesOnGameBoard.Count + piecesInNest.Count;
                 //TODO - Måste titta över denna, fastnar i loopen
-                while (userInput < 1 || userInput > 4)
+                while (userInput < 1 || userInput > counter)
                 {
                     userInput = 0;
                     int.TryParse(Console.ReadLine(), out userInput);
-                    Console.WriteLine("Fast i loopen");
+                    
+                    if(userInput < 1 || userInput > counter)
+                    {
+                        Console.WriteLine($"You pressed wrong number! Try agin");
+                    }
                 }
 
                 for (int i = 0; i < piecesInNest.Count; i++)
                 {
-
-                    if (piecesInNest[i].Id == pieces[userInput - 1].Id)
+                    if (userInput >= 0 && userInput <= 4)
                     {
-                        Console.Clear();
-                        Square.CurrentBoard(players);
-                        Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
+                        if (piecesInNest[i].Id == pieces[userInput - 1].Id)
+                        {
+                            Console.Clear();
+                            Square.CurrentBoard(players);
+                            Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
 
-                        // Måste ändra att MovePiece tar emot en piece, inte en lista.
-                        updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
-                        break;
+                            // Måste ändra att MovePiece tar emot en piece, inte en lista.
+                            updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"You pressed wrong number! Try agin you bastard!");
+                        }
                     }
                 }
 
                 for (int i = 0; i < piecesOnGameBoard.Count; i++)
                 {
-                    if (piecesOnGameBoard[i].Id == pieces[userInput - 1].Id)
+                    if (userInput >= 0 && userInput <= 4)
                     {
-                        Console.Clear();
-                        Square.CurrentBoard(players);
-                        Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
-                        updatedPositions = MovePiece(piecesOnGameBoard[i], diceValue, currentPlayer.PlayerBoard, players);
-                        break;
+                        if (piecesOnGameBoard[i].Id == pieces[userInput - 1].Id)
+                        {
+                            Console.Clear();
+                            Square.CurrentBoard(players);
+                            Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
+                            updatedPositions = MovePiece(piecesOnGameBoard[i], diceValue, currentPlayer.PlayerBoard, players);
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"You pressed wrong number! Try agin You fuckface!!!");
+                        }
                     }
                 }
             }
@@ -144,14 +162,17 @@ namespace LudoGameEngine.GameLogic
 
                     for (int i = 0; i < piecesInNest.Count; i++)
                     {
-                        if (piecesInNest[i].Id == pieces[userInput - 1].Id)
+                        if(userInput <= piecesInNest.Count && userInput > 0)
                         {
-                            Console.Clear();
-                            Square.CurrentBoard(players);
+                            if (piecesInNest[i].Id == pieces[userInput - 1].Id)
+                            {
+                                Console.Clear();
+                                Square.CurrentBoard(players);
 
-                            updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
-                            isRunning = false;
-                            break;
+                                updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
+                                isRunning = false;
+                                break;
+                            }
                         }
                     }
 
@@ -179,11 +200,13 @@ namespace LudoGameEngine.GameLogic
                 {
                     if (piece.Position == movedPiece.Position && piece.PlayerId != movedPiece.PlayerId)
                     {
-                        Console.WriteLine("KNUFF!".Magenta());
+                        Console.WriteLine("KNUFF!".Rainbow());
                         piece.Position = GameBoard.nestPositions[i];
                         updatedPieces.Add(piece);
-                    }
+                        // Explosion from hell!!!
+                        Thread.Sleep(3000);
 
+                   }
                 }
             }
             return updatedPieces;

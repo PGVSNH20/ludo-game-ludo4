@@ -67,6 +67,22 @@ namespace LudoBoard.DataAccess
             Console.WriteLine("Game saved to database");
         }
 
+        public void ChangeIsActive(List<Piece> pieces)
+        {
+            
+
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                if (pieces[i].IsActive == false)
+                {
+                    int pieceId = Convert.ToInt32(pieces[i].Id);
+                    var allActive = context.Piece.Where(x => x.Id == pieceId).Single();
+                    allActive.IsActive = false;
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public void SavePositionsToDb(List<Piece> pieces, List<Player> players)
         {
             //using (var context = new LudoDbContext())
@@ -114,7 +130,7 @@ namespace LudoBoard.DataAccess
         public List<Piece> GetCurrentPlayersPieces(int playerId)
         {
 
-            return context.Piece.Where(x => x.PlayerId == playerId).ToList();
+            return context.Piece.Where(x => x.PlayerId == playerId && x.IsActive == true).ToList();
         }
 
         public int GetHighestBoardId()
