@@ -36,6 +36,7 @@ namespace LudoGameEngine
             while (isPlaying) // loopar omgångar
             {
                 // View Current Board
+                Console.Clear();
                 Square.CurrentBoard(players);
 
                 Dice rollDice = new Dice();
@@ -50,12 +51,12 @@ namespace LudoGameEngine
                 List<Piece> updatedPositions = new List<Piece>();
 
                 Console.WriteLine("1. rolldice");
-                
-                
+
+
                 do
                 {
                     int.TryParse(Console.ReadLine(), out userInput);
-                    
+
                     if (userInput == 1)
                     {
                         Console.Clear();
@@ -63,45 +64,64 @@ namespace LudoGameEngine
 
                         // Roll Dice
                         diceValue = rollDice.RollDice();
-                        Console.WriteLine($"Player {currentPlayer.PlayerColor}: {currentPlayer.Name} rolled {diceValue}!");
-
                     }
                     else
                     {
                         Console.Write("Please enter 1 to roll:");
                     }
-                  
+
                 } while (userInput != 1);
 
                 // Check if dicevalue is 6 & if there is a piece in the nest. 
-                List<int> nestChecker = new List<int>() { 0, 4, 56, 60 };
-
+                List<int> nestChecker = new List<int>() { 0, 4, 60, 56 };
                 if (diceValue == 6)
                 {
                     foreach (var piece in currentPlayerPieces)
                     {
                         if (nestChecker.Contains(Convert.ToInt32(piece.Position)))
                         {
-
                             updatedPositions = move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+                            break;
                         }
+
                     }
                 }
+
                 else
                 {
-                    // Fixad
-                    // piece.Position > & < currentPlayer.PlayerBoard[0] denna är fel, spelare 3 har piece.position == 60. Då blir den aldrig > än [0]
                     foreach (var piece in currentPlayerPieces)
                     {
-                        if ( !currentPlayer.PlayerBoard[0].Equals(piece.Position) && piece.Position != 30)
-                        {
 
-                            updatedPositions = move.MovePiece(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+                        if (piece.Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
+                        {
+                            int pieceId = 0;
+                            do
+                            {
+                                pieceId = 0;
+                                Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} Rolled {diceValue}\n" +
+                                                    "Which piece do you want to move?");
+
+                                for (int i = 0; i < currentPlayerPieces.Count; i++)
+                                {
+                                    if (piece.Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
+                                    {
+                                        Console.WriteLine($"{i + 1}. Piece");
+                                    }
+                                }
+
+                                int.TryParse(Console.ReadLine(), out pieceId);
+
+                            } while (pieceId < 1 || pieceId > 4);
+
+                            pieceId -= 1;
+
+                            updatedPositions = move.MovePiece(currentPlayerPieces[pieceId], diceValue, currentPlayer.PlayerBoard, players);
+                            break;
                         }
                     }
                 }
-               
-                    UpdateGameBoard.UpdatePlayerTurn(updatedPositions, players);
+
+                UpdateGameBoard.UpdatePlayerTurn(updatedPositions, players);
             }
         }
     }

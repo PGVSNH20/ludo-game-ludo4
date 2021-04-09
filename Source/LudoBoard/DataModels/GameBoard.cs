@@ -9,7 +9,7 @@ namespace LudoBoard.DataModels
     public class GameBoard
     {
         // Board Nest Positions @Current map.
-        public readonly List<int> nestPositions = new List<int> { 0, 4, 60, 56 };
+        public static readonly List<int> nestPositions = new List<int> { 0, 4, 60, 56 };
 
         //46 squares total (0-45 index)
         // Each Players Game Board

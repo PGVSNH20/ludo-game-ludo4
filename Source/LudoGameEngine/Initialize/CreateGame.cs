@@ -115,9 +115,6 @@ namespace LudoGameEngine.Initialize
                 throw new ArgumentNullException(nameof(player));
             }
 
-            GameBoard gameBoard = new GameBoard();
-            var nests = gameBoard.nestPositions;
-
             // SET Piece Id, Position
             List<Piece> piece = new List<Piece>();
             var counter = 0;
@@ -130,7 +127,7 @@ namespace LudoGameEngine.Initialize
 
                 for (int x = 0; x < 4; x++)
                 {
-                    piece[counter + x].Position = nests[i];
+                    piece[counter + x].Position = GameBoard.nestPositions[i];
                     piece[counter + x].IsActive = true;
                 }
                 counter += 4;
