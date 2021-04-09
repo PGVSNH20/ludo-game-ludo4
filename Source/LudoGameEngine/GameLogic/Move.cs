@@ -1,4 +1,5 @@
-﻿using LudoBoard.DataAccess;
+﻿using Edokan.KaiZen.Colors;
+using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
 using LudoGameEngine.UI;
 using System;
@@ -178,7 +179,7 @@ namespace LudoGameEngine.GameLogic
                 {
                     if (piece.Position == movedPiece.Position && piece.PlayerId != movedPiece.PlayerId)
                     {
-                        Console.WriteLine($"KNUFF!");
+                        Console.WriteLine("KNUFF!".Magenta());
                         piece.Position = GameBoard.nestPositions[i];
                         updatedPieces.Add(piece);
                     }

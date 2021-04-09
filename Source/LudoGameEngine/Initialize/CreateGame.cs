@@ -66,7 +66,7 @@ namespace LudoGameEngine.Initialize
             Random randomStartPlayer = new Random();
             int playerId = randomStartPlayer.Next(1, player.Count);
 
-            List<string> colors = new List<string>() { "Red", "Blue", "Green", "Yellow" };
+            List<string> colors = new List<string>() { "Red".Red(), "Blue".Blue(), "Green".Green(), "Yellow".Yellow() };
             using (var context = new LudoDbContext())
             {
                 for (int i = 0; i < player.Count; i++)

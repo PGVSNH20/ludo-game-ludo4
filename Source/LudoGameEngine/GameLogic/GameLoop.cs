@@ -4,6 +4,7 @@ using LudoGameEngine.Initialize;
 using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
+using Edokan.KaiZen.Colors;
 
 namespace LudoGameEngine
 {
@@ -50,7 +51,7 @@ namespace LudoGameEngine
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
                 List<Piece> updatedPositions = new List<Piece>();
 
-                Console.WriteLine("1. rolldice");
+                Console.WriteLine("[1] Rolldice");
 
 
                 do
