@@ -89,6 +89,8 @@ namespace LudoGameEngine
 
                 else
                 {
+                    List<Piece> piecesOnBoard = new List<Piece>();
+                    bool isTrueorFalse = true;
                     foreach (var piece in currentPlayerPieces)
                     {
 
@@ -103,17 +105,27 @@ namespace LudoGameEngine
 
                                 for (int i = 0; i < currentPlayerPieces.Count; i++)
                                 {
-                                    if (piece.Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
+                                    if (currentPlayerPieces[i].Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
                                     {
+                                        piecesOnBoard.Add(currentPlayerPieces[i]);
                                         Console.WriteLine($"{i + 1}. Piece");
                                     }
                                 }
-
+                                
                                 int.TryParse(Console.ReadLine(), out pieceId);
+                                pieceId -= 1;
 
-                            } while (pieceId < 1 || pieceId > 4);
+                                foreach (var p in piecesOnBoard)
+                                {
+                                    if (p.Id == currentPlayerPieces[pieceId].Id)
+                                    {
+                                        isTrueorFalse = false;
+                                    }
+                                }
 
-                            pieceId -= 1;
+                            } while (isTrueorFalse);
+
+                            
 
                             updatedPositions = move.MovePiece(currentPlayerPieces[pieceId], diceValue, currentPlayer.PlayerBoard, players);
                             break;
