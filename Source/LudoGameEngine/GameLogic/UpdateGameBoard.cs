@@ -1,4 +1,5 @@
-﻿using LudoBoard.DataAccess;
+﻿using Edokan.KaiZen.Colors;
+using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
 using System;
 using System.Collections.Generic;
@@ -97,19 +98,19 @@ namespace LudoGameEngine.GameLogic
                             {                                
                                 if (pieceCounter == 1) // piece Id
                                 {
-                                    gb[i] = gb[i] + "1";
+                                    gb[i] = gb[i] + "1".Red();
                                 }
                                 else if (pieceCounter == 2)
                                 {
-                                    gb[i] = gb[i] + "2";
+                                    gb[i] = gb[i] + "2".Red();
                                 }
                                 else if (pieceCounter == 3)
                                 {
-                                    gb[i] = gb[i] + "3";
+                                    gb[i] = gb[i] + "3".Red();
                                 }
                                 else if (pieceCounter == 4)
                                 {
-                                    gb[i] = gb[i] + "4";
+                                    gb[i] = gb[i] + "4".Red();
                                 }
                                 
                             }
@@ -118,57 +119,57 @@ namespace LudoGameEngine.GameLogic
                             {
                                 if (pieceCounter == 1) // piece Id
                                 {
-                                    gb[i] = gb[i] + "1";
+                                    gb[i] = gb[i] + "1".Blue();
                                 }
                                 else if (pieceCounter == 2)
                                 {
-                                    gb[i] = gb[i] + "2";
+                                    gb[i] = gb[i] + "2".Blue();
                                 }
                                 else if (pieceCounter == 3)
                                 {
-                                    gb[i] = gb[i] + "3";
+                                    gb[i] = gb[i] + "3".Blue();
                                 }
                                 else if (pieceCounter == 4)
                                 {
-                                    gb[i] = gb[i] + "4";
+                                    gb[i] = gb[i] + "4".Blue();
                                 }
                             }
                             else if (x == 2) // Player 3
                             {
                                 if (pieceCounter == 1) // piece Id
                                 {
-                                    gb[i] = gb[i] + "1";
+                                    gb[i] = gb[i] + "1".Green();
                                 }
                                 else if (pieceCounter == 2)
                                 {
-                                    gb[i] = gb[i] + "2";
+                                    gb[i] = gb[i] + "2".Green();
                                 }
                                 else if (pieceCounter == 3)
                                 {
-                                    gb[i] = gb[i] + "3";
+                                    gb[i] = gb[i] + "3".Green();
                                 }
                                 else if (pieceCounter == 4)
                                 {
-                                    gb[i] = gb[i] + "4";
+                                    gb[i] = gb[i] + "4".Green();
                                 }
                             }
                             else if (x == 3) // Player 4
                             {
                                 if (pieceCounter == 1) // piece Id
                                 {
-                                    gb[i] = gb[i] + "1";
+                                    gb[i] = gb[i] + "1".Yellow();
                                 }
                                 else if (pieceCounter == 2)
                                 {
-                                    gb[i] = gb[i] + "2";
+                                    gb[i] = gb[i] + "2".Yellow();
                                 }
                                 else if (pieceCounter == 3)
                                 {
-                                    gb[i] = gb[i] + "3";
+                                    gb[i] = gb[i] + "3".Yellow();
                                 }
                                 else if (pieceCounter == 4)
                                 {
-                                    gb[i] = gb[i] + "4";
+                                    gb[i] = gb[i] + "4".Yellow();
                                 }
                             }                            
                         }
