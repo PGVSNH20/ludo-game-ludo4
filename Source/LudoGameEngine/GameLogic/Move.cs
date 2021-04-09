@@ -118,7 +118,7 @@ namespace LudoGameEngine.GameLogic
 
 
                 //TODO - Måste titta över denna, fastnar i loopen
-                while (userInput != 1 || userInput != 2 || userInput != 3 || userInput != 4)
+                while (userInput < 1 || userInput > 4)
                 {
                     userInput = 0;
                     int.TryParse(Console.ReadLine(), out userInput);
@@ -135,7 +135,7 @@ namespace LudoGameEngine.GameLogic
                         Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
 
                         // Måste ändra att MovePiece tar emot en piece, inte en lista.
-                        updatedPositions = MovePiece(piecesOnGameBoard[i], 1, currentPlayer.PlayerBoard, players);
+                        updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
                         break;
                     }
                 }
@@ -176,6 +176,7 @@ namespace LudoGameEngine.GameLogic
 
                             updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
                             isRunning = false;
+                            break;
                         }
                     }
 
