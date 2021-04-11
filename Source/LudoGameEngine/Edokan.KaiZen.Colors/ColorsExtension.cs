@@ -51,10 +51,10 @@ namespace Edokan.KaiZen.Colors
         public static string Black(this string s) { return Wrap(s, "black"); }
         public static string Blue(this string s) { return Wrap(s, "blue"); }
         public static string Cyan(this string s) { return Wrap(s, "cyan"); }
-        public static string Yellow(this string s) { return Wrap(s, "green"); }
+        public static string Yellow(this string s) { return Wrap(s, "yellow"); }
         public static string Magenta(this string s) { return Wrap(s, "magenta"); }
         public static string Red(this string s) { return Wrap(s, "red"); }
-        public static string Green(this string s) { return Wrap(s, "yellow"); }
+        public static string Green(this string s) { return Wrap(s, "green"); }
         
         public static string Reset(this string s) { return Wrap("", "reset") + s; }
 

@@ -33,7 +33,12 @@ namespace LudoGameEngine.Initialize
         {
             // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
             //Ladda senast sparade spelet
-            //LoadGame();
+            LudoDbAccess ludoDbAccess = new LudoDbAccess();
+
+            // GET latest game from board id
+            var gameBoard = ludoDbAccess.GetHighestBoardId();
+            LoadAnyGame(gameBoard);
+
         }
     }
 }
