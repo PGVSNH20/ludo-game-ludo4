@@ -3,6 +3,7 @@ using LudoBoard.DataModels;
 using LudoGameEngine.Initialize;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace LudoGameEngine.UI
 {
@@ -51,7 +52,14 @@ namespace LudoGameEngine.UI
             // Laddar en lista med spel från LudoDbAccess som man sedan ska kunna välja från Load Game Menyn
             List<Game> games = new LudoDbAccess().GetAllUnfinishedGames();
             List<Player> players = new LudoDbAccess().GetAllPlayers();
-
+            UserInterface userInterface = new UserInterface();
+            if (games.Count == 0)
+            {
+                Console.WriteLine("Sorry mate, no games to be found " +
+                                  "\nPlease create a new game.");
+                Thread.Sleep(2000);
+                userInterface.MainMenu();
+            }
 
             while (isRunning)
             {
@@ -59,6 +67,7 @@ namespace LudoGameEngine.UI
                 
                 for (int i = 0; i < games.Count; i++)
                 {
+                  
                     Console.WriteLine($"[{games[i].Id}]\nGame Id: {games[i].Id}\nLast Played: {games[i].LastTimePlayedDate}");
                     Console.Write($"Players:");
                     foreach(Player p in players)

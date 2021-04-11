@@ -5,6 +5,7 @@ using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
 using Edokan.KaiZen.Colors;
+using System.Threading;
 
 namespace LudoGameEngine
 {
@@ -65,6 +66,8 @@ namespace LudoGameEngine
 
                         // Roll Dice
                         diceValue = rollDice.RollDice();
+                        Console.WriteLine("\nYou rolled: {0}", diceValue);
+                        Thread.Sleep(500);
                     }
                     else
                     {
