@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace LudoBoard.DataAccess
 {
@@ -69,18 +70,32 @@ namespace LudoBoard.DataAccess
 
         public void ChangeIsActive(List<Piece> pieces)
         {
-            
 
+            int changedActiveToInactiveCounter = 0;
             for (int i = 0; i < pieces.Count; i++)
             {
+
                 if (pieces[i].IsActive == false)
                 {
                     int pieceId = Convert.ToInt32(pieces[i].Id);
                     var allActive = context.Piece.Where(x => x.Id == pieceId).Single();
                     allActive.IsActive = false;
-                    context.SaveChanges();
+                    changedActiveToInactiveCounter++;
+
+                    List<Piece> inactivePieces = context.Piece.Where(z => z.IsActive == false && z.PlayerId == pieces[i].PlayerId).ToList();
+
+                    // Kollar om det är 4 st pjäser som är inaktiv
+                    if (inactivePieces.Count + changedActiveToInactiveCounter == 4)
+                    {
+                        Player winner = context.Player.Where(y => y.Id == pieces[i].PlayerId).Single();
+                        // Denna ska kunna sättas när vi ändrar isActive == false
+                        SetWinner(winner);
+                    }
+
                 }
             }
+
+            context.SaveChanges();
         }
 
         public void SavePositionsToDb(List<Piece> pieces, List<Player> players)
@@ -219,10 +234,8 @@ namespace LudoBoard.DataAccess
             game.IsCompleted = true;
             game.CompletedDate = DateTime.Now;
 
-            // Save change in database
-            context.SaveChanges();
-
             Console.WriteLine($"PLAYER {player.PlayerColor.ToUpper()} {player.Name.ToUpper()} HAS WON!");
+            Thread.Sleep(2000);
         }
     }
 }

@@ -33,6 +33,15 @@ namespace LudoGameEngine.GameLogic
             int playercounter = currentPlayers.Count;
 
             ludoDbAccess.ChangeIsActive(pieces);
+            var currentGame = ludoDbAccess.GetAllFinishedGames().Where(x => x.Id == currentPlayers[0].GameId).Single();
+
+            if (currentGame.IsCompleted == true)
+            {
+                var runMenu = new UserInterface();
+
+                runMenu.MainMenu();
+            }
+
             for (int i = 0; i < currentPlayers.Count; i++)
             {
                 if (currentPlayers[i].PlayerTurn == true)
@@ -88,15 +97,9 @@ namespace LudoGameEngine.GameLogic
                 {
                     int pieceCounter = 0; // Värdet på denna counter är id 1, 2 ,3 ,4 på en spelares pjäser.
                                           // Detta för att vi ska kunna skriva ut "1", "2", "3" eller "4" på kartan.
-                    int pieceIsInactiveCounter = 0;
+
                     foreach (var piece in eachPlayersPieces[x]) // Går igenom varje spelares pjäser (4st)
                     {
-                        //TODO - Ska kolla vinnare!!
-                        if (piece.IsActive == false)
-                        {
-                            pieceIsInactiveCounter++;
-
-                        }
                         pieceCounter += 1;
 
                         if (piece.Position == i)
@@ -182,16 +185,7 @@ namespace LudoGameEngine.GameLogic
                                 }
                             }                            
                         }
-                    }
-
-                    if(pieceIsInactiveCounter == 4)
-                    {
-                        ludoDbAccess.SetWinner(allActivePlayers[x]);
-
-                        var runMenu = new UserInterface();
-
-                        runMenu.MainMenu();
-                    }
+                    }                  
                 }
 
                 while (counter != 0)
