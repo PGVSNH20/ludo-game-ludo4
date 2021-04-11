@@ -96,8 +96,7 @@ namespace LudoGameEngine
                             do
                             {
                                 pieceId = 0;
-                                Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} Rolled {diceValue}\n" +
-                                                    "Which piece do you want to move?");
+                                Console.WriteLine($"\nWhich piece do you want to move?");
 
                                 for (int i = 0; i < currentPlayerPieces.Count; i++)
                                 {

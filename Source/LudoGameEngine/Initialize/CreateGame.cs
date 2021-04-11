@@ -1,13 +1,9 @@
-﻿using Edokan.KaiZen.Colors;
-using LudoBoard.DataAccess;
+﻿using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
-using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LudoGameEngine.Initialize
 {
@@ -73,7 +69,6 @@ namespace LudoGameEngine.Initialize
                 for (int i = 0; i < player.Count; i++)
                 {
                     // SET Player Color
-                    //player[i].PlayerColor = colors[i];
                     player[i].PlayerColor = dbColors[i];
 
                     // SET Player Name

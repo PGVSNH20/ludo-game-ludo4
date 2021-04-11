@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 
 namespace LudoGameEngine.UI
 {
-    // This class should be controlling all the movement
-    // so that CurrentBoard() can print out each piece location.
     public static class Square
     {
 

@@ -10,18 +10,22 @@ namespace LudoGameEngine.GameLogic
 {
     public class UpdateGameBoard
     {
+        public static readonly List<string> playerColors = new List<string> { "Red".Red(), "Blue".Blue(), "Yellow".Yellow(), "Green".Green() };
 
         // Start Of Gameloop, Check Player Turn
         public static Player GetPlayerTurn(List<Player> players)
         {
+            int playerCounter = 0;
+
             foreach (var player in players)
             {
                 if (player.PlayerTurn == true)
                 {
-                    Console.WriteLine($"It's Player {player.PlayerColor}: {player.Name}'s time to roll! ");
+                    Console.WriteLine($"It's Player {playerColors[playerCounter]}: {player.Name}'s time to roll! ");
 
                     return player;
                 }
+                playerCounter++;
             }
 
             return null;

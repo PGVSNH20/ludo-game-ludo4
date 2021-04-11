@@ -1,4 +1,5 @@
-﻿using LudoBoard.DataAccess;
+﻿using Edokan.KaiZen.Colors;
+using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
 using LudoGameEngine.Initialize;
 using System;
@@ -9,6 +10,9 @@ namespace LudoGameEngine.UI
 {
     public class UserInterface
 	{
+        public static readonly List<string> playerColors = new List<string> { "Red".Red(), "Blue".Blue(), "Yellow".Yellow(), "Green".Green() };
+        static int playerCounter = 0;
+
         private static int userInput = 0;
         private static bool isRunning = true;
 
@@ -46,7 +50,7 @@ namespace LudoGameEngine.UI
             }
         }
 
-        public static void MenuLoadGame() //Visa information om sparade spel och ladda det. Skall kunna hoppa tillbaka till menyn. Om det inte finns någon data ge ett felmeddelande och skicka tillbaka till huvudmenyn.
+        public static void MenuLoadGame()
         {
             GameLoop gameLoop = new GameLoop();
             while (isRunning)
@@ -81,9 +85,9 @@ namespace LudoGameEngine.UI
         {
             Console.Clear();
 
-            // Laddar en lista med spel från LudoDbAccess som man sedan ska kunna välja från Load Game Menyn
             List<Game> games = new LudoDbAccess().GetAllUnfinishedGames();
             List<Player> players = new LudoDbAccess().GetAllPlayers();
+
             UserInterface userInterface = new UserInterface();
             if (games.Count == 0)
             {
@@ -99,14 +103,20 @@ namespace LudoGameEngine.UI
 
                 for (int i = 0; i < games.Count; i++)
                 {
-
+                    playerCounter = 0;
                     Console.WriteLine($"[{games[i].Id}]\nGame Id: {games[i].Id}\nLast Played: {games[i].LastTimePlayedDate}");
                     Console.Write($"Players:");
+
+                    
                     foreach (Player p in players)
                     {
+                        
                         if (p.GameId == games[i].Id)
-                            Console.Write($"\nPlayer: {p.Name} | Color: {p.PlayerColor}");
-
+                        {
+                            Console.Write($"\nPlayer: {p.Name} | Color: {playerColors[playerCounter]}");
+                            playerCounter++;
+                        }
+                       
                     }
 
 
@@ -132,7 +142,6 @@ namespace LudoGameEngine.UI
         public static void LoadOldGamesUI()
         {
             Console.Clear();
-            // Laddar en lista med spel från LudoDbAccess som man sedan ska kunna välja från Load Game Menyn
             List<Game> games = new LudoDbAccess().GetAllFinishedGames();
             List<Player> players = new LudoDbAccess().GetAllPlayers();
             UserInterface userInterface = new UserInterface();
@@ -151,14 +160,16 @@ namespace LudoGameEngine.UI
 
                 for (int i = 0; i < games.Count; i++)
                 {
-
-                    Console.WriteLine($"Game Id: {games[i].Id}\nGame Completed: {games[i].CompletedDate}\nPlayer Winner: {games[i].WinnerPlayerName}");
+                    playerCounter = 0;
+                    Console.WriteLine($"Game Id: {games[i].Id}\nGame Completed: {games[i].CompletedDate}\nWinner: {games[i].WinnerPlayerName}");
                     Console.Write($"Players:");
                     foreach (Player p in players)
                     {
                         if (p.GameId == games[i].Id)
-                            Console.Write($"\nPlayer: {p.Name} | Color: {p.PlayerColor}");
-
+                        {
+                            Console.Write($"\nPlayer: {p.Name} | Color: {playerColors[playerCounter]}");
+                            playerCounter++;
+                        }
                     }
 
 
