@@ -82,16 +82,22 @@ namespace LudoBoard.DataAccess
                     allActive.IsActive = false;
                     changedActiveToInactiveCounter++;
 
-                    List<Piece> inactivePieces = context.Piece.Where(z => z.IsActive == false && z.PlayerId == pieces[i].PlayerId).ToList();
-
-                    // Kollar om det är 4 st pjäser som är inaktiv
-                    if (inactivePieces.Count + changedActiveToInactiveCounter == 4)
+                    try
                     {
-                        Player winner = context.Player.Where(y => y.Id == pieces[i].PlayerId).Single();
-                        // Denna ska kunna sättas när vi ändrar isActive == false
-                        SetWinner(winner);
+                        List<Piece> inactivePieces = context.Piece.Where(z => z.IsActive == false && z.PlayerId == pieces[i].PlayerId).ToList();
+                        
+                        // Kollar om det är 4 st pjäser som är inaktiv
+                        if (inactivePieces.Count + changedActiveToInactiveCounter == 4)
+                        {
+                            Player winner = context.Player.Where(y => y.Id == pieces[i].PlayerId).Single();
+                            // Denna ska kunna sättas när vi ändrar isActive == false
+                            SetWinner(winner);
+                        }
                     }
+                    catch (Exception)
+                    {
 
+                    }
                 }
             }
 
