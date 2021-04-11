@@ -1,9 +1,11 @@
 ﻿using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
+using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LudoGameEngine.Initialize
@@ -34,9 +36,18 @@ namespace LudoGameEngine.Initialize
             // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
             //Ladda senast sparade spelet
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
-
+            UserInterface userInterface = new UserInterface();
             // GET latest game from board id
             var gameBoard = ludoDbAccess.GetHighestBoardId();
+            if (gameBoard == 0)
+            {
+                Console.WriteLine("No game found.. " +
+                                  "\nCreate a new game..");
+                Thread.Sleep(2000);
+                userInterface.MainMenu();
+                
+            }
+
             LoadAnyGame(gameBoard);
 
         }

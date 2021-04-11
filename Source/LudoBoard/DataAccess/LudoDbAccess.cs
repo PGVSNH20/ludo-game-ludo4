@@ -164,12 +164,13 @@ namespace LudoBoard.DataAccess
             {
                 boardId = context.Game.OrderByDescending(t => t.Id).First();
                 Console.WriteLine(boardId.Id);
+                return boardId.Id;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+               return 0;
             }
-            return boardId.Id;
+            
         }
 
         public int GetHighestPlayerId()
