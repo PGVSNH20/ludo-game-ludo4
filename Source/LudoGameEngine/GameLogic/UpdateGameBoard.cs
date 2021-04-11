@@ -33,14 +33,22 @@ namespace LudoGameEngine.GameLogic
             int playercounter = currentPlayers.Count;
 
             ludoDbAccess.ChangeIsActive(pieces);
-            var currentGame = ludoDbAccess.GetAllFinishedGames().Where(x => x.Id == currentPlayers[0].GameId).Single();
-
-            if (currentGame.IsCompleted == true)
+            try
             {
-                var runMenu = new UserInterface();
+                var currentGame = ludoDbAccess.GetAllFinishedGames().Where(x => x.Id == currentPlayers[0].GameId).Single();
+               
+                if (currentGame.IsCompleted == true)
+                {
+                    var runMenu = new UserInterface();
 
-                runMenu.MainMenu();
+                    runMenu.MainMenu();
+                }
             }
+            catch (Exception e)
+            {
+
+            }
+
 
             for (int i = 0; i < currentPlayers.Count; i++)
             {
