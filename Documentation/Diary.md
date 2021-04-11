@@ -141,8 +141,18 @@ Förmiddagen
 - Vi har dessutom försökt fixa en metod ("SavePositionToDb") i klassen "UpdateGameBoard.cs", som ska spara det vi skrev ovanför till databasen.   
 
 8/4
-förmiddagen:
+Förmiddagen:
 - Fixade så att metoden UpdateGameboard fungerar
 - Flyttat listan på nest positions till datamodellen GameBoard
 - Refaktorerade var context i LudoDbAccess
 - Skapat en funktion som knuffar spelare till nest
+
+11/4
+Förmiddagen:
+- Började dagen med att gå igenom hur vi ska lägga upp videoklippet
+- Vi har gått igenom hela programmet tillsammans, fixat små-buggar som gjorde att spelet krashade
+
+Eftermiddagen:
+- Fortsatt med finjusteringar
+- Vi lade till ett nytt menyval där man kan se spelhistorik
+- Suttit och diskuterat om hur vi skulle kunna vidareutvecklat vårat program senare, med statistik mm.

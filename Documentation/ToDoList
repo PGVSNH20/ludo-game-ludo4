@@ -1,5 +1,12 @@
 TODO-LISTAN LIGGER INNE I VS, //TODO -> Task List. Detta är nurvarande Todo's
 
+Hur kan vi vidareutveckla spelet?
+
+Mer statistik, rundor, antal 6or per spelare
+
+Vissa rutor kan fler pjäser stå på (Fria rutor)
+
+
 1.	TODO - Sikta på att spara varje gång en runda har gått. 
 2.	TODO - Lägg till check om det finns pieces i nest.
 3.	TODO - Kanske skapa en metod i LudoDbAccess för att uppdatera databasen.
