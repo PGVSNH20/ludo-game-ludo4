@@ -84,12 +84,14 @@ namespace LudoBoard.DataAccess
 
                     try
                     {
-                        List<Piece> inactivePieces = context.Piece.Where(z => z.IsActive == false && z.PlayerId == pieces[i].PlayerId).ToList();
-                        
+                        int id = Convert.ToInt32(pieces[i].PlayerId);
+                        List<Piece> inactivePieces = context.Piece.Where(z => z.PlayerId == id && z.IsActive == false).ToList();
+
                         // Kollar om det är 4 st pjäser som är inaktiv
                         if (inactivePieces.Count + changedActiveToInactiveCounter == 4)
                         {
-                            Player winner = context.Player.Where(y => y.Id == pieces[i].PlayerId).Single();
+                            id = Convert.ToInt32(pieces[i].PlayerId);
+                            Player winner = context.Player.Where(y => y.Id == id).Single();
                             // Denna ska kunna sättas när vi ändrar isActive == false
                             SetWinner(winner);
                         }
@@ -233,14 +235,14 @@ namespace LudoBoard.DataAccess
 
         public void SetWinner(Player player)
         {
-
-            var game = context.Game.Where(x => x.Id == player.GameId).Single();
+            int id = Convert.ToInt32(player.GameId);
+            var game = context.Game.Where(x => x.Id == id).Single();
 
             game.WinnerPlayerName = player.Name;
             game.IsCompleted = true;
             game.CompletedDate = DateTime.Now;
 
-            Console.WriteLine($"PLAYER {player.PlayerColor.ToUpper()} {player.Name.ToUpper()} HAS WON!");
+            Console.WriteLine($"PLAYER {player.Name.ToUpper()} HAS WON!");
             Thread.Sleep(2000);
         }
     }

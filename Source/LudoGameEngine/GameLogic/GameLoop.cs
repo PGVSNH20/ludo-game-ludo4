@@ -112,12 +112,16 @@ namespace LudoGameEngine
                                         Console.WriteLine($"[{i + 1}] Piece {i + 1}");
                                     }
                                 }
-                                
-                                int.TryParse(Console.ReadLine(), out pieceId);
-                                pieceId -= 1;                               
 
+                                while (pieceId < 1 || pieceId > piecesOnBoard.Count)
+                                { 
+                                    int.TryParse(Console.ReadLine(), out pieceId);
+                                }
+
+                                pieceId -= 1;
                                 foreach (var p in piecesOnBoard)
                                 {
+
                                     if (pieceId >= 0 && pieceId <= piecesOnBoard.Count)
                                     {
                                         if (p.Id == currentPlayerPieces[pieceId].Id)

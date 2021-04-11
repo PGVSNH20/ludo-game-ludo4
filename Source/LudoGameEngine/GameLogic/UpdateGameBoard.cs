@@ -35,7 +35,8 @@ namespace LudoGameEngine.GameLogic
             ludoDbAccess.ChangeIsActive(pieces);
             try
             {
-                var currentGame = ludoDbAccess.GetAllFinishedGames().Where(x => x.Id == currentPlayers[0].GameId).Single();
+                int gameId = Convert.ToInt32(currentPlayers[0].GameId);
+                var currentGame = ludoDbAccess.GetAllFinishedGames().Where(x => x.Id == gameId).Single();
                
                 if (currentGame.IsCompleted == true)
                 {
