@@ -19,7 +19,7 @@ namespace LudoGameEngine
             switch (choice)
             {
                 case 1:
-                    loadGame.ContinueGame(); //Kolla vilken vi ska använda automatiskt
+                    loadGame.ContinueGame();
                     break;
                 case 2:
                     game.CreateNewGame();
@@ -76,7 +76,7 @@ namespace LudoGameEngine
                     {
                         if (nestChecker.Contains(Convert.ToInt32(piece.Position)))
                         {
-                            updatedPositions = move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, currentPlayer.PlayerBoard, players);
+                            updatedPositions = move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, players);
                             break;
                         }
 
@@ -140,7 +140,7 @@ namespace LudoGameEngine
                     }
                 }
 
-                UpdateGameBoard.UpdatePlayerTurn(updatedPositions, players);
+                UpdateGameBoard.UpdatePlayerTurn(updatedPositions, players, diceValue);
             }
         }
     }

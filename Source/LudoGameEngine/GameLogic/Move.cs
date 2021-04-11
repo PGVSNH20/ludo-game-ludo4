@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace LudoGameEngine.GameLogic
 {
+    // TODO - Måste fixa så att man inte kan gå med en pjäs i mitten (så att den skippar rundan), den måste då gå med någon annan pjäs
     public class Move
     {
         public List<Piece> MovePiece(Piece piece, int diceValue, List<int> playerGameBoard, List<Player> players)
@@ -21,7 +22,7 @@ namespace LudoGameEngine.GameLogic
 
             index = index + diceValue;
 
-            // TODO - Här måste vi göra en check så att position inte överstiger position 30 (sista steget)
+            // Checking if position <= 30, else Catch
             try
             {
                 piece.Position = playerGameBoard[index];
@@ -30,43 +31,44 @@ namespace LudoGameEngine.GameLogic
                 {                   
                     piece.IsActive = false;
                 }
+
+                updatedPositions.Add(piece);
             }
             catch (Exception e)
             {
-
+                // If Position > FinishLine, Continue
             }
 
-            updatedPositions.Add(piece);
 
-            var checkIfPushingAnotherPlayer = CheckPositions(updatedPositions[0], players);
-            foreach (var p in checkIfPushingAnotherPlayer)
+            if (updatedPositions.Count > 0)
             {
-                updatedPositions.Add(p);
+                var checkIfPushingAnotherPlayer = CheckPositions(updatedPositions[0], players);
+                foreach (var p in checkIfPushingAnotherPlayer)
+                {
+                    updatedPositions.Add(p);
+                }
             }
 
             return updatedPositions;
         }
 
-        //Kollar så att användaren vill flytta en pjäs från nest eller flytta en pjäs som redan finns på bordet.
-        public List<Piece> MoveFromNestOrBoard(List<Piece> pieces, int diceValue, List<int> playerGameBoard, List<Player> players)
+        // Asks if the player wants to move a piece from nest or a piece on the game board.
+        public List<Piece> MoveFromNestOrBoard(List<Piece> pieces, int diceValue, List<Player> players)
         {
             int userInput = 0;
-            GameLoop runGame = new GameLoop();
             Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
-            //List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
-            List<Piece> updatedPositions = new List<Piece>();
 
             Console.Clear();
             Square.CurrentBoard(players);
+
             Console.WriteLine($"Player {currentPlayer.PlayerColor}: {currentPlayer.Name}, you rolled {diceValue}!");
 
 
-            // Kollar om en pjäs finns i nest eller ute på spelbrädet
+            // Checking if there are pieces in nest or on the game board
             bool isPieceInNest = false;
             bool isPieceOnBoard = false;
 
-
-            // Kollar pieces i nästet
+            // Checking Nest
             List<Piece> piecesInNest = new List<Piece>();
             foreach (var piece in pieces)
             {
@@ -77,7 +79,7 @@ namespace LudoGameEngine.GameLogic
                 }
             }
 
-            // Kollar pieces på spelbordet
+            // Checking Game Board
             List<Piece> piecesOnGameBoard = new List<Piece>();
             foreach (var piece in pieces)
             {
@@ -88,15 +90,17 @@ namespace LudoGameEngine.GameLogic
                 }
             }
 
+            List<Piece> updatedPositions = new List<Piece>();
+
+            // Choose To Move Piece From Nest Or Board
             if (isPieceInNest && isPieceOnBoard)
             {
                 Console.WriteLine("You rolled 6! Choose a piece from the nest or on the board!");
 
                 var counter = piecesOnGameBoard.Count + piecesInNest.Count;
-                //TODO - Måste titta över denna, fastnar i loopen
+
                 while (userInput < 1 || userInput > counter)
                 {
-                    userInput = 0;
                     int.TryParse(Console.ReadLine(), out userInput);
                     
                     if(userInput < 1 || userInput > counter)
@@ -104,6 +108,7 @@ namespace LudoGameEngine.GameLogic
                         Console.WriteLine($"You pressed wrong number! Try agin");
                     }
                 }
+
 
                 for (int i = 0; i < piecesInNest.Count; i++)
                 {
@@ -115,13 +120,12 @@ namespace LudoGameEngine.GameLogic
                             Square.CurrentBoard(players);
                             Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
 
-                            // Måste ändra att MovePiece tar emot en piece, inte en lista.
                             updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
                             break;
                         }
                         else
                         {
-                            Console.WriteLine($"You pressed wrong number! Try agin you bastard!");
+                            Console.WriteLine($"You pressed wrong number!");
                         }
                     }
                 }
@@ -135,20 +139,21 @@ namespace LudoGameEngine.GameLogic
                             Console.Clear();
                             Square.CurrentBoard(players);
                             Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!");
+
                             updatedPositions = MovePiece(piecesOnGameBoard[i], diceValue, currentPlayer.PlayerBoard, players);
                             break;
                         }
                         else
                         {
-                            Console.WriteLine($"You pressed wrong number! Try agin You fuckface!!!");
+                            Console.WriteLine($"You pressed wrong number!");
                         }
                     }
                 }
             }
 
+            // Move Piece From Nest
             else if (isPieceInNest && !isPieceOnBoard)
             {
-                //Här ska vi flytta en pjäs från nest:et.
                 Console.Clear();
                 Square.CurrentBoard(players);
 
@@ -157,7 +162,6 @@ namespace LudoGameEngine.GameLogic
                 bool isRunning = true;
                 do
                 {
-                    userInput = 0;
                     int.TryParse(Console.ReadLine(), out userInput);
 
                     for (int i = 0; i < piecesInNest.Count; i++)
@@ -170,6 +174,38 @@ namespace LudoGameEngine.GameLogic
                                 Square.CurrentBoard(players);
 
                                 updatedPositions = MovePiece(piecesInNest[i], 1, currentPlayer.PlayerBoard, players);
+                                isRunning = false;
+                                break;
+                            }
+                        }
+                    }
+
+                } while (isRunning);
+            }
+
+            // Move Piece On The Game Board
+            else
+            {
+                Console.Clear();
+                Square.CurrentBoard(players);
+
+                Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!\n" +
+                                        "Which piece do you want to move on the board");
+                bool isRunning = true;
+                do
+                {
+                    int.TryParse(Console.ReadLine(), out userInput);
+
+                    for (int i = 0; i < piecesOnGameBoard.Count; i++)
+                    {
+                        if (userInput <= piecesOnGameBoard.Count && userInput > 0)
+                        {
+                            if (piecesOnGameBoard[i].Id == pieces[userInput - 1].Id)
+                            {
+                                Console.Clear();
+                                Square.CurrentBoard(players);
+
+                                updatedPositions = MovePiece(piecesOnGameBoard[i], 1, currentPlayer.PlayerBoard, players);
                                 isRunning = false;
                                 break;
                             }
@@ -198,15 +234,15 @@ namespace LudoGameEngine.GameLogic
             {
                 foreach (var piece in eachPlayersPieces[i])
                 {
+                    // Checking for knuff
                     if (piece.Position == movedPiece.Position && piece.PlayerId != movedPiece.PlayerId)
                     {
                         Console.WriteLine("KNUFF!".Rainbow());
                         piece.Position = GameBoard.nestPositions[i];
                         updatedPieces.Add(piece);
-                        // Explosion from hell!!!
-                        Thread.Sleep(3000);
 
-                   }
+                        Thread.Sleep(3000);
+                    }
                 }
             }
             return updatedPieces;

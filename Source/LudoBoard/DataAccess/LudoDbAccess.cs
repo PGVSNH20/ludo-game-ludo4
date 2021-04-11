@@ -106,22 +106,23 @@ namespace LudoBoard.DataAccess
             context.SaveChanges();
         }
 
-        public void SavePositionsToDb(List<Piece> pieces, List<Player> players)
+        public void SavePositionsToDb(List<Piece> pieces, List<Player> players, int diceValue)
         {
-            //using (var context = new LudoDbContext())
+
+            List<Piece> playerPieces = new List<Piece>();
+            for (int i = 0; i < pieces.Count; i++)
             {
-                List<Piece> playerPieces = new List<Piece>();
-                for (int i = 0; i < pieces.Count; i++)
-                {
 
-                    int id = Convert.ToInt32(pieces[i].Id);
-                    var piece = context.Piece.Where(x => x.Id == id).Single();
+                int id = Convert.ToInt32(pieces[i].Id);
+                var piece = context.Piece.Where(x => x.Id == id).Single();
 
-                    piece.Position = pieces[i].Position;
+                piece.Position = pieces[i].Position;
 
-                    playerPieces.Add(piece);
-                }
+                playerPieces.Add(piece);
+            }
 
+            if (diceValue != 6)
+            {
                 List<Player> allPlayers = new List<Player>();
                 for (int z = 0; z < players.Count; z++)
                 {
@@ -133,9 +134,9 @@ namespace LudoBoard.DataAccess
 
                     allPlayers.Add(player);
                 }
-
-                context.SaveChanges();
             }
+            context.SaveChanges();
+
         }
 
         public List<Player> GetAllPlayers()
@@ -168,9 +169,9 @@ namespace LudoBoard.DataAccess
             }
             catch (Exception e)
             {
-               return 0;
+                return 0;
             }
-            
+
         }
 
         public int GetHighestPlayerId()
@@ -243,7 +244,7 @@ namespace LudoBoard.DataAccess
             game.IsCompleted = true;
             game.CompletedDate = DateTime.Now;
 
-            Console.WriteLine($"PLAYER {player.Name.ToUpper()} HAS WON!");
+            Console.WriteLine($"PLAYER {player.PlayerColor.ToUpper()} {player.Name.ToUpper()} HAS WON!");
             Thread.Sleep(2000);
         }
     }

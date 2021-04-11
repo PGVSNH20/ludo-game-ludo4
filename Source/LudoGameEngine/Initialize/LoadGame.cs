@@ -12,7 +12,7 @@ namespace LudoGameEngine.Initialize
 {
    public class LoadGame
     {
-        public void LoadAnyGame(int gameID) //Laddar parametrar och skickar det sedan till spelet som sedan körs
+        public void LoadAnyGame(int gameID) // Loading The Game Chosen In Loading Menu
         {
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
 
@@ -31,12 +31,12 @@ namespace LudoGameEngine.Initialize
             gameLoop.RunGame(players);
         }
 
+        // Loading The Latest Game
         public void ContinueGame()
         {
-            // TODO - Här måste vi hämta GetHighestBoardId för att fortsätta spela klart senast sparade spelet
-            //Ladda senast sparade spelet
             LudoDbAccess ludoDbAccess = new LudoDbAccess();
             UserInterface userInterface = new UserInterface();
+
             // GET latest game from board id
             var gameBoard = ludoDbAccess.GetHighestBoardId();
             if (gameBoard == 0)
@@ -49,7 +49,6 @@ namespace LudoGameEngine.Initialize
             }
 
             LoadAnyGame(gameBoard);
-
         }
     }
 }

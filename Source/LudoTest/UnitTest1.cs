@@ -47,7 +47,6 @@ namespace LudoTest
 
             // Assert - Vad vill vi att resultatet ska bli?
             Assert.True(result >= 0 && result <= 6);
-
         }
 
         [Fact (Skip = "Vi får ut namnet på den högsta värdet i \"player\" databasen")]
