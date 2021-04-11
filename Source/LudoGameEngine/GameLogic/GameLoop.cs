@@ -10,8 +10,6 @@ namespace LudoGameEngine
 {
     public class GameLoop
     {
-        public static bool isPlaying = false;
-
         public void InitializeGame(int choice)
         {
             CreateGame game = new CreateGame();
@@ -33,36 +31,28 @@ namespace LudoGameEngine
 
         public void RunGame(List<Player> players) //Kanske måste uppdelas eller göras om till initialize
         {
-            bool isPlaying = true;
-            while (isPlaying) // loopar omgångar
+            while (true) // loopar omgångar
             {
+                Dice rollDice = new Dice();
+                Move move = new Move();
+                int diceValue = 0;
+
                 // View Current Board
                 Console.Clear();
                 Square.CurrentBoard(players);
 
-                Dice rollDice = new Dice();
-                Move move = new Move();
-                int userInput = 0;
-                int diceValue = 0;
-
                 // Kollar vilkens spelares tur det är
                 Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
-
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
-                List<Piece> updatedPositions = new List<Piece>();
 
                 Console.WriteLine("[1] Rolldice");
-
-
+                int userInput = 0;
                 do
                 {
                     int.TryParse(Console.ReadLine(), out userInput);
 
                     if (userInput == 1)
                     {
-                        //Console.Clear();
-                        //Square.CurrentBoard(players);
-
                         // Roll Dice
                         diceValue = rollDice.RollDice();
                     }
@@ -72,6 +62,8 @@ namespace LudoGameEngine
                     }
 
                 } while (userInput != 1);
+
+                List<Piece> updatedPositions = new List<Piece>();
 
                 // Check if dicevalue is 6 & if there is a piece in the nest. 
                 List<int> nestChecker = new List<int>() { 0, 4, 60, 56 };
