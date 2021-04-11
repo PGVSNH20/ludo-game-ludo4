@@ -52,19 +52,22 @@ namespace LudoGameEngine.UI
             List<Game> games = new LudoDbAccess().GetAllUnfinishedGames();
             List<Player> players = new LudoDbAccess().GetAllPlayers();
 
+
             while (isRunning)
             {
                 Console.WriteLine("What game do you want to load?\n");
-
+                
                 for (int i = 0; i < games.Count; i++)
                 {
-                    Console.WriteLine($"[{games[i].Id}]\nGame Id: {games[i].Id} Last Played: {games[i].LastTimePlayedDate}");
+                    Console.WriteLine($"[{games[i].Id}]\nGame Id: {games[i].Id}\nLast Played: {games[i].LastTimePlayedDate}");
                     Console.Write($"Players:");
                     foreach(Player p in players)
                     {
                         if (p.GameId == games[i].Id)
-                            Console.Write($" {p.Name}");
+                            Console.Write($"\nPlayer: {p.Name} | Color: {p.PlayerColor}");
+                        
                     }
+
 
                     Console.WriteLine($"\n---------------------------------------------------------------------------\n");
                 }

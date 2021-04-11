@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LudoGameEngine.Initialize
@@ -95,18 +96,24 @@ namespace LudoGameEngine.Initialize
                         {
                             Console.WriteLine($"Added Player {i + 1} | Name: {player[i].Name} | Color: {player[i].PlayerColor} |");
                             isRunning = false;
+                           
                         }
                     }
+                    
 
                     if (playerId == i + 1)
                     {
                         player[i].PlayerTurn = true;
                         Console.WriteLine($"{player[i].Name} starts.");
+                        
                     }
                 }
             }
-
+         
             CreatePieces(board, player);
+            Console.WriteLine("\nThe game starts in 3 seconds");
+            Thread.Sleep(3000);
+
         }
 
         private static void CreatePieces(Game board, List<Player> player)
