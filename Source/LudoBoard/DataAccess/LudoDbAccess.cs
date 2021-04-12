@@ -87,12 +87,12 @@ namespace LudoBoard.DataAccess
                         int id = Convert.ToInt32(pieces[i].PlayerId);
                         List<Piece> inactivePieces = context.Piece.Where(z => z.PlayerId == id && z.IsActive == false).ToList();
 
-                        // Kollar om det är 4 st pjäser som är inaktiv
+                        // Checks if all 4 pieces is inactive
                         if (inactivePieces.Count + changedActiveToInactiveCounter == 4)
                         {
                             id = Convert.ToInt32(pieces[i].PlayerId);
                             Player winner = context.Player.Where(y => y.Id == id).Single();
-                            // Denna ska kunna sättas när vi ändrar isActive == false
+                            // Set winner when isActive == false
                             SetWinner(winner);
                         }
                     }
@@ -121,6 +121,8 @@ namespace LudoBoard.DataAccess
                 playerPieces.Add(piece);
             }
 
+            // If player does not roll 6 then update player turn.
+            // If player roll 6, skip this and player rolls again.
             if (diceValue != 6)
             {
                 List<Player> allPlayers = new List<Player>();
@@ -202,7 +204,7 @@ namespace LudoBoard.DataAccess
             return context.Game.Where(t => t.IsCompleted == false).ToList();
         }
 
-        // IsActive = Kollar om pjäsen är aktiv på brädet eller om den har gått i mål.
+        // IsActive = Checks if piece is active in board or if it has reached goal.
         public List<Piece> GetAllPieces(List<Player> playersCurrentlyPlaying)
         {
             List<Piece> playersPieces = new List<Piece>();
@@ -220,19 +222,6 @@ namespace LudoBoard.DataAccess
             }
 
             return playersPieces;
-        }
-
-        public void UpdatePlayerTurn(List<Player> players)
-        {
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].PlayerTurn == true)
-                {
-                    players[i].PlayerTurn = false;
-                    players[i + 1].PlayerTurn = true;
-                    break;
-                }
-            }
         }
 
         public void SetWinner(Player player)

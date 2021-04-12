@@ -30,9 +30,9 @@ namespace LudoGameEngine
             }
         }
 
-        public void RunGame(List<Player> players) //Kanske måste uppdelas eller göras om till initialize
+        public void RunGame(List<Player> players)
         {
-            while (true) // loopar omgångar
+            while (true) // loops rounds
             {
                 Dice rollDice = new Dice();
                 Move move = new Move();
@@ -42,7 +42,7 @@ namespace LudoGameEngine
                 Console.Clear();
                 Square.CurrentBoard(players);
 
-                // Kollar vilkens spelares tur det är
+                // checks player turn
                 Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
