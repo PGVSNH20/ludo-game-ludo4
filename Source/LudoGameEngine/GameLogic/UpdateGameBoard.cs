@@ -52,7 +52,7 @@ namespace LudoGameEngine.GameLogic
                     runMenu.MainMenu();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // If Game IsCompleted == False, continue next Gameloop
             }
