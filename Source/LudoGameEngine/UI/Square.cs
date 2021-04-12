@@ -1,12 +1,8 @@
 ﻿using Edokan.KaiZen.Colors;
-using LudoBoard.DataAccess;
 using LudoBoard.DataModels;
 using LudoGameEngine.GameLogic;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LudoGameEngine.UI
 {

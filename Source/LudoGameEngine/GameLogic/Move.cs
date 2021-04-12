@@ -4,14 +4,10 @@ using LudoBoard.DataModels;
 using LudoGameEngine.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LudoGameEngine.GameLogic
 {
-    // TODO - Måste fixa så att man inte kan gå med en pjäs i mitten (så att den skippar rundan), den måste då gå med någon annan pjäs
     public class Move
     {
         public List<Piece> MovePiece(Piece piece, int diceValue, List<int> playerGameBoard, List<Player> players)
@@ -36,7 +32,7 @@ namespace LudoGameEngine.GameLogic
             }
             catch (Exception e)
             {
-                // If Position > FinishLine, Continue
+                // If Position > FinishLine, Skip to next player
             }
 
 
