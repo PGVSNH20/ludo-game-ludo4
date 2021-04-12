@@ -108,11 +108,11 @@ Vi ska se över lite metoder om det går att hämta data från databasen iställ
 
 4/4
 Förmiddagen:
-Vi har suttit försökt att testa att få ut det högsta värdet ifrån "boardId" i Xunit. 
-Gick inte att köra testet pga av en Console.ReadLine() som blockerade vårt testa att köras.
-Vi såg också att hanterat metoden felaktigt så att den spottade ut nåt vi inte ville ha. 
-Efter lite mek så insåg vi att databasen var smartare än sig själv då vi faktiskt kan hämta ut hela spelet ur den.
-Testet funkar nu.
+- Vi har suttit försökt att testa att få ut det högsta värdet ifrån "boardId" i Xunit. 
+- Gick inte att köra testet pga av en Console.ReadLine() som blockerade vårt testa att köras.
+- Vi såg också att hanterat metoden felaktigt så att den spottade ut nåt vi inte ville ha. 
+- Efter lite mek så insåg vi att databasen var smartare än sig själv då vi faktiskt kan hämta ut hela spelet ur den.
+- Testet funkar nu.
 
 Eftermiddagen:
 Vi har fortsatt pysslat med tester. 
@@ -123,7 +123,7 @@ Vi har fortsatt pysslat med tester.
 
 5/4
 Förmiddagen:
- -Skapat en metod som tar in spel som inte är avslutad (IsCompleted = false) till en lista, Därifrån ska vi skapa ett val om vilket spel man skulle vilja ladda
+ - Skapat en metod som tar in spel som inte är avslutad (IsCompleted = false) till en lista, Därifrån ska vi skapa ett val om vilket spel man skulle vilja ladda
 
 6/4 
 Förmiddagen
