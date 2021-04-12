@@ -11,29 +11,44 @@ namespace LudoTest
 {
     public class UnitTest1
     {
-        [Fact]
+        LudoDbAccess ludoDbAccess = new LudoDbAccess();
+
+        [Fact(Skip = "Vi får ut det högsta värdet i \"Game\" databasen")]
         public void When_Using_GetHigestBoardId_Expecting_ShouldReturn_MaxId()
         {
-            // Arange - lägg upp testet genom att ta in variabler osv.
-            LudoDbAccess ludoDbAccess = new LudoDbAccess();
+            // Arange
             int expected = 2;
 
-            // Act - Vad ska testet göra, en metod som får ut ett resultat?
+            // Act
             int result = ludoDbAccess.GetHighestBoardId();
 
-            // Assert - Vad vill vi att resultatet ska bli?
-            Assert.Equal(expected, result);
+            // Assert
+            //Assert.Equal(expected, result);
         }
 
-        //[Fact]
-        //public void When_LoadGamesFromMenu_Expecting_ListOfUnfinishedGamesToPlay()
-        //{
-        //    // Arange - lägg upp testet genom att ta in variabler osv.
+        [Fact]
+        public void When_LoadGamesFromMenu_Expecting_ListOfUnfinishedGamesToPlay()
+        {
+            // Arange - lägg upp testet genom att ta in variabler osv.
+            List<Game> listOfUnfinishedGames = new List<Game>();
+            // Act - Vad ska testet göra, en metod som får ut ett resultat?
+            listOfUnfinishedGames = ludoDbAccess.GetAllUnfinishedGames();
 
-        //    // Act - Vad ska testet göra, en metod som får ut ett resultat?
+            // Assert - Vad vill vi att resultatet ska bli?
+            Assert.IsType<List<Game>>(listOfUnfinishedGames);
+        }
 
-        //    // Assert - Vad vill vi att resultatet ska bli?
-        //}
+        [Fact]
+        public void When_LoadCompletedGamesFromMenu_Expecting_ListOfFinishedGames()
+        {
+            // Arange - lägg upp testet genom att ta in variabler osv.
+            List<Game> listOfFinishedGames = new List<Game>();
+            // Act - Vad ska testet göra, en metod som får ut ett resultat?
+            listOfFinishedGames = ludoDbAccess.GetAllFinishedGames();
+
+            // Assert - Vad vill vi att resultatet ska bli?
+            Assert.IsType<List<Game>>(listOfFinishedGames);
+        }
 
         [Fact]
         public void When_RollDice_ExpectNumberBetween_1_And_6()
@@ -63,40 +78,46 @@ namespace LudoTest
             //Assert.Equal(expected, result);
         }
 
+        //Fungerar inte då vi måste skicka med pieces på något sätt...
         //[Fact]
-        //public void When_CurrentBoard_Expect_PiecesToTheirPosition_ShouldReturn_UpdatedBoard()
+        //public static void When_CurrentBoardInNewGame_Expect_PiecesInTheirNestPosition()
         //{
-        //    // Arange - lägg upp testet genom att ta in variabler osv.
-        //    Square square = new Square();
+        //    // Arange
+        //    List<List<int>> PlayersGameBoards = new List<List<int>>(){
+        //    new List<int>() { 0, 14, 15, 16, 17, 18, 11, 8, 5, 1, 2, 3, 7, 10, 13, 20, 21, 22, 23, 24, 35, 46, 45, 44, 43, 42, 49, 52, 55, 59, 58, 57, 53, 50, 47, 40, 39, 38, 37, 36, 25, 26, 27, 28, 29, 30 },
+        //    new List<int>() { 4, 3, 7, 10, 13, 20, 21, 22, 23, 24, 35, 46, 45, 44, 43, 42, 49, 52, 55, 59, 58, 57, 53, 50, 47, 40, 39, 38, 37, 36, 25, 14, 15, 16, 17, 18, 11, 8, 5, 1, 2, 6, 9, 12, 19, 30 },
+        //    new List<int>() { 60, 46, 45, 44, 43, 42, 49, 52, 55, 59, 58, 57, 53, 50, 47, 40, 39, 38, 37, 36, 25, 14, 15, 16, 17, 18, 11, 8, 5, 1, 2, 3, 7, 10, 13, 20, 21, 22, 23, 24, 35, 34, 33, 32, 31, 30 },
+        //    new List<int>() { 56, 57, 53, 50, 47, 40, 39, 38, 37, 36, 25, 14, 15, 16, 17, 18, 11, 8, 5, 1, 2, 3, 7, 10, 13, 20, 21, 22, 23, 24, 35, 46, 45, 44, 43, 42, 49, 52, 55, 59, 58, 54, 51, 48, 41, 30 }
+        //    };
+            
+        //    List<Piece> pieces = new List<Piece>();
+        //    pieces.Add(new Piece { Id = 1, IsActive = true, Position = 0, PlayerId = 1 });
+        //    pieces.Add(new Piece { Id = 2, IsActive = true, Position = 4, PlayerId = 2 });
+        //    pieces.Add(new Piece { Id = 3, IsActive = true, Position = 56, PlayerId = 3 });
+        //    pieces.Add(new Piece { Id = 4, IsActive = true, Position = 60, PlayerId = 4 });
+            
+        //    List<Player> players = new List<Player>();
+        //    players.Add(new Player { Id = 1, Name = "Red", PlayerBoard = PlayersGameBoards[0]});
+        //    players.Add(new Player { Id = 2, Name = "Blue", PlayerBoard = PlayersGameBoards[1]});
+        //    players.Add(new Player { Id = 3, Name = "Green", PlayerBoard = PlayersGameBoards[2]});
+        //    players.Add(new Player { Id = 4, Name = "Yellow", PlayerBoard = PlayersGameBoards[3]});
+
 
         //    List<string> expected = new List<string>(60)
         //    {
-        //        "1234","    ","    ","    ","1234","    ","    ","    ","    ","   ",
+        //        "1   ","    ","    ","    ","1   ","    ","    ","    ","    ","   ",
         //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
         //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
         //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
         //        "    ","    ","    ","    ","    ","    ","    ","    ","    ","    ",
-        //        "    ","    ","    ","    ","    ","    ","1234","    ","    ", "    ", "1234"
+        //        "    ","    ","    ","    ","    ","    ","1   ","    ","    ", "    ", "1   "
         //    };
-        //    List<string> result = new List<string>();
-
-        //    Console.WriteLine($"[{expected[0]}]                  [{expected[1]}][{expected[2]}][{expected[3]}]                  [{expected[4]}]\n" +
-        //                     $"                        [{expected[5]}][{expected[6]}][{expected[7]}]\n" +
-        //                     $"                        [{expected[8]}][{expected[9]}][{expected[10]}]\n" +
-        //                     $"                        [{expected[11]}][{expected[12]}][{expected[13]}]\n" +
-        //                     $"[{expected[14]}][{expected[15]}][{expected[16]}][{expected[17]}][{expected[18]}][{expected[19]}][{expected[20]}][{expected[21]}][{expected[22]}][{expected[23]}][{expected[24]}]\n" +
-        //                     $"[{expected[25]}][{expected[26]}][{expected[27]}][{expected[28]}][{expected[29]}][{expected[30]}][{expected[31]}][{expected[32]}][{expected[33]}][{expected[34]}][{expected[35]}]\n" +
-        //                     $"[{expected[36]}][{expected[37]}][{expected[38]}][{expected[39]}][{expected[40]}][{expected[41]}][{expected[42]}][{expected[43]}][{expected[44]}][{expected[45]}][{expected[46]}]\n" +
-        //                     $"                        [{expected[47]}][{expected[48]}][{expected[49]}]\n" +
-        //                     $"                        [{expected[50]}][{expected[51]}][{expected[52]}]\n" +
-        //                     $"                        [{expected[53]}][{expected[54]}][{expected[55]}]\n" +
-        //                     $"[{expected[56]}]                  [{expected[57]}][{expected[58]}][{expected[59]}]                  [{expected[60]}]\n");
 
         //    // Act - Vad ska testet göra, en metod som får ut ett resultat?
-        //    result = square.CurrentBoard();
+        //    var gb = UpdateGameBoard.PiecesOnGameBoardUpdate(players);
 
         //    // Assert - Vad vill vi att resultatet ska bli?
-        //    Assert.Equal(expected, result);
+        //    Assert.Equal(expected, gb);
 
         //}
 
@@ -111,11 +132,11 @@ namespace LudoTest
         //[InlineData(0, 5, -5)]
         //public void Test2(int expected, int x, int y)
         //{
-        //    // Arange - lägg upp testet genom att ta in variabler osv.
+        //    // Arange - your objects, creating and setting them up as necessary.
 
-        //    // Act - Vad ska testet göra, en metod som får ut ett resultat?
+        //    // Act - on an object.
 
-        //    // Assert - Vad vill vi att resultatet ska bli?
+        //    // Assert - that something is as expected.
 
         //}
     }
