@@ -205,7 +205,7 @@ namespace LudoGameEngine.GameLogic
                                 Console.Clear();
                                 Square.CurrentBoard(players);
 
-                                updatedPositions = MovePiece(piecesOnGameBoard[i], 1, currentPlayer.PlayerBoard, players);
+                                updatedPositions = MovePiece(piecesOnGameBoard[i], diceValue, currentPlayer.PlayerBoard, players);
                                 isRunning = false;
                                 break;
                             }

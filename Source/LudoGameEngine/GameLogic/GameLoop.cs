@@ -47,12 +47,12 @@ namespace LudoGameEngine
                 List<Piece> currentPlayerPieces = UpdateGameBoard.GetPlayerPieces(currentPlayer);
 
                 Console.WriteLine("[1] Rolldice");
-                int userInput = 0;
+                int pieceId = 0;
                 do
                 {
-                    int.TryParse(Console.ReadLine(), out userInput);
+                    int.TryParse(Console.ReadLine(), out pieceId);
 
-                    if (userInput == 1)
+                    if (pieceId == 1)
                     {
                         // Roll Dice
                         diceValue = rollDice.RollDice();
@@ -64,7 +64,7 @@ namespace LudoGameEngine
                         Console.Write("Please enter 1 to roll:");
                     }
 
-                } while (userInput != 1);
+                } while (pieceId != 1);
 
                 List<Piece> updatedPositions = new List<Piece>();
 
@@ -86,56 +86,51 @@ namespace LudoGameEngine
                 else
                 {
                     List<Piece> piecesOnBoard = new List<Piece>();
-                    bool isTrueorFalse = true;
-                    foreach (var piece in currentPlayerPieces)
+                    for (int i = 0; i < currentPlayerPieces.Count; i++)
+                    {
+                        if (currentPlayerPieces[i].Position != currentPlayer.PlayerBoard[0] && currentPlayerPieces[i].Position != 30)
+                        {
+                            piecesOnBoard.Add(currentPlayerPieces[i]);
+                        }
+                    }
+
+                    if (piecesOnBoard.Count != 0)
                     {
 
-                        if (piece.Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
+                        Console.WriteLine($"\nWhich piece do you want to move?");
+
+                        for (int i = 0; i < currentPlayerPieces.Count; i++)
                         {
-                            int pieceId = 0;
-                            do
+                            if (currentPlayerPieces[i].Position != currentPlayer.PlayerBoard[0] && currentPlayerPieces[i].Position != 30)
                             {
-                                pieceId = 0;
-                                Console.WriteLine($"\nWhich piece do you want to move?");
-
-                                for (int i = 0; i < currentPlayerPieces.Count; i++)
-                                {
-                                    if (currentPlayerPieces[i].Position != currentPlayer.PlayerBoard[0] && piece.Position != 30)
-                                    {
-                                        piecesOnBoard.Add(currentPlayerPieces[i]);
-                                        Console.WriteLine($"[{i + 1}] Piece {i + 1}");
-                                    }
-                                }
-
-                                while (pieceId < 1 || pieceId > piecesOnBoard.Count)
-                                { 
-                                    int.TryParse(Console.ReadLine(), out pieceId);
-                                }
-
-                                pieceId -= 1;
-                                foreach (var p in piecesOnBoard)
-                                {
-
-                                    if (pieceId >= 0 && pieceId <= piecesOnBoard.Count)
-                                    {
-                                        if (p.Id == currentPlayerPieces[pieceId].Id)
-                                        {
-                                            isTrueorFalse = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine($"You pressed wrong number! Try agin");
-                                    }
-                                }
-
-                            } while (isTrueorFalse);
-
-                            Console.Clear();
-
-                            updatedPositions = move.MovePiece(currentPlayerPieces[pieceId], diceValue, currentPlayer.PlayerBoard, players);
-                            break;
+                                Console.WriteLine($"[{i + 1}] Piece {i + 1}");
+                            }
                         }
+
+                        bool isRunning = true;
+                        do
+                        {
+                            int.TryParse(Console.ReadLine(), out pieceId);
+
+                            for (int i = 0; i < piecesOnBoard.Count; i++)
+                            {
+                                try
+                                {
+                                    if (piecesOnBoard[i].Id == currentPlayerPieces[pieceId - 1].Id)
+                                    {
+                                        updatedPositions = move.MovePiece(piecesOnBoard[i], diceValue, currentPlayer.PlayerBoard, players);
+                                        isRunning = false;
+                                        break;
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    // If id doesnt exist, try again
+                                    break;
+                                }
+                            }
+
+                        } while (isRunning);
                     }
                 }
 
