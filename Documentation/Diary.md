@@ -156,3 +156,12 @@ Eftermiddagen:
 - Fortsatt med finjusteringar
 - Vi lade till ett nytt menyval där man kan se spelhistorik
 - Suttit och diskuterat om hur vi skulle kunna vidareutvecklat vårat program senare, med statistik mm.
+
+12/4
+Förmiddagen:
+- Började med att gå igenom programmet tillsammans, hittade en bugg som fastnade i en loop
+- Påbörjade att försöka fixa buggen
+
+Eftermiddagen:
+- Fixat buggen som gjorde att vi fastnade i en while-loop
+- 
