@@ -169,7 +169,7 @@ namespace LudoBoard.DataAccess
                 Console.WriteLine(boardId.Id);
                 return boardId.Id;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return 0;
             }

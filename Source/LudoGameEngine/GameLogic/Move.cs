@@ -30,7 +30,7 @@ namespace LudoGameEngine.GameLogic
 
                 updatedPositions.Add(piece);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // If Position > FinishLine, Skip to next player
             }
@@ -53,12 +53,6 @@ namespace LudoGameEngine.GameLogic
         {
             int userInput = 0;
             Player currentPlayer = UpdateGameBoard.GetPlayerTurn(players);
-
-            Console.Clear();
-            Square.CurrentBoard(players);
-
-            Console.WriteLine($"Player {currentPlayer.PlayerColor}: {currentPlayer.Name}, you rolled {diceValue}!");
-
 
             // Checking if there are pieces in nest or on the game board
             bool isPieceInNest = false;
@@ -91,7 +85,18 @@ namespace LudoGameEngine.GameLogic
             // Choose To Move Piece From Nest Or Board
             if (isPieceInNest && isPieceOnBoard)
             {
+                Console.Clear();
+                Square.CurrentBoard(players);
+
                 Console.WriteLine("You rolled 6! Choose a piece from the nest or on the board!");
+
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    if (pieces[i].Position != 30)
+                    {
+                        Console.WriteLine($"[{i + 1}] Piece {i + 1}");
+                    }
+                }
 
                 var counter = piecesOnGameBoard.Count + piecesInNest.Count;
 
@@ -155,6 +160,15 @@ namespace LudoGameEngine.GameLogic
 
                 Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!\n" +
                                         "Which piece do you want to move from the nest?");
+
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    if (pieces[i].Position == currentPlayer.PlayerBoard[0])
+                    {
+                        Console.WriteLine($"[{i + 1}] Piece {i + 1}");
+                    }
+                }
+
                 bool isRunning = true;
                 do
                 {
@@ -187,6 +201,15 @@ namespace LudoGameEngine.GameLogic
 
                 Console.WriteLine($"Player {currentPlayer.PlayerColor} {currentPlayer.Name} rolled 6!\n" +
                                         "Which piece do you want to move on the board");
+
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    if (pieces[i].Position != currentPlayer.PlayerBoard[0] && pieces[i].Position != 30)
+                    {
+                        Console.WriteLine($"[{i + 1}] Piece {i + 1}");
+                    }
+                }
+
                 bool isRunning = true;
                 do
                 {

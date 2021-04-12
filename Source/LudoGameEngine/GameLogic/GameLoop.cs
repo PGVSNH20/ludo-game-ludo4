@@ -67,21 +67,17 @@ namespace LudoGameEngine
 
                 List<Piece> updatedPositions = new List<Piece>();
 
-                // Check if dicevalue is 6 & if there is a piece in the nest. 
-                List<int> nestChecker = new List<int>() { 0, 4, 60, 56 };
+                // Check if dicevalue is 6
                 if (diceValue == 6)
                 {
                     foreach (var piece in currentPlayerPieces)
                     {
-                        if (nestChecker.Contains(Convert.ToInt32(piece.Position)))
-                        {
-                            updatedPositions = move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, players);
-                            break;
-                        }
-
+                        updatedPositions = move.MoveFromNestOrBoard(currentPlayerPieces, diceValue, players);
+                        break;
                     }
                 }
 
+                // If Dicevalue != 6
                 else
                 {
                     List<Piece> piecesOnBoard = new List<Piece>();
